@@ -16,7 +16,7 @@
 
 @synthesize accessoryArray = _accessoryArray;
 @synthesize accessoryDelegate = _accessoryDelegate;
-
+//------
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
