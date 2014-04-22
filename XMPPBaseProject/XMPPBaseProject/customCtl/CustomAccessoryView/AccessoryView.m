@@ -16,12 +16,13 @@
 
 @synthesize accessoryArray = _accessoryArray;
 @synthesize accessoryDelegate = _accessoryDelegate;
-//------
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        NSLog(@"11111111");
     }
     return self;
 }

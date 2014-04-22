@@ -69,6 +69,7 @@
 		47F6B53418F8E75F00246D68 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */; };
 		47F6B53518F8E75F00246D68 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */; };
 		BB7CD0AF18FE240800D96C1A /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7CD0AE18FE240800D96C1A /* EGORefreshTableHeaderView.m */; };
+		BBA15C0F1905FFC5009F4389 /* accessoryInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBA15C0E1905FFC5009F4389 /* accessoryInfo.plist */; };
 		BBDC012518F52807008A4DA7 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BBDCFF7618F52806008A4DA7 /* SVProgressHUD.bundle */; };
 		BBDC012618F52807008A4DA7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDCFF7818F52806008A4DA7 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BBDC012718F52807008A4DA7 /* COMScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDCFF7B18F52806008A4DA7 /* COMScrollView.m */; };
@@ -464,6 +465,7 @@
 		47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextViewInternal.m; sourceTree = "<group>"; };
 		BB7CD0AD18FE240800D96C1A /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		BB7CD0AE18FE240800D96C1A /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		BBA15C0E1905FFC5009F4389 /* accessoryInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = accessoryInfo.plist; sourceTree = "<group>"; };
 		BBDC000018F52806008A4DA7 /* XMPPJID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPJID.m; sourceTree = "<group>"; };
 		BBDC000118F52806008A4DA7 /* XMPPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogging.h; sourceTree = "<group>"; };
 		BBDC000218F52806008A4DA7 /* XMPPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessage.h; sourceTree = "<group>"; };
@@ -1036,6 +1038,7 @@
 			children = (
 				4705D23219026367006D1D2E /* AccessoryView.h */,
 				4705D23319026367006D1D2E /* AccessoryView.m */,
+				BBA15C0E1905FFC5009F4389 /* accessoryInfo.plist */,
 			);
 			path = CustomAccessoryView;
 			sourceTree = "<group>";
@@ -2576,6 +2579,7 @@
 				47B6DB0C18F83EA200DB4328 /* ToolViewEmotion@2x.png in Resources */,
 				BBDC02B118F53F89008A4DA7 /* new_features_startbutton_background_highlighted@2x.png in Resources */,
 				4705D227190257BD006D1D2E /* facesBack@2x.png in Resources */,
+				BBA15C0F1905FFC5009F4389 /* accessoryInfo.plist in Resources */,
 				BBDC029718F53F89008A4DA7 /* navigationbar_background.png in Resources */,
 				4705D2601903772F006D1D2E /* chat_bottombar_voice_normal.png in Resources */,
 				BBDC02D318F53F89008A4DA7 /* tabbar_more_selected@2x.png in Resources */,
