@@ -10,7 +10,7 @@
 
 @class User,FaceToolBar,AccessoryView;
 @protocol FaceToolBarDelegate,AccessoryViewDelegate;
-@interface ChatViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,  XMPPMessageDelegate,FaceToolBarDelegate,AccessoryViewDelegate>{
+@interface ChatViewController : UIViewController<UITableViewDelegate, UITableViewDataSource,  XMPPMessageDelegate,FaceToolBarDelegate,AccessoryViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>{
     AccessoryView *accessoryView;
 }
 

@@ -19,7 +19,7 @@
 
 @interface AccessoryView : UIScrollView
 
-@property(nonatomic,retain)NSMutableArray *accessoryArray; //附件信息字典集合
+@property(nonatomic,strong)NSMutableArray *accessoryArray; //附件信息字典集合
 
 @property(nonatomic,assign) id<AccessoryViewDelegate> accessoryDelegate;
 

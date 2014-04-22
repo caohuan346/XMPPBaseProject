@@ -236,6 +236,63 @@
     
 }
 
+#pragma mark - image picker delegate
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    NSDictionary *dict=nil;
+    if ([mediaType isEqualToString:@"public.image"]) {
+        UIImage *originImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+        //dict=[self handleImage:originImage];
+        if (picker.sourceType==UIImagePickerControllerSourceTypeCamera) {
+            UIImageWriteToSavedPhotosAlbum(originImage, nil, nil, nil);
+        }
+    }
+    //[SVProgressHUD dismiss];
+    [self dismissViewControllerAnimated:YES completion:^{
+       
+    }];
+//    if (dict) {
+//        [self performSelector:@selector(sendImage:) withObject:dict afterDelay:1];
+//    }
+}
+
+#pragma mark - accessary view button event
+//图片
+-(void)accessaryBtnChoosePhoto{
+    UIImagePickerController * picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }else{
+        NSLog(@"模拟器无法打开相机");
+    }
+    [self presentViewController:picker animated:YES completion:^{ }];
+}
+
+//拍照
+-(void)accessaryBtnTakePhoto{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:^{ }];
+}
+
+//位置
+-(void)accessaryBtnLocation{
+    
+}
+
+//消息
+-(void)accessaryBtnNormalMsg{
+    
+}
+
+//文件
+-(void)accessaryBtnSendFile{
+    
+}
+
+
 #pragma mark - private 
 -(void)initData{
     ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"chatUserId" compare:CHComparisonMarkEQ withValue:_chatTargetUser.userId];

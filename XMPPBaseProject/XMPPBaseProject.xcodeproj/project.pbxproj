@@ -252,8 +252,6 @@
 		BBDC028618F53F89008A4DA7 /* BlueBubble2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021418F53F88008A4DA7 /* BlueBubble2.png */; };
 		BBDC028718F53F89008A4DA7 /* GreenBubble2.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021518F53F88008A4DA7 /* GreenBubble2.png */; };
 		BBDC028818F53F89008A4DA7 /* orange.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021618F53F88008A4DA7 /* orange.png */; };
-		BBDC028918F53F89008A4DA7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021818F53F88008A4DA7 /* icon.png */; };
-		BBDC028A18F53F89008A4DA7 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021918F53F88008A4DA7 /* icon@2x.png */; };
 		BBDC028B18F53F89008A4DA7 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021B18F53F88008A4DA7 /* background.png */; };
 		BBDC028C18F53F89008A4DA7 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021C18F53F88008A4DA7 /* background@2x.png */; };
 		BBDC028D18F53F89008A4DA7 /* female.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC021D18F53F88008A4DA7 /* female.png */; };
@@ -735,8 +733,6 @@
 		BBDC021418F53F88008A4DA7 /* BlueBubble2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueBubble2.png; sourceTree = "<group>"; };
 		BBDC021518F53F88008A4DA7 /* GreenBubble2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenBubble2.png; sourceTree = "<group>"; };
 		BBDC021618F53F88008A4DA7 /* orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orange.png; sourceTree = "<group>"; };
-		BBDC021818F53F88008A4DA7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		BBDC021918F53F88008A4DA7 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		BBDC021B18F53F88008A4DA7 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
 		BBDC021C18F53F88008A4DA7 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		BBDC021D18F53F88008A4DA7 /* female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = female.png; sourceTree = "<group>"; };
@@ -1774,7 +1770,6 @@
 			children = (
 				BBDC021218F53F88008A4DA7 /* chat */,
 				4705D213190257BD006D1D2E /* chatToolBar */,
-				BBDC021718F53F88008A4DA7 /* icon */,
 				BBDC021A18F53F88008A4DA7 /* login */,
 				BBDC022318F53F89008A4DA7 /* navigationbar */,
 				BBDC023218F53F89008A4DA7 /* newfeature */,
@@ -1808,15 +1803,6 @@
 				BBDC021618F53F88008A4DA7 /* orange.png */,
 			);
 			path = chat;
-			sourceTree = "<group>";
-		};
-		BBDC021718F53F88008A4DA7 /* icon */ = {
-			isa = PBXGroup;
-			children = (
-				BBDC021818F53F88008A4DA7 /* icon.png */,
-				BBDC021918F53F88008A4DA7 /* icon@2x.png */,
-			);
-			path = icon;
 			sourceTree = "<group>";
 		};
 		BBDC021A18F53F88008A4DA7 /* login */ = {
@@ -2606,7 +2592,6 @@
 				BBDC02E718F53F89008A4DA7 /* avatar_default@2x.png in Resources */,
 				BBDC01C918F52808008A4DA7 /* build-libidn.sh in Resources */,
 				BBDC029C18F53F89008A4DA7 /* navigationbar_compose_highlighted@2x.png in Resources */,
-				BBDC028918F53F89008A4DA7 /* icon.png in Resources */,
 				BBDCFEBF18F526D8008A4DA7 /* MultiUserChatViewCtl.xib in Resources */,
 				BBDC02C218F53F89008A4DA7 /* tabbar_home.png in Resources */,
 				BBDC02C418F53F89008A4DA7 /* tabbar_home_highlighted.png in Resources */,
@@ -2647,7 +2632,6 @@
 				BBDC028C18F53F89008A4DA7 /* background@2x.png in Resources */,
 				BBDC02E518F53F89008A4DA7 /* tb_set_normal@2x.png in Resources */,
 				4705D26919037BEB006D1D2E /* InputBack@2x.png in Resources */,
-				BBDC028A18F53F89008A4DA7 /* icon@2x.png in Resources */,
 				4705D250190266B4006D1D2E /* pl_message_normal.png in Resources */,
 				4705D25C1903750D006D1D2E /* chat_input_bar.png in Resources */,
 				47B6DB1518F83F1100DB4328 /* ToolViewBkg_Black@2x.png in Resources */,
