@@ -8,6 +8,7 @@
 
 #import "MoreViewController.h"
 #import "MoreOptionCell.h"
+#import "ScanViewController.h"
 
 @interface MoreViewController ()
 
@@ -82,14 +83,25 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    NSArray *itemArray = [self.optionsDic objectForKey:[NSString stringWithFormat:@"section%d",indexPath.section]];
+    NSDictionary *itemDic = [itemArray objectAtIndex:indexPath.row];
+    NSString *segueName = [itemDic objectForKey:@"segue"];
+    if (segueName.length > 0) {
+        [self performSegueWithIdentifier:segueName sender:self];
+    }
 }
 
 #pragma mark - Segue event
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    //扫描
+    if ([segue.identifier isEqualToString:@"optionToScan"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        ScanViewController *scan  = segue.destinationViewController;
+    }else if ([segue.identifier isEqualToString:@"optionToScan"]) {
+        
+    }
+
 }
 
 

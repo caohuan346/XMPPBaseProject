@@ -11,12 +11,16 @@
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>文件</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 			<dict>
 				<key>icon</key>
 				<string>yy_scan_normal</string>
 				<key>title</key>
 				<string>扫一扫</string>
+				<key>segue</key>
+				<string>optionToScan</string>
 			</dict>
 		</array>
 		<key>section1</key>
@@ -26,18 +30,24 @@
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>2-0</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 			<dict>
 				<key>icon</key>
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>2-1</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 			<dict>
 				<key>icon</key>
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>2-2</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 		</array>
 		<key>section2</key>
@@ -47,12 +57,16 @@
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>3-0</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 			<dict>
 				<key>icon</key>
 				<string>yy_file_normal</string>
 				<key>title</key>
 				<string>3-1</string>
+				<key>segue</key>
+				<string></string>
 			</dict>
 		</array>
 	</dict>

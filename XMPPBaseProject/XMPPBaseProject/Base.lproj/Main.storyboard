@@ -596,10 +596,32 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="更多" id="5mO-sH-F0S"/>
+                    <connections>
+                        <segue destination="QC3-Gp-xK9" kind="push" identifier="optionToScan" id="emM-or-j1b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="es4-sV-zoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1586" y="1210"/>
+        </scene>
+        <!--Scan View Controller - 扫描-->
+        <scene sceneID="hqI-qW-Yza">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="QC3-Gp-xK9" userLabel="Scan View Controller - 扫描" customClass="ScanViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TwC-vO-B1Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="r0v-kg-ZVP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="H3o-ju-mMu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="CRM-IQ-OfH"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fwW-fj-Feg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2207" y="987"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="8za-LV-dYd">
