@@ -57,11 +57,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"SessionCell";
+    static NSString *CellIdentifier = @"optionCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell=[nibs objectAtIndex: 0];
+//        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+//        cell=[nibs objectAtIndex: 0];
+        
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     NSArray *itemArray = [self.optionsDic objectForKey:[NSString stringWithFormat:@"section%d",indexPath.section]];
