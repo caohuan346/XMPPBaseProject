@@ -50,6 +50,7 @@
 		470EFF1018F5707000018AFF /* header_icon_set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF0E18F5707000018AFF /* header_icon_set@2x.png */; };
 		470EFF1318F5711D00018AFF /* fresh_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF1118F5711D00018AFF /* fresh_friends.png */; };
 		470EFF1418F5711D00018AFF /* fresh_friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF1218F5711D00018AFF /* fresh_friends@2x.png */; };
+		477577D51907F994006300BC /* MoreOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 477577D41907F994006300BC /* MoreOptionCell.m */; };
 		47B6DB0618F83E6600DB4328 /* ToolViewInputVoice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB0418F83E6600DB4328 /* ToolViewInputVoice@2x.png */; };
 		47B6DB0718F83E6600DB4328 /* ToolViewInputVoiceHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB0518F83E6600DB4328 /* ToolViewInputVoiceHL@2x.png */; };
 		47B6DB0C18F83EA200DB4328 /* ToolViewEmotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB0818F83EA200DB4328 /* ToolViewEmotion@2x.png */; };
@@ -468,6 +469,8 @@
 		470EFF0E18F5707000018AFF /* header_icon_set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header_icon_set@2x.png"; sourceTree = "<group>"; };
 		470EFF1118F5711D00018AFF /* fresh_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fresh_friends.png; sourceTree = "<group>"; };
 		470EFF1218F5711D00018AFF /* fresh_friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fresh_friends@2x.png"; sourceTree = "<group>"; };
+		477577D31907F994006300BC /* MoreOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreOptionCell.h; sourceTree = "<group>"; };
+		477577D41907F994006300BC /* MoreOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreOptionCell.m; sourceTree = "<group>"; };
 		47B6DB0418F83E6600DB4328 /* ToolViewInputVoice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoice@2x.png"; sourceTree = "<group>"; };
 		47B6DB0518F83E6600DB4328 /* ToolViewInputVoiceHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewInputVoiceHL@2x.png"; sourceTree = "<group>"; };
 		47B6DB0818F83EA200DB4328 /* ToolViewEmotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewEmotion@2x.png"; sourceTree = "<group>"; };
@@ -1150,6 +1153,8 @@
 				BB98A5151907BC63004FC8F7 /* MoreViewController.h */,
 				BB98A5161907BC63004FC8F7 /* MoreViewController.m */,
 				BB98A5181907BF4F004FC8F7 /* MoreViewCtlOptions.plist */,
+				477577D31907F994006300BC /* MoreOptionCell.h */,
+				477577D41907F994006300BC /* MoreOptionCell.m */,
 				BB47082619078E5800681ECC /* ScanViewController.h */,
 				BB47082719078E5800681ECC /* ScanViewController.mm */,
 			);
@@ -2789,6 +2794,7 @@
 				BBDC014A18F52807008A4DA7 /* SBJsonStreamWriter.m in Sources */,
 				BBDC01B418F52808008A4DA7 /* NSXMLElement+XEP_0297.m in Sources */,
 				BBDC015318F52807008A4DA7 /* XMPPDigestMD5Authentication.m in Sources */,
+				477577D51907F994006300BC /* MoreOptionCell.m in Sources */,
 				BBDC013118F52807008A4DA7 /* XMPPServer.m in Sources */,
 				BBDC017E18F52808008A4DA7 /* XMPPRoomMemoryStorage.m in Sources */,
 				BBDC018A18F52808008A4DA7 /* XMPPvCardTempAdr.m in Sources */,

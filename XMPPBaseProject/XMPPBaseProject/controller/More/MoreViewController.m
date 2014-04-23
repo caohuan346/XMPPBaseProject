@@ -7,6 +7,7 @@
 //
 
 #import "MoreViewController.h"
+#import "MoreOptionCell.h"
 
 @interface MoreViewController ()
 
@@ -57,30 +58,27 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"optionCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"MoreOptionCell";
+    MoreOptionCell *cell = (MoreOptionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-//        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-//        cell=[nibs objectAtIndex: 0];
-        
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell=[nibs objectAtIndex: 0];
     }
-    
     NSArray *itemArray = [self.optionsDic objectForKey:[NSString stringWithFormat:@"section%d",indexPath.section]];
     
     NSDictionary *itemDic = [itemArray objectAtIndex:indexPath.row];
     NSString *title = [itemDic objectForKey:@"title"];
     NSString *icon = [itemDic objectForKey:@"icon"];
     
-    cell.textLabel.text = title;
-    cell.imageView.image = [UIImage imageNamed:icon];
+    cell.titleLabel.text = title;
+    cell.iconImageView.image = [UIImage imageNamed:icon];
     
     return cell;
 }
 
 #pragma mark - Table view delegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 35;
+    return 40;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
