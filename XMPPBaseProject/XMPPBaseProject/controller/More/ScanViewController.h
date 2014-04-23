@@ -22,6 +22,7 @@
 @property (nonatomic, assign) BOOL isScanning;
 @property (nonatomic, assign) BOOL stopScan;
 
+- (IBAction)choosePhoto:(id)sender;
 - (void)reScan;
 
 @end

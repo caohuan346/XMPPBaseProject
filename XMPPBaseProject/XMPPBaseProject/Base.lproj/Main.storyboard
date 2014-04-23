@@ -617,7 +617,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="CRM-IQ-OfH"/>
+                    <navigationItem key="navigationItem" id="CRM-IQ-OfH">
+                        <barButtonItem key="rightBarButtonItem" title="选择相片" id="VGp-do-Df4">
+                            <connections>
+                                <action selector="choosePhoto:" destination="QC3-Gp-xK9" id="KDd-1B-uT2"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwW-fj-Feg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

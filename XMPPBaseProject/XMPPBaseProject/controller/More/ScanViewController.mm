@@ -23,6 +23,8 @@
 @end
 
 @implementation ScanViewController
+
+#pragma mark - life circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,15 +41,6 @@
 }
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-}
-#pragma mark - UIView Methods -
-- (void)loadView{
-    
-    //初始化View
-    UIView *aView = [[UIView alloc] init];
-    aView.frame = CGRectMake(0.0, 0.0, 320.0, 416.0+ (iPhone5?88.0:0.0));
-    aView.backgroundColor = [UIColor clearColor];
-    self.view = aView;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -95,6 +88,8 @@
 //    [self.navigationItem modfyNavLeftButton:@"广场" action:@selector(backList) target:self];
 //    [self.navigationItem modfyNavRightButton:@"相册选择" secondString:nil action:@selector(pressPhotoLibraryButton:) target:self];
 }
+
+#pragma mark - private
 -(void)backList
 {
     decoder.delegate = nil;
@@ -110,6 +105,14 @@
     readLineView.layer.timeOffset= pausedTime;
 }
 
+
+- (void)reScan{
+    
+    self.isScanning = YES;
+    [_captureSession startRunning];
+    [self loopDrawLine];
+}
+
 //继续扫描动画
 - (void)resumeScan
 {
@@ -119,6 +122,17 @@
     readLineView.layer.beginTime= 0.0;
     CFTimeInterval timeSincePause = [readLineView.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
     readLineView.layer.beginTime= timeSincePause;
+}
+
+- (void)decodeImage:(UIImage *)image
+{
+    //    Y_NSLOG_METHOD_NAME;
+    MultiFormatOneDReader *oneReaders = [[MultiFormatOneDReader alloc]init];
+    QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
+    NSSet *readers = [[NSSet alloc] initWithObjects:oneReaders, qrcodeReader, nil];
+    decoder.delegate = self;
+    decoder.readers = readers;
+    [decoder decodeImage:image];
 }
 
 -(void)loopDrawLine
@@ -135,16 +149,9 @@
     [readLineView.layer addAnimation:translation forKey:@"translation"];
     
 }
-#pragma mark - 自定义OverlayView -
-- (void )customOverlayView{
-    OverlayView *aView = [[OverlayView alloc] initWithFrame:self.view.frame cancelEnabled:NO oneDMode:NO showLicense:NO];
-    aView.cropRect = CGRectMake(60.0, 120.0, 200.0, 200.0);
-    aView.displayedMessage = @"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别。";
-    [self.view addSubview:aView];
-}
-#pragma mark - 选择相册图片 -
-- (void)pressPhotoLibraryButton:(id)sender
-{
+
+//选择图片
+- (IBAction)choosePhoto:(id)sender {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.allowsEditing = YES;
     picker.delegate = self;
@@ -155,7 +162,16 @@
         [_captureSession stopRunning];
     }];
 }
-#pragma mark - 初始化相机 -
+
+//OverlayView
+- (void )customOverlayView{
+    OverlayView *aView = [[OverlayView alloc] initWithFrame:self.view.frame cancelEnabled:NO oneDMode:NO showLicense:NO];
+    aView.cropRect = CGRectMake(60.0, 120.0, 200.0, 200.0);
+    aView.displayedMessage = @"将二维码图像置于矩形方框内，离手机摄像头10CM左右，系统会自动识别。";
+    [self.view addSubview:aView];
+}
+
+//初始化相机
 - (void)initCapture{
     AVCaptureDevice* inputDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
     
@@ -176,19 +192,16 @@
         [UIScreen mainScreen].scale > 1 &&
         [inputDevice
          supportsAVCaptureSessionPreset:AVCaptureSessionPresetiFrame960x540]) {
-            // NSLog(@"960");
             preset = AVCaptureSessionPresetiFrame960x540;
         }
     if (!preset) {
-        // NSLog(@"MED");
         preset = AVCaptureSessionPresetMedium;
     }
     _captureSession.sessionPreset = preset;
-    
     _captureVideoPreviewLayer = [AVCaptureVideoPreviewLayer layerWithSession:_captureSession];
-    
     _captureVideoPreviewLayer.frame = self.view.bounds;
     _captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    
     [self.view.layer addSublayer: _captureVideoPreviewLayer];
     
     self.isScanning = YES;
@@ -196,7 +209,6 @@
     
 }
 
-#pragma mark - 选择相册图片 -
 - (UIImage *) imageFromSampleBuffer:(CMSampleBufferRef) sampleBuffer
 {
     CVImageBufferRef imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer);
@@ -251,19 +263,8 @@
     
     return image;
 }
-#pragma mark - 解析图片中的二维码 -
-- (void)decodeImage:(UIImage *)image
-{
-    //    Y_NSLOG_METHOD_NAME;
-    MultiFormatOneDReader *oneReaders = [[MultiFormatOneDReader alloc]init];
-    QRCodeReader *qrcodeReader = [[QRCodeReader alloc] init];
-    NSSet *readers = [[NSSet alloc] initWithObjects:oneReaders, qrcodeReader, nil];
-    decoder.delegate = self;
-    decoder.readers = readers;
-    [decoder decodeImage:image];
-}
 
-#pragma mark - DecoderDelegate 代理方法 -
+#pragma mark - Decoder Delegate
 - (void)decoder:(Decoder *)decoder didDecodeImage:(UIImage *)image usingSubset:(UIImage *)subset withResult:(TwoDDecoderResult *)result
 {
     
@@ -293,7 +294,6 @@
 }
 - (void)decoder:(Decoder *)decoder failedToDecodeImage:(UIImage *)image usingSubset:(UIImage *)subset reason:(NSString *)reason
 {
-    //    Y_NSLOG_METHOD_NAME;
     if (!self.isScanning) {
         self.isScanning = YES;
         [_captureSession stopRunning];
@@ -304,8 +304,7 @@
         [alertView show];
     }
 }
-#pragma mark - UIAlertViewDelegate 代理方法 -
-
+#pragma mark - UIAlertView Delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
 
     if (alertView.tag == 3) {
@@ -331,13 +330,12 @@
             browser.hidesBottomBarWhenPushed=YES;
             browser.scanViewController = self;
             [self.navigationController pushViewController:browser animated:YES];
-             */
+            */
         }
             break;
         case 1:
         {
             self.isScanning = YES;
-            //把字符串放置到剪贴板上：
             UIPasteboard *pasteboard=[UIPasteboard generalPasteboard];
             pasteboard.string = alertView.message;
             [self.navigationController popViewControllerAnimated:YES];
@@ -350,24 +348,15 @@
     
 }
 
-- (void)reScan{
-    
-    self.isScanning = YES;
-    [_captureSession startRunning];
-    [self loopDrawLine];
-}
-
-#pragma mark - AVCaptureVideoDataOutputSampleBufferDelegate 代理方法 -
-
+#pragma mark - AVCaptureVideoDataOutputSampleBuffer Delegate
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
-    //    Y_NSLOG_METHOD_NAME;
     UIImage *image = [self imageFromSampleBuffer:sampleBuffer];
     [self decodeImage:image];
 }
 
 
-#pragma mark - UIImagePickerControllerDelegate 相册选择代理方法 -
+#pragma mark - UIImagePickerController Delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     self.stopScan = YES;
@@ -377,6 +366,7 @@
         [self decodeImage:image];
     }];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     self.stopScan = NO;
