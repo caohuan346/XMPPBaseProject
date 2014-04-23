@@ -1,5 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>items</key>
+	<dict>
+		<key>section0</key>
+		<array>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>文件</string>
+			</dict>
+			<dict>
+				<key>icon</key>
+				<string>yy_scan_normal</string>
+				<key>title</key>
+				<string>扫一扫</string>
+			</dict>
+		</array>
+		<key>section1</key>
+		<array>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>2-0</string>
+			</dict>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>2-1</string>
+			</dict>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>2-2</string>
+			</dict>
+		</array>
+		<key>section2</key>
+		<array>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>3-0</string>
+			</dict>
+			<dict>
+				<key>icon</key>
+				<string>yy_file_normal</string>
+				<key>title</key>
+				<string>3-1</string>
+			</dict>
+		</array>
+	</dict>
+</dict>
 </plist>

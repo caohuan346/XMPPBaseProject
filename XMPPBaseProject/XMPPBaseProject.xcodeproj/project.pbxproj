@@ -68,7 +68,23 @@
 		47F6B53318F8E75F00246D68 /* FacialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52818F8E75F00246D68 /* FacialView.m */; };
 		47F6B53418F8E75F00246D68 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */; };
 		47F6B53518F8E75F00246D68 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */; };
+		BB47082819078E5800681ECC /* ScanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB47082719078E5800681ECC /* ScanViewController.mm */; };
 		BB7CD0AF18FE240800D96C1A /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7CD0AE18FE240800D96C1A /* EGORefreshTableHeaderView.m */; };
+		BB98A5061907B069004FC8F7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01E118F52899008A4DA7 /* libz.dylib */; };
+		BB98A50B1907B242004FC8F7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A5021907AD5D004FC8F7 /* AVFoundation.framework */; };
+		BB98A50C1907B24F004FC8F7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A5001907AD4F004FC8F7 /* AudioToolbox.framework */; };
+		BB98A50D1907B25A004FC8F7 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A4FE1907AD43004FC8F7 /* CoreVideo.framework */; };
+		BB98A50E1907B260004FC8F7 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A4FC1907AD3B004FC8F7 /* CoreMedia.framework */; };
+		BB98A5101907B26F004FC8F7 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A50F1907B26F004FC8F7 /* libiconv.dylib */; };
+		BB98A5111907B277004FC8F7 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A4F81907AD28004FC8F7 /* AddressBook.framework */; };
+		BB98A5121907B27C004FC8F7 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A4FA1907AD2E004FC8F7 /* AddressBookUI.framework */; };
+		BB98A5131907B299004FC8F7 /* libZXingWidget.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BB98A4F21907A9E1004FC8F7 /* libZXingWidget.a */; };
+		BB98A5171907BC63004FC8F7 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB98A5161907BC63004FC8F7 /* MoreViewController.m */; };
+		BB98A5191907BF4F004FC8F7 /* MoreViewCtlOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB98A5181907BF4F004FC8F7 /* MoreViewCtlOptions.plist */; };
+		BB98A51F1907C137004FC8F7 /* yy_file_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98A51B1907C137004FC8F7 /* yy_file_normal.png */; };
+		BB98A5201907C137004FC8F7 /* yy_file_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98A51C1907C137004FC8F7 /* yy_file_normal@2x.png */; };
+		BB98A5211907C137004FC8F7 /* yy_scan_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98A51D1907C137004FC8F7 /* yy_scan_normal.png */; };
+		BB98A5221907C137004FC8F7 /* yy_scan_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB98A51E1907C137004FC8F7 /* yy_scan_normal@2x.png */; };
 		BBA15C0F1905FFC5009F4389 /* accessoryInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BBA15C0E1905FFC5009F4389 /* accessoryInfo.plist */; };
 		BBDC012518F52807008A4DA7 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BBDCFF7618F52806008A4DA7 /* SVProgressHUD.bundle */; };
 		BBDC012618F52807008A4DA7 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDCFF7818F52806008A4DA7 /* SVProgressHUD.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -236,7 +252,6 @@
 		BBDC01DC18F52882008A4DA7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01DB18F52882008A4DA7 /* Security.framework */; };
 		BBDC01DE18F5288A008A4DA7 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01DD18F5288A008A4DA7 /* libxml2.dylib */; };
 		BBDC01E018F52892008A4DA7 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01DF18F52892008A4DA7 /* libresolv.dylib */; };
-		BBDC01E218F52899008A4DA7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01E118F52899008A4DA7 /* libz.dylib */; };
 		BBDC01E418F528A7008A4DA7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01E318F528A7008A4DA7 /* MobileCoreServices.framework */; };
 		BBDC01FE18F52A71008A4DA7 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDC01E718F52A71008A4DA7 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		BBDC01FF18F52A71008A4DA7 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = BBDC01EA18F52A71008A4DA7 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -292,9 +307,7 @@
 		BBDC02B018F53F89008A4DA7 /* new_features_startbutton_background_highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024218F53F89008A4DA7 /* new_features_startbutton_background_highlighted.png */; };
 		BBDC02B118F53F89008A4DA7 /* new_features_startbutton_background_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024318F53F89008A4DA7 /* new_features_startbutton_background_highlighted@2x.png */; };
 		BBDC02B218F53F89008A4DA7 /* login-button_highted.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024518F53F89008A4DA7 /* login-button_highted.png */; };
-		BBDC02B318F53F89008A4DA7 /* login-button_highted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024618F53F89008A4DA7 /* login-button_highted@2x.png */; };
 		BBDC02B418F53F89008A4DA7 /* login-button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024718F53F89008A4DA7 /* login-button_normal.png */; };
-		BBDC02B518F53F89008A4DA7 /* login-button_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024818F53F89008A4DA7 /* login-button_normal@2x.png */; };
 		BBDC02B618F53F89008A4DA7 /* setting_logout_button_highted.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024918F53F89008A4DA7 /* setting_logout_button_highted.png */; };
 		BBDC02B718F53F89008A4DA7 /* setting_logout_button_highted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024A18F53F89008A4DA7 /* setting_logout_button_highted@2x.png */; };
 		BBDC02B818F53F89008A4DA7 /* setting_logout_button_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BBDC024B18F53F89008A4DA7 /* setting_logout_button_normal.png */; };
@@ -380,6 +393,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BB98A4F11907A9E1004FC8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = ZXingWidget;
+		};
+		BB98A4F31907A9E1004FC8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1D60398D13DF7CAD006F4B51;
+			remoteInfo = ZXingTests;
+		};
+		BB98A5081907B18A004FC8F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D;
+			remoteInfo = ZXingWidget;
+		};
 		BBDCFCCD18F52342008A4DA7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BBDCFC9F18F52341008A4DA7 /* Project object */;
@@ -461,8 +495,25 @@
 		47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
 		47F6B52B18F8E75F00246D68 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
 		47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextViewInternal.m; sourceTree = "<group>"; };
+		BB47082619078E5800681ECC /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
+		BB47082719078E5800681ECC /* ScanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScanViewController.mm; sourceTree = "<group>"; };
 		BB7CD0AD18FE240800D96C1A /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		BB7CD0AE18FE240800D96C1A /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZXingWidget.xcodeproj; path = zxing/iphone/ZXingWidget/ZXingWidget.xcodeproj; sourceTree = "<group>"; };
+		BB98A4F81907AD28004FC8F7 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		BB98A4FA1907AD2E004FC8F7 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		BB98A4FC1907AD3B004FC8F7 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		BB98A4FE1907AD43004FC8F7 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		BB98A5001907AD4F004FC8F7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BB98A5021907AD5D004FC8F7 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BB98A50F1907B26F004FC8F7 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		BB98A5151907BC63004FC8F7 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		BB98A5161907BC63004FC8F7 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		BB98A5181907BF4F004FC8F7 /* MoreViewCtlOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MoreViewCtlOptions.plist; sourceTree = "<group>"; };
+		BB98A51B1907C137004FC8F7 /* yy_file_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yy_file_normal.png; sourceTree = "<group>"; };
+		BB98A51C1907C137004FC8F7 /* yy_file_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yy_file_normal@2x.png"; sourceTree = "<group>"; };
+		BB98A51D1907C137004FC8F7 /* yy_scan_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yy_scan_normal.png; sourceTree = "<group>"; };
+		BB98A51E1907C137004FC8F7 /* yy_scan_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yy_scan_normal@2x.png"; sourceTree = "<group>"; };
 		BBA15C0E1905FFC5009F4389 /* accessoryInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = accessoryInfo.plist; sourceTree = "<group>"; };
 		BBDC000018F52806008A4DA7 /* XMPPJID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPJID.m; sourceTree = "<group>"; };
 		BBDC000118F52806008A4DA7 /* XMPPLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPLogging.h; sourceTree = "<group>"; };
@@ -773,9 +824,7 @@
 		BBDC024218F53F89008A4DA7 /* new_features_startbutton_background_highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new_features_startbutton_background_highlighted.png; sourceTree = "<group>"; };
 		BBDC024318F53F89008A4DA7 /* new_features_startbutton_background_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new_features_startbutton_background_highlighted@2x.png"; sourceTree = "<group>"; };
 		BBDC024518F53F89008A4DA7 /* login-button_highted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button_highted.png"; sourceTree = "<group>"; };
-		BBDC024618F53F89008A4DA7 /* login-button_highted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button_highted@2x.png"; sourceTree = "<group>"; };
 		BBDC024718F53F89008A4DA7 /* login-button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button_normal.png"; sourceTree = "<group>"; };
-		BBDC024818F53F89008A4DA7 /* login-button_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button_normal@2x.png"; sourceTree = "<group>"; };
 		BBDC024918F53F89008A4DA7 /* setting_logout_button_highted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_logout_button_highted.png; sourceTree = "<group>"; };
 		BBDC024A18F53F89008A4DA7 /* setting_logout_button_highted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting_logout_button_highted@2x.png"; sourceTree = "<group>"; };
 		BBDC024B18F53F89008A4DA7 /* setting_logout_button_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting_logout_button_normal.png; sourceTree = "<group>"; };
@@ -973,8 +1022,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB98A5131907B299004FC8F7 /* libZXingWidget.a in Frameworks */,
+				BB98A5121907B27C004FC8F7 /* AddressBookUI.framework in Frameworks */,
+				BB98A5111907B277004FC8F7 /* AddressBook.framework in Frameworks */,
+				BB98A5101907B26F004FC8F7 /* libiconv.dylib in Frameworks */,
+				BB98A50E1907B260004FC8F7 /* CoreMedia.framework in Frameworks */,
+				BB98A50D1907B25A004FC8F7 /* CoreVideo.framework in Frameworks */,
+				BB98A50C1907B24F004FC8F7 /* AudioToolbox.framework in Frameworks */,
+				BB98A50B1907B242004FC8F7 /* AVFoundation.framework in Frameworks */,
+				BB98A5061907B069004FC8F7 /* libz.dylib in Frameworks */,
 				BBDC01E418F528A7008A4DA7 /* MobileCoreServices.framework in Frameworks */,
-				BBDC01E218F52899008A4DA7 /* libz.dylib in Frameworks */,
 				BBDC01E018F52892008A4DA7 /* libresolv.dylib in Frameworks */,
 				BBDC01DE18F5288A008A4DA7 /* libxml2.dylib in Frameworks */,
 				BBDC01DC18F52882008A4DA7 /* Security.framework in Frameworks */,
@@ -1087,6 +1144,18 @@
 			path = "emoji-master";
 			sourceTree = "<group>";
 		};
+		BB47082519078E5800681ECC /* More */ = {
+			isa = PBXGroup;
+			children = (
+				BB98A5151907BC63004FC8F7 /* MoreViewController.h */,
+				BB98A5161907BC63004FC8F7 /* MoreViewController.m */,
+				BB98A5181907BF4F004FC8F7 /* MoreViewCtlOptions.plist */,
+				BB47082619078E5800681ECC /* ScanViewController.h */,
+				BB47082719078E5800681ECC /* ScanViewController.mm */,
+			);
+			path = More;
+			sourceTree = "<group>";
+		};
 		BB7CD0AC18FE240800D96C1A /* EGORefreshView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1096,6 +1165,26 @@
 			name = EGORefreshView;
 			path = XMPPBaseProject/customCtl/EGORefreshView;
 			sourceTree = SOURCE_ROOT;
+		};
+		BB98A4ED1907A9E1004FC8F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BB98A4F21907A9E1004FC8F7 /* libZXingWidget.a */,
+				BB98A4F41907A9E1004FC8F7 /* ZXingTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BB98A51A1907C137004FC8F7 /* more */ = {
+			isa = PBXGroup;
+			children = (
+				BB98A51B1907C137004FC8F7 /* yy_file_normal.png */,
+				BB98A51C1907C137004FC8F7 /* yy_file_normal@2x.png */,
+				BB98A51D1907C137004FC8F7 /* yy_scan_normal.png */,
+				BB98A51E1907C137004FC8F7 /* yy_scan_normal@2x.png */,
+			);
+			path = more;
+			sourceTree = "<group>";
 		};
 		BBDC000C18F52806008A4DA7 /* Extensions */ = {
 			isa = PBXGroup;
@@ -1777,6 +1866,7 @@
 				BBDC024D18F53F89008A4DA7 /* tabBar */,
 				4705D235190266B4006D1D2E /* accessory */,
 				BBDC027A18F53F89008A4DA7 /* userinfo_relationship */,
+				BB98A51A1907C137004FC8F7 /* more */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -1869,9 +1959,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDC024518F53F89008A4DA7 /* login-button_highted.png */,
-				BBDC024618F53F89008A4DA7 /* login-button_highted@2x.png */,
 				BBDC024718F53F89008A4DA7 /* login-button_normal.png */,
-				BBDC024818F53F89008A4DA7 /* login-button_normal@2x.png */,
 				BBDC024918F53F89008A4DA7 /* setting_logout_button_highted.png */,
 				BBDC024A18F53F89008A4DA7 /* setting_logout_button_highted@2x.png */,
 				BBDC024B18F53F89008A4DA7 /* setting_logout_button_normal.png */,
@@ -1955,6 +2043,7 @@
 		BBDCFC9E18F52341008A4DA7 = {
 			isa = PBXGroup;
 			children = (
+				BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */,
 				BBDCFCB018F52342008A4DA7 /* XMPPBaseProject */,
 				BBDCFCCF18F52342008A4DA7 /* XMPPBaseProjectTests */,
 				BBDCFCA918F52342008A4DA7 /* Frameworks */,
@@ -1974,6 +2063,13 @@
 		BBDCFCA918F52342008A4DA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB98A50F1907B26F004FC8F7 /* libiconv.dylib */,
+				BB98A5021907AD5D004FC8F7 /* AVFoundation.framework */,
+				BB98A5001907AD4F004FC8F7 /* AudioToolbox.framework */,
+				BB98A4FE1907AD43004FC8F7 /* CoreVideo.framework */,
+				BB98A4FC1907AD3B004FC8F7 /* CoreMedia.framework */,
+				BB98A4FA1907AD2E004FC8F7 /* AddressBookUI.framework */,
+				BB98A4F81907AD28004FC8F7 /* AddressBook.framework */,
 				BBDC01E318F528A7008A4DA7 /* MobileCoreServices.framework */,
 				BBDC01E118F52899008A4DA7 /* libz.dylib */,
 				BBDC01DF18F52892008A4DA7 /* libresolv.dylib */,
@@ -2048,7 +2144,7 @@
 				BBDCFCE018F526D7008A4DA7 /* Buddy */,
 				BBDCFCEB18F526D7008A4DA7 /* Group */,
 				BBDCFCF118F526D7008A4DA7 /* Login */,
-				BBDCFCFA18F526D7008A4DA7 /* More */,
+				BB47082519078E5800681ECC /* More */,
 				BBDCFD0118F526D7008A4DA7 /* Set */,
 			);
 			path = controller;
@@ -2088,13 +2184,6 @@
 				BBDCFCF618F526D7008A4DA7 /* RegisterViewCtl.m */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		BBDCFCFA18F526D7008A4DA7 /* More */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = More;
 			sourceTree = "<group>";
 		};
 		BBDCFCFB18F526D7008A4DA7 /* Session */ = {
@@ -2409,6 +2498,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				BB98A5091907B18A004FC8F7 /* PBXTargetDependency */,
 			);
 			name = XMPPBaseProject;
 			productName = XMPPBaseProject;
@@ -2458,6 +2548,12 @@
 			mainGroup = BBDCFC9E18F52341008A4DA7;
 			productRefGroup = BBDCFCA818F52342008A4DA7 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = BB98A4ED1907A9E1004FC8F7 /* Products */;
+					ProjectRef = BB98A4EC1907A9E1004FC8F7 /* ZXingWidget.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				BBDCFCA618F52341008A4DA7 /* XMPPBaseProject */,
@@ -2465,6 +2561,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		BB98A4F21907A9E1004FC8F7 /* libZXingWidget.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libZXingWidget.a;
+			remoteRef = BB98A4F11907A9E1004FC8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BB98A4F41907A9E1004FC8F7 /* ZXingTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ZXingTests.octest;
+			remoteRef = BB98A4F31907A9E1004FC8F7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BBDCFCA518F52341008A4DA7 /* Resources */ = {
@@ -2485,8 +2598,8 @@
 				4705D22E190257BD006D1D2E /* Voice.png in Resources */,
 				BBDC02AA18F53F89008A4DA7 /* new_features_2@2x.jpg in Resources */,
 				BBDC02D918F53F89008A4DA7 /* tabbar_profile_selected@2x.png in Resources */,
-				BBDC02B518F53F89008A4DA7 /* login-button_normal@2x.png in Resources */,
 				BBDC02AE18F53F89008A4DA7 /* new_features_startbutton_background.png in Resources */,
+				BB98A5211907C137004FC8F7 /* yy_scan_normal.png in Resources */,
 				BBDC02E818F53F89008A4DA7 /* userinfo_relationship_followbutton_background.png in Resources */,
 				BBDC028F18F53F89008A4DA7 /* login-button_highted@2x.png in Resources */,
 				BBDCFCC318F52342008A4DA7 /* Images.xcassets in Resources */,
@@ -2499,6 +2612,7 @@
 				BBDC02CF18F53F89008A4DA7 /* tabbar_more@2x.png in Resources */,
 				BBDC028618F53F89008A4DA7 /* BlueBubble2.png in Resources */,
 				BBDC029018F53F89008A4DA7 /* login-button_normal.png in Resources */,
+				BB98A5191907BF4F004FC8F7 /* MoreViewCtlOptions.plist in Resources */,
 				BBDC02BD18F53F89008A4DA7 /* tabbar_discover@2x.png in Resources */,
 				BBDC029E18F53F89008A4DA7 /* navigationbar_refresh@2x.png in Resources */,
 				BBDC02BC18F53F89008A4DA7 /* tabbar_discover.png in Resources */,
@@ -2517,11 +2631,12 @@
 				4705D222190257BD006D1D2E /* face.png in Resources */,
 				BBDC02CB18F53F89008A4DA7 /* tabbar_message_center_highlighted@2x.png in Resources */,
 				BBDC02E418F53F89008A4DA7 /* tb_set_normal.png in Resources */,
+				BB98A51F1907C137004FC8F7 /* yy_file_normal.png in Resources */,
 				BBDC029518F53F89008A4DA7 /* navigationbar_back_highlighted.png in Resources */,
 				BBDC01C418F52808008A4DA7 /* README.txt in Resources */,
-				BBDC02B318F53F89008A4DA7 /* login-button_highted@2x.png in Resources */,
 				BBDC02CD18F53F89008A4DA7 /* tabbar_message_center_selected@2x.png in Resources */,
 				BBDC02EF18F53F89008A4DA7 /* userinfo_relationship_unfollowbutton_background_highlighted@2x.png in Resources */,
+				BB98A5201907C137004FC8F7 /* yy_file_normal@2x.png in Resources */,
 				BBDC029A18F53F89008A4DA7 /* navigationbar_compose@2x.png in Resources */,
 				4705D225190257BD006D1D2E /* faceDelete@2x.png in Resources */,
 				BBDC02ED18F53F89008A4DA7 /* userinfo_relationship_unfollowbutton_background@2x.png in Resources */,
@@ -2581,6 +2696,7 @@
 				BBDC028B18F53F89008A4DA7 /* background.png in Resources */,
 				4705D24F190266B4006D1D2E /* pl_location_normal@2x.png in Resources */,
 				BBDC029118F53F89008A4DA7 /* login-button_normal@2x.png in Resources */,
+				BB98A5221907C137004FC8F7 /* yy_scan_normal@2x.png in Resources */,
 				BBDC02D418F53F89008A4DA7 /* tabbar_profile.png in Resources */,
 				BBDC02A718F53F89008A4DA7 /* new_features_1@2x.jpg in Resources */,
 				BBDC029B18F53F89008A4DA7 /* navigationbar_compose_highlighted.png in Resources */,
@@ -2663,6 +2779,7 @@
 				BBDC015018F52807008A4DA7 /* XMPPAnonymousAuthentication.m in Sources */,
 				BBDC01FE18F52A71008A4DA7 /* ASIAuthenticationDialog.m in Sources */,
 				BBDC020618F52A71008A4DA7 /* ASINetworkQueue.m in Sources */,
+				BB98A5171907BC63004FC8F7 /* MoreViewController.m in Sources */,
 				BBDC01B618F52808008A4DA7 /* DDList.m in Sources */,
 				BBDC01B118F52808008A4DA7 /* XEP_0223.m in Sources */,
 				BBDC013418F52807008A4DA7 /* User.m in Sources */,
@@ -2767,6 +2884,7 @@
 				BBDC015918F52807008A4DA7 /* XMPPElement.m in Sources */,
 				47F6B53518F8E75F00246D68 /* UIExpandingTextViewInternal.m in Sources */,
 				BBDC014818F52807008A4DA7 /* SBJsonStreamParserAdapter.m in Sources */,
+				BB47082819078E5800681ECC /* ScanViewController.mm in Sources */,
 				BBDC019D18F52808008A4DA7 /* XMPPCapabilities.xcdatamodel in Sources */,
 				BBDC014218F52807008A4DA7 /* FMDatabaseQueue.m in Sources */,
 				BBDC019318F52808008A4DA7 /* XMPPIQ+XEP_0060.m in Sources */,
@@ -2853,6 +2971,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BB98A5091907B18A004FC8F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZXingWidget;
+			targetProxy = BB98A5081907B18A004FC8F7 /* PBXContainerItemProxy */;
+		};
 		BBDCFCCE18F52342008A4DA7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BBDCFCA618F52341008A4DA7 /* XMPPBaseProject */;
@@ -2892,8 +3015,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2921,6 +3044,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../cpp/core/src,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2931,8 +3059,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -2954,7 +3082,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../../cpp/core/src,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2965,11 +3099,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMPPBaseProject/XMPPBaseProject-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
+					"./zxing/iphone/ZXingWidget/Classes/**",
+					./zxing/cpp/core/src,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
@@ -2979,7 +3117,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XMPPBaseProject/thirdPartyLib/XMPP/Vendor/libidn",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2989,11 +3129,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMPPBaseProject/XMPPBaseProject-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
+					"./zxing/iphone/ZXingWidget/Classes/**",
+					./zxing/cpp/core/src,
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
@@ -3003,7 +3147,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XMPPBaseProject/thirdPartyLib/XMPP/Vendor/libidn",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
