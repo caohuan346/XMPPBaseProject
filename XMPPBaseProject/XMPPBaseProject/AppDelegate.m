@@ -12,10 +12,24 @@
 #import "SVProgressHUD.h"
 #import "XMPPHelper.h"
 
+@interface AppDelegate (){
+    BMKMapManager * _mapManager;
+}
+
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // 要使用百度地图，请先启动BaiduMapManager
+	_mapManager = [[BMKMapManager alloc]init];
+	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];
+	if (!ret) {
+		NSLog(@"manager start failed!");
+	}
+
+    
     // Override point for customization after application launch.
     return YES;
 }
@@ -113,6 +127,29 @@
 -(void)xmppServerAuthenticateFail{
     [SVProgressHUD dismissWithError:@"验证失败！" afterDelay:1.0];
 }
+
+#pragma mark - BMKGeneral Delegate
+- (void)onGetNetworkState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"联网成功");
+    }
+    else{
+        NSLog(@"onGetNetworkState %d",iError);
+    }
+    
+}
+
+- (void)onGetPermissionState:(int)iError
+{
+    if (0 == iError) {
+        NSLog(@"授权成功");
+    }
+    else {
+        NSLog(@"onGetPermissionState %d",iError);
+    }
+}
+
 
 #pragma mark - public instance method
 -(void)initUserData{

@@ -467,7 +467,82 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWO-pe-pLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2227" y="-613"/>
+            <point key="canvasLocation" x="2255" y="-611"/>
+        </scene>
+        <!--Location View Controller - 位置-->
+        <scene sceneID="cCU-Ma-U88">
+            <objects>
+                <viewController hidesBottomBarWhenPushed="YES" id="OU3-IC-Jdf" userLabel="Location View Controller - 位置" customClass="LocationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0Mp-jn-D0M"/>
+                        <viewControllerLayoutGuide type="bottom" id="da9-mr-VoM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ejT-z7-Pra">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOP-8v-ihi" customClass="BMKMapView">
+                                <rect key="frame" x="0.0" y="26" width="320" height="516"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRX-Mf-80f">
+                                        <rect key="frame" x="5" y="0.0" width="73" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="开始定位">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="qk3-C2-aip"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEg-8m-wOf">
+                                        <rect key="frame" x="75" y="0.0" width="85" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="使用跟随">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startFollowing:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="XBz-9C-K94"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-lL-2du">
+                                        <rect key="frame" x="247" y="0.0" width="73" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="停止定位">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="stopLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="Oge-NB-qcU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5M-oR-Qso">
+                                        <rect key="frame" x="154" y="0.0" width="85" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="使用罗盘">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startFollowHeading:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="VpJ-8J-kM4"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Zax-Yf-F30"/>
+                    <connections>
+                        <outlet property="_mapView" destination="uOP-8v-ihi" id="olc-Wq-U99"/>
+                        <outlet property="followHeadBtn" destination="d5M-oR-Qso" id="0KT-tZ-cgY"/>
+                        <outlet property="followingBtn" destination="gEg-8m-wOf" id="WEW-7I-Y0N"/>
+                        <outlet property="startBtn" destination="GRX-Mf-80f" id="ei5-NN-9BZ"/>
+                        <outlet property="stopBtn" destination="EgS-lL-2du" id="vEJ-PH-3Yw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6j3-F4-DKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2767" y="87"/>
         </scene>
         <!--Group View Controller - 群组-->
         <scene sceneID="bUB-ch-apN">
@@ -534,11 +609,12 @@
                     <connections>
                         <outlet property="chatToolBar" destination="qjf-CK-UuP" id="eY3-K4-wST"/>
                         <outlet property="tView" destination="uUU-3I-8Ve" id="TzM-Kk-kbH"/>
+                        <segue destination="OU3-IC-Jdf" kind="push" identifier="toLocation" id="5qZ-Ao-BFk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Fw-8F-PbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2220" y="103"/>
+            <point key="canvasLocation" x="2270" y="87"/>
         </scene>
         <!--More View Controller - 更多-->
         <scene sceneID="Ka9-6Y-um4">
@@ -777,6 +853,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="3kp-9E-dGb"/>
+        <segue reference="mLH-ke-O8r"/>
     </inferredMetricsTieBreakers>
 </document>

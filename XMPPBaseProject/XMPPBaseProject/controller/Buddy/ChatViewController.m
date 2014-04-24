@@ -279,7 +279,7 @@
 
 //位置
 -(void)accessaryBtnLocation{
-    
+    [self performSegueWithIdentifier:@"toLocation" sender:self];
 }
 
 //消息

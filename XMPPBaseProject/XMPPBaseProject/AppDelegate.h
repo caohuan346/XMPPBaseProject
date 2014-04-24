@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BMapKit.h"
+#import "XMPPServer.h"
+#import "DBCenter.h"
 
 @class LoginViewController;
 @class Globals;
 @class DBCenter;
-#import "XMPPServer.h"
-#import "DBCenter.h"
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,retain) UIViewController *viewController;
