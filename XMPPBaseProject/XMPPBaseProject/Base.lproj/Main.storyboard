@@ -481,55 +481,73 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOP-8v-ihi" customClass="BMKMapView">
-                                <rect key="frame" x="0.0" y="26" width="320" height="516"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOP-8v-ihi" customClass="BMKMapView">
+                                <rect key="frame" x="0.0" y="29" width="320" height="539"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRX-Mf-80f">
-                                        <rect key="frame" x="5" y="0.0" width="73" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="开始定位">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="qk3-C2-aip"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEg-8m-wOf">
-                                        <rect key="frame" x="75" y="0.0" width="85" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="使用跟随">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startFollowing:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="XBz-9C-K94"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-lL-2du">
-                                        <rect key="frame" x="247" y="0.0" width="73" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="停止定位">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="stopLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="Oge-NB-qcU"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5M-oR-Qso">
-                                        <rect key="frame" x="154" y="0.0" width="85" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="使用罗盘">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="startFollowHeading:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="VpJ-8J-kM4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRX-Mf-80f">
+                                <rect key="frame" x="20" y="5" width="60" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Ju3-wU-qJB"/>
+                                </constraints>
+                                <state key="normal" title="开始定位">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="qk3-C2-aip"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEg-8m-wOf">
+                                <rect key="frame" x="90" y="5" width="60" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="使用跟随">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startFollowing:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="XBz-9C-K94"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5M-oR-Qso">
+                                <rect key="frame" x="160" y="5" width="60" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="使用罗盘">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startFollowHeading:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="VpJ-8J-kM4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgS-lL-2du">
+                                <rect key="frame" x="230" y="5" width="60" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="停止定位">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopLocation:" destination="OU3-IC-Jdf" eventType="touchUpInside" id="Oge-NB-qcU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gEg-8m-wOf" firstAttribute="top" secondItem="ejT-z7-Pra" secondAttribute="top" constant="5" id="DNF-mg-cIu"/>
+                            <constraint firstItem="d5M-oR-Qso" firstAttribute="leading" secondItem="gEg-8m-wOf" secondAttribute="trailing" constant="10" id="ErY-o6-XPd"/>
+                            <constraint firstItem="EgS-lL-2du" firstAttribute="top" secondItem="ejT-z7-Pra" secondAttribute="top" constant="5" id="HZW-6r-REC"/>
+                            <constraint firstItem="uOP-8v-ihi" firstAttribute="leading" secondItem="ejT-z7-Pra" secondAttribute="leading" id="IHg-h5-SHu"/>
+                            <constraint firstItem="GRX-Mf-80f" firstAttribute="bottom" secondItem="gEg-8m-wOf" secondAttribute="bottom" id="N0k-So-0QZ"/>
+                            <constraint firstAttribute="trailing" secondItem="uOP-8v-ihi" secondAttribute="trailing" id="NxJ-Ld-TgX"/>
+                            <constraint firstItem="uOP-8v-ihi" firstAttribute="top" secondItem="GRX-Mf-80f" secondAttribute="bottom" constant="4" id="OLg-ho-hS1"/>
+                            <constraint firstItem="GRX-Mf-80f" firstAttribute="top" secondItem="ejT-z7-Pra" secondAttribute="top" constant="5" id="Txj-6L-HgU"/>
+                            <constraint firstItem="EgS-lL-2du" firstAttribute="leading" secondItem="d5M-oR-Qso" secondAttribute="trailing" constant="10" id="Vyn-93-nue"/>
+                            <constraint firstItem="GRX-Mf-80f" firstAttribute="leading" secondItem="ejT-z7-Pra" secondAttribute="leading" constant="20" symbolic="YES" id="fye-lp-fe8"/>
+                            <constraint firstItem="gEg-8m-wOf" firstAttribute="leading" secondItem="GRX-Mf-80f" secondAttribute="trailing" constant="10" id="hmY-mq-Dv2"/>
+                            <constraint firstItem="d5M-oR-Qso" firstAttribute="bottom" secondItem="EgS-lL-2du" secondAttribute="bottom" id="hvK-yd-RaN"/>
+                            <constraint firstItem="d5M-oR-Qso" firstAttribute="bottom" secondItem="gEg-8m-wOf" secondAttribute="bottom" id="jlr-K6-1td"/>
+                            <constraint firstItem="d5M-oR-Qso" firstAttribute="top" secondItem="ejT-z7-Pra" secondAttribute="top" constant="5" id="lfx-Ca-Q3R"/>
+                            <constraint firstAttribute="bottom" secondItem="uOP-8v-ihi" secondAttribute="bottom" id="uwJ-F7-o9N"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Zax-Yf-F30"/>
                     <connections>
