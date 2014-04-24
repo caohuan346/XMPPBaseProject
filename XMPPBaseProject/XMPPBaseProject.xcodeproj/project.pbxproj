@@ -69,6 +69,7 @@
 		47F6B53318F8E75F00246D68 /* FacialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52818F8E75F00246D68 /* FacialView.m */; };
 		47F6B53418F8E75F00246D68 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */; };
 		47F6B53518F8E75F00246D68 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */; };
+		BB17CD0D1908977800FCA7F7 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB17CD0C1908977800FCA7F7 /* WebViewController.m */; };
 		BB47082819078E5800681ECC /* ScanViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = BB47082719078E5800681ECC /* ScanViewController.mm */; };
 		BB7CD0AF18FE240800D96C1A /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB7CD0AE18FE240800D96C1A /* EGORefreshTableHeaderView.m */; };
 		BB98A5061907B069004FC8F7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01E118F52899008A4DA7 /* libz.dylib */; };
@@ -498,6 +499,8 @@
 		47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
 		47F6B52B18F8E75F00246D68 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
 		47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextViewInternal.m; sourceTree = "<group>"; };
+		BB17CD0B1908977800FCA7F7 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		BB17CD0C1908977800FCA7F7 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BB47082619078E5800681ECC /* ScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanViewController.h; sourceTree = "<group>"; };
 		BB47082719078E5800681ECC /* ScanViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScanViewController.mm; sourceTree = "<group>"; };
 		BB7CD0AD18FE240800D96C1A /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
@@ -1157,6 +1160,8 @@
 				477577D41907F994006300BC /* MoreOptionCell.m */,
 				BB47082619078E5800681ECC /* ScanViewController.h */,
 				BB47082719078E5800681ECC /* ScanViewController.mm */,
+				BB17CD0B1908977800FCA7F7 /* WebViewController.h */,
+				BB17CD0C1908977800FCA7F7 /* WebViewController.m */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -2797,6 +2802,7 @@
 				477577D51907F994006300BC /* MoreOptionCell.m in Sources */,
 				BBDC013118F52807008A4DA7 /* XMPPServer.m in Sources */,
 				BBDC017E18F52808008A4DA7 /* XMPPRoomMemoryStorage.m in Sources */,
+				BB17CD0D1908977800FCA7F7 /* WebViewController.m in Sources */,
 				BBDC018A18F52808008A4DA7 /* XMPPvCardTempAdr.m in Sources */,
 				BBDC017218F52808008A4DA7 /* XMPPJabberRPCModule.m in Sources */,
 				BBDC019E18F52808008A4DA7 /* XMPPCapabilitiesCoreDataStorage.m in Sources */,

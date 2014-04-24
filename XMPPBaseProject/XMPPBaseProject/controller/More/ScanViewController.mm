@@ -12,13 +12,16 @@
 #import <TwoDDecoderResult.h>
 #import <ZXingWidgetController.h>
 #import <MultiFormatOneDReader.h>
+#import "WebViewController.h"
 //#import "UINavigationItem+NavButton.h"
 //#import "APPOAController.h"
 #define RGBCOLOR(r,g,b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1]
 //判断是否是iPhone5
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
-@interface ScanViewController ()
+@interface ScanViewController (){
+    NSString *_scanURLStr;
+}
 
 @end
 
@@ -267,8 +270,6 @@
 #pragma mark - Decoder Delegate
 - (void)decoder:(Decoder *)decoder didDecodeImage:(UIImage *)image usingSubset:(UIImage *)subset withResult:(TwoDDecoderResult *)result
 {
-    
-    //    Y_NSLOG_METHOD_NAME;
     self.isScanning = YES;
     [_captureSession stopRunning];
     [self pauseScan];
@@ -315,22 +316,16 @@
         case 0:
         {
             
-            NSString *urlString = nil;
+            //NSString *urlString = nil;
             if (alertView.tag == 2) {
                 NSString *searchMessage = [NSString stringWithFormat:@"http://www.baidu.com/s?wd=%@&rsv_bp=0&rsv_spt=3&rsv_sug3=2&rsv_sug=0&rsv_sug4=235&rsv_sug1=1&inputT=731", alertView.message];
-                urlString = searchMessage;
+                _scanURLStr = searchMessage;
             }else{
-                urlString = alertView.message;
+                _scanURLStr = alertView.message;
             }
             
-            /*
-            APPOAController *browser=[[[APPOAController alloc] initWithNibName:@"APPOAController" bundle:Nil] autorelease];
-            browser.isBroswer=YES;
-            browser.urlString=urlString;
-            browser.hidesBottomBarWhenPushed=YES;
-            browser.scanViewController = self;
-            [self.navigationController pushViewController:browser animated:YES];
-            */
+            //toWebView
+            [self performSegueWithIdentifier:@"toWebView" sender:self];
         }
             break;
         case 1:
@@ -373,6 +368,18 @@
     self.isScanning = YES;
     [self dismissViewControllerAnimated:YES completion:^{
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    //扫描
+    if ([segue.identifier isEqualToString:@"toWebView"]) {
+        WebViewController *web  = segue.destinationViewController;
+        web.urlStr = _scanURLStr;
+    }else if ([segue.identifier isEqualToString:@"XX"]) {
+        
+    }
+    
 }
 
 @end
