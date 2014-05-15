@@ -388,11 +388,12 @@
                         <segue destination="e76-Nw-SOU" kind="relationship" relationship="viewControllers" id="4Kh-ab-nth"/>
                         <segue destination="yhF-Dx-I3Y" kind="relationship" relationship="viewControllers" id="vcA-sX-hnD"/>
                         <segue destination="Tzp-88-JP6" kind="relationship" relationship="viewControllers" id="uI0-7K-iTX"/>
+                        <segue destination="fuy-0f-i5x" kind="relationship" relationship="viewControllers" id="BzD-3h-eMI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y54-pV-lsi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-173" y="464"/>
+            <point key="canvasLocation" x="-157" y="504"/>
         </scene>
         <!--Buddy View Controller - 好友-->
         <scene sceneID="1D1-jg-GUb">
@@ -705,7 +706,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="es4-sV-zoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1586" y="1210"/>
+            <point key="canvasLocation" x="1584" y="1289"/>
         </scene>
         <!--Scan View Controller - 扫描-->
         <scene sceneID="hqI-qW-Yza">
@@ -733,7 +734,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fwW-fj-Feg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2207" y="987"/>
+            <point key="canvasLocation" x="2205" y="1066"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="8Xr-iy-Ubw">
@@ -762,7 +763,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcM-FE-8iC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2729" y="991"/>
+            <point key="canvasLocation" x="2727" y="1070"/>
         </scene>
         <!--Navigation Controller - 设置-->
         <scene sceneID="8za-LV-dYd">
@@ -778,7 +779,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZU-zL-ePA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1056" y="1947"/>
+            <point key="canvasLocation" x="1072" y="2074"/>
         </scene>
         <!--Setting View Ctl - 设置-->
         <scene sceneID="a4L-9p-BiJ">
@@ -813,7 +814,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b6z-wK-g7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1592" y="1947"/>
+            <point key="canvasLocation" x="1608" y="2074"/>
+        </scene>
+        <!--Navigation Controller - Item-->
+        <scene sceneID="ibr-OY-7hf">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="fuy-0f-i5x" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="AD4-8C-gyv"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PJC-VM-3HS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0Sf-M9-hnY" kind="relationship" relationship="rootViewController" id="w3M-2y-oui"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ObL-B7-Ebp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1065" y="2835"/>
+        </scene>
+        <!--App View Controller-->
+        <scene sceneID="hFQ-XN-2Pz">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="0Sf-M9-hnY" customClass="AppViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="bcC-Xv-aCD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pL5-lk-UzG">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Hqq-92-XsH">
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="0Sf-M9-hnY" id="s9g-iY-joL"/>
+                            <outlet property="delegate" destination="0Sf-M9-hnY" id="Dvn-7t-tSa"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="yBI-Pu-ti0"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JzI-cy-qdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737" y="2851"/>
         </scene>
         <!--Navigation Controller - 更多-->
         <scene sceneID="2MY-px-3GR">
@@ -829,7 +881,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8l-wi-vk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1050" y="1210"/>
+            <point key="canvasLocation" x="1048" y="1289"/>
         </scene>
         <!--Navigation Controller - 群组-->
         <scene sceneID="JtM-wg-Iyo">

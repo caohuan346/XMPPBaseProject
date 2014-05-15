@@ -24,6 +24,7 @@
 #pragma mark - life circle
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
 }
 
@@ -37,8 +38,8 @@
     self.passTextField.text = password;
     //self.serverTextField.text = xmppServer;
     
-    /*
      //自动登录：
+    /*
     if (userId && password) {
         XmppUserInfo *userInfo = [[XmppUserInfo alloc] init];
         userInfo.userName = userId;
@@ -46,6 +47,9 @@
         [[XMPPServer sharedServer] connectWithUserInfo:userInfo];
     }
      */
+    [self toLogin:nil];
+    
+    [self initAnim6];
 }
 
 - (void)viewDidUnload
@@ -112,4 +116,85 @@
     [SVProgressHUD dismissWithError:@"登录失败，请检查用户名或密码"];
 }
 
+//#pragma mark - segue
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+//{
+//    if ([segue.identifier isEqualToString:@"register"]) {
+//
+//    }
+//}
+
+
+#pragma mark - anim
+//平移动画
+-(void)initAnim1{
+    CABasicAnimation *basicAnim = [CABasicAnimation animationWithKeyPath:@"position"];
+    basicAnim.duration = 2;
+    //    basicAnim.fromValue = [NSValue valueWithCGPoint:CGPointMake(100, 100)];
+    basicAnim.toValue = [NSValue valueWithCGPoint:CGPointMake(250, 300)];
+    //    basicAnim.byValue =[NSValue valueWithCGPoint:CGPointMake(100, 100)];
+    [self.userTextField.layer addAnimation:basicAnim forKey:nil];
+    
+    basicAnim.removedOnCompletion  = NO;
+    basicAnim.fillMode = kCAFillModeForwards;
+    
+    // 设置动画代理
+    basicAnim.delegate = self;
+}
+
+//旋转动画
+-(void)initAnim2{
+     CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    anim.toValue = @M_PI_4;
+    anim.duration = 2;
+    anim.repeatCount = MAXFLOAT;
+    anim.removedOnCompletion = NO;
+    anim.fillMode = kCAFillModeForwards;
+    [self.userTextField.layer addAnimation:anim forKey:nil];
+}
+
+//自定义动画-平移1
+-(void)initAnim3{
+    CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    anim.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    anim.duration = 2;
+    NSValue *p1 = [NSValue valueWithCGPoint:CGPointMake(0, 0)];
+    NSValue *p2 = [NSValue valueWithCGPoint:CGPointMake(300, 0)];
+    NSValue *p3 = [NSValue valueWithCGPoint:CGPointMake(300, 300)];
+    NSValue *p4 = [NSValue valueWithCGPoint:CGPointMake(0, 300)];
+    anim.values = @[p1, p2, p3, p4];
+    
+    [self.userTextField.layer addAnimation:anim forKey:nil];
+}
+
+//自定义动画-平移2 根据路径进行动画
+-(void)initAnim4{
+    CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathAddEllipseInRect(path, NULL, CGRectMake(0, 0, 300, 300));
+    anim.duration = 1;
+    anim.path = path;
+    anim.repeatCount = MAXFLOAT;
+    [self.userTextField.layer addAnimation:anim forKey:nil];
+    CGPathRelease(path);
+}
+
+//抖动动画
+#define angle2radian(x) (((x)/180.0)*M_PI) //定义一个宏定义
+-(void)initAnim5{
+    CAKeyframeAnimation *anim = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation"];
+    float angle = angle2radian(3);
+    anim.values = @[@(-angle), @(angle), @(-angle)];
+    anim.repeatCount = MAXFLOAT;
+    anim.duration = 0.2;
+    [self.userTextField.layer addAnimation:anim forKey:nil];
+}
+#pragma mark - anim2
+-(void)initAnim6{
+    CATransition *anim = [CATransition animation];
+    anim.type = @"fade";
+    anim.subtype = kCATransitionFromRight;
+    anim.duration = 0.5;
+    [self.userTextField.layer addAnimation:anim forKey:nil];
+}
 @end

@@ -22,6 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //NSString *const AppDelegateConstant = @"12121312312";
+    
     // 要使用百度地图，请先启动BaiduMapManager
 	_mapManager = [[BMKMapManager alloc]init];
 	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];
@@ -29,6 +31,23 @@
 		NSLog(@"manager start failed!");
 	}
 
+    
+    //判断是否由远程消息通知触发应用程序启动
+    if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]!=nil) {
+        //获取应用程序消息通知标记数（即小红圈中的数字）
+        int badge = [UIApplication sharedApplication].applicationIconBadgeNumber;
+        if (badge>0) {
+            //如果应用程序消息通知标记数（即小红圈中的数字）大于0，清除标记。
+            badge--;
+            //清除标记。清除小红圈中数字，小红圈中数字为0，小红圈才会消除。
+            [UIApplication sharedApplication].applicationIconBadgeNumber = badge;
+        }
+    }
+    //消息推送注册
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge];
+    
+    //1. 将app注册notification里面,
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
     
     // Override point for customization after application launch.
     return YES;
@@ -59,6 +78,37 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark -registerForRemoteNotifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    //2: 并从APNS上获取测试机的deviceToken.
+    NSString *dToken=[[deviceToken description] substringWithRange:NSMakeRange(1, [deviceToken description].length-2)];
+    NSLog(@"%@",dToken);
+    [StandardUserDefaults setObject:dToken forKey:@"deviceToken"];
+    [StandardUserDefaults synchronize];
+    NSLog(@"%s-----%@", __FUNCTION__,[deviceToken description]);
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    NSLog(@"%s == %@", __FUNCTION__,error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@" 收到推送消息 ： %@",[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]);
+    if ([[userInfo objectForKey:@"aps"] objectForKey:@"alert"]!=NULL) {
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"推送通知"
+                                            message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"]
+                                            delegate:self
+                                            cancelButtonTitle:@" 关闭"
+                                            otherButtonTitles:@" 更新状态",nil];
+        [alert show];
+        NSLog(@"%s", __FUNCTION__);
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSLog(@"%s", __FUNCTION__);
 }
 
 #pragma mark - private

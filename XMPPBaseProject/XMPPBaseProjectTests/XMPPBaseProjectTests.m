@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "AppDelegate.h"
 
 @interface XMPPBaseProjectTests : XCTestCase
 
@@ -26,9 +27,16 @@
     [super tearDown];
 }
 
-- (void)testExample
+//- (void)testExample
+//{
+////    XCTAssertNil(<#a1#>, <#format...#>)
+//    //XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+//}
+- (void)testExample1
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    NSArray *array;
+    NSArray *array2;
+    XCTAssertEqualObjects(array, array2, @"Should have returned the expected string.");
 }
 
 @end

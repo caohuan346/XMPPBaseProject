@@ -11,6 +11,8 @@
 #import "XMPPServer.h"
 #import "DBCenter.h"
 
+extern NSString *const AppDelegateConstant;
+
 @class LoginViewController;
 @class Globals;
 @class DBCenter;

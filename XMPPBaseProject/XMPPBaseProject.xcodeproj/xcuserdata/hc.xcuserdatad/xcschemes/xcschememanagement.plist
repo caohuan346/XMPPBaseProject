@@ -9,9 +9,26 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>XMPPBaseProjectTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>4799540E192463F200BE5282</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>47995424192463F200BE5282</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BBDCFCA618F52341008A4DA7</key>
 		<dict>
 			<key>primary</key>

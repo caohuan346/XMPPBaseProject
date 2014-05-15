@@ -47,7 +47,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //NSLog(@"%@",AppDelegateConstant);
     self.subscribeBothUsers = [NSMutableArray array];
     self.subscribeFromUsers = [NSMutableArray array];
     self.subscribeToUsers = [NSMutableArray array];
