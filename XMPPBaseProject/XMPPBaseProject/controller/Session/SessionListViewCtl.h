@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @protocol EGORefreshTableHeaderDelegate;
-@interface SessionListViewCtl : UITableViewController<EGORefreshTableHeaderDelegate>
+@interface SessionListViewCtl : UITableViewController
 
 @end

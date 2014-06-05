@@ -12,8 +12,13 @@
 #import "SVProgressHUD.h"
 #import "XMPPHelper.h"
 
+#define KEEP_ALIVE_INTERVAL 600
+
 @interface AppDelegate (){
     BMKMapManager * _mapManager;
+    
+    UIBackgroundTaskIdentifier _bgTask;
+    NSInteger bgCount;
 }
 
 @end
@@ -24,13 +29,12 @@
 {
     //NSString *const AppDelegateConstant = @"12121312312";
     
-    // 要使用百度地图，请先启动BaiduMapManager
+    // 启动BaiduMapManager使用百度地图
 	_mapManager = [[BMKMapManager alloc]init];
 	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];
 	if (!ret) {
 		NSLog(@"manager start failed!");
 	}
-
     
     //判断是否由远程消息通知触发应用程序启动
     if ([launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey]!=nil) {
@@ -63,6 +67,21 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    if ([self isMultitaskingSupported])
+    {
+        [self performSelectorOnMainThread:@selector(keepAppAlive) withObject:nil waitUntilDone:YES];
+        BOOL backgroundAccepted = [application setKeepAliveTimeout:KEEP_ALIVE_INTERVAL handler:^{
+            NSLog(@"setKeepAliveTimeout:%d",bgCount);
+            if (_bgTask == UIBackgroundTaskInvalid && bgCount) {
+                [self performSelectorOnMainThread:@selector(keepAppAlive) withObject:nil waitUntilDone:YES];
+                bgCount = 0;
+            }
+        }];
+        if (backgroundAccepted) {
+            NSLog(@"backgrounding accepted");
+        }
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -111,6 +130,47 @@
     NSLog(@"%s", __FUNCTION__);
 }
 
+#pragma mark - background
+- (BOOL) isMultitaskingSupported{
+    BOOL result = NO;
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(isMultitaskingSupported)])
+    {
+        result = [[UIDevice currentDevice] isMultitaskingSupported];
+    }
+    return result;
+}
+
+- (void)keepAppAlive{
+    //bg task
+    _bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"beginBackgroundTaskWithExpirationHandler:%d",1);
+        [[UIApplication sharedApplication]  endBackgroundTask:_bgTask];
+        _bgTask = UIBackgroundTaskInvalid;
+        bgCount += 1;
+    }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        while (1) {
+            if (_bgTask == UIBackgroundTaskInvalid) {
+                break;
+            }
+            NSTimeInterval remainingTime = [UIApplication sharedApplication].backgroundTimeRemaining;
+            if (remainingTime == DBL_MAX) {
+                bgCount = 0;
+                break;
+            }else{
+                NSLog(@"BackgroundTaskWithExpiration,BGTime left: %f", remainingTime);
+            }
+            sleep(1);
+        }
+        NSLog(@"beginBackgroundTaskWithExpirationHandler:%d",2);
+        [[UIApplication sharedApplication]  endBackgroundTask:_bgTask];
+        _bgTask = UIBackgroundTaskInvalid;
+        bgCount += 1;
+    });
+}
+
+
 #pragma mark - private
 -(void)logout{
     [[XMPPServer sharedServer] disconnect];
@@ -142,6 +202,12 @@
 //    mainViewController.remarkLabel.text = @"";
 //    [UIView commitAnimations];
 }
+
+- (void)keepAlive {
+    static int i = 0;
+    NSLog(@"11111---%d",i++);
+}
+
 #pragma mark - custome getters
 - (Globals *)globals {
 	if (_globals == nil) {

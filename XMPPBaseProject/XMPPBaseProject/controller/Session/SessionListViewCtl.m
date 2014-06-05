@@ -14,14 +14,14 @@
 #import "SessionCell.h"
 #import "XMPPHelper.h"
 #import "ChatViewController.h"
-#import "EGORefreshTableHeaderView.h"
+#import "MJRefresh.h"
 
 @interface SessionListViewCtl (){
-    EGORefreshTableHeaderView *_refreshHeaderView;
+    MJRefreshHeaderView *_header;
+    MJRefreshFooterView *_footer;
 }
 
 @property(nonatomic,strong)NSArray *sessionList;
-
 
 @end
 
@@ -32,6 +32,8 @@
 - (void)dealloc
 {
      [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
+    [_header free];
+    [_footer free];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -57,12 +59,16 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveXMPPMsg:) name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
     
-//    EGORefreshTableHeaderView *refreshview = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0.0f, -320.0f, self.view.frame.size.width, 320)];
-//    refreshview.delegate = self;
-//    [self.tableView addSubview:refreshview];
-//    _refreshHeaderView = refreshview;
-
+    //初始化数据
     [self initData];
+    
+    // 集成刷新控件
+    //1.下拉刷新
+    [self addHeader];
+    
+    //2.上拉加载更多
+    [self addFooter];
+
 }
 
 
@@ -97,6 +103,86 @@
         NSLog(@"%@停止输入",aMsg.senderId);
     }
     [self refreshData];
+}
+
+#pragma mark - refresh view
+- (void)addFooter
+{
+    __unsafe_unretained SessionListViewCtl *vc = self;
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.tableView;
+    footer.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        //TODO 增加数据
+//        // 增加5条假数据
+//        for (int i = 0; i<5; i++) {
+//            int random = arc4random_uniform(1000000);
+//            [vc->_fakeData addObject:[NSString stringWithFormat:@"随机数据---%d", random]];
+//        }
+
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是footer
+        [vc performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    _footer = footer;
+}
+
+- (void)addHeader
+{
+    __unsafe_unretained SessionListViewCtl *vc = self;
+    
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.tableView;
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        
+        //TODO 增加数据
+        // 增加5条假数据
+//        for (int i = 0; i<5; i++) {
+//            int random = arc4random_uniform(1000000);
+//            [vc->_fakeData insertObject:[NSString stringWithFormat:@"随机数据---%d", random] atIndex:0];
+//        }
+
+        
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是header
+        [vc performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+        
+        NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    };
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@----刷新完毕", refreshView.class);
+    };
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@----切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    [header beginRefreshing];
+    _header = header;
+}
+
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
+{
+    // 刷新表格
+    [self.tableView reloadData];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
 }
 
 
@@ -219,33 +305,4 @@
     }
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-}
--(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-}
-
-
-#pragma mark - ego refresh delegate
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
-    
-    NSLog(@"1");
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
-    NSLog(@"2");
-    return true;
-}
-
-- (void)egoRefreshTableHeaderDidTriggerToBottom{
-    NSLog(@"3");
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-    NSLog(@"4");
-    return [NSDate date];
-}
 @end

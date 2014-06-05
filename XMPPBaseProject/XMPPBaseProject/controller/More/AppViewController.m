@@ -10,8 +10,15 @@
 #import "Cell.h"
 #import "LineLayout.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "MJRefresh.h"
 
-@interface AppViewController ()
+NSString *const MyCollectionCellID = @"MyCollectionCellID";
+
+@interface AppViewController ()<MJRefreshBaseViewDelegate>{
+    NSMutableArray *_fakeColor;
+    MJRefreshHeaderView *_header;
+    MJRefreshFooterView *_footer;
+}
 
 @property(nonatomic,strong)NSMutableArray *groupsInfoArray;
 @property(nonatomic,strong)NSMutableArray *photoURLs;
@@ -20,18 +27,33 @@
 @end
 
 @implementation AppViewController
+- (id)init
+{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(80, 80);
+    layout.sectionInset = UIEdgeInsetsMake(20, 20, 20, 20);
+    layout.minimumInteritemSpacing = 20;
+    layout.minimumLineSpacing = 20;
+    return [self initWithCollectionViewLayout:layout];
+}
 
+#pragma mark - life circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+
     }
     return self;
 }
 
 - (void)viewDidLoad
 {
+    
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
     /*
      在iOS6中，我们可以更加方便的使用Cell，系统总是为我们初始化Cell。我们可以直接使用。只需要简单的按照两步走即可：
     
@@ -46,24 +68,46 @@
      -(id)dequeueReusableSupplementaryViewOfKind:withReuseIdentifier:forIndexPath:
      */
     
-    [self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
+    //注册
+    //[self.collectionView registerClass:[Cell class] forCellWithReuseIdentifier:@"MY_CELL"];
+    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.alwaysBounceVertical = YES;
+     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:MyCollectionCellID];
     
     self.photoURLs = [NSMutableArray array];
     self.photosDic = [NSMutableDictionary dictionary];
     self.groupsInfoArray = [NSMutableArray array];
     
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    // 2.假数据
+    _fakeColor = [NSMutableArray array];
+    for (int i = 0; i<5; i++) {
+        // 添加随机色
+        [_fakeColor addObject:[UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]];
+    }
+
+    
+    // 集成刷新控件
+    // 1.下拉刷新
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = self.collectionView;
+    header.delegate = self;
+    // 自动刷新
+    [header beginRefreshing];
+    _header = header;
+    
+    //2.上拉加载更多
+    MJRefreshFooterView *footer = [MJRefreshFooterView footer];
+    footer.scrollView = self.collectionView;
+    footer.delegate = self;
+    _footer = footer;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-//    [self getAllImages];
     
-    [self getImgs];
+    //[self getImgs];
     
-    [self handlePhotoData];
-    
-    NSLog(@"1111");
+    //[self handlePhotoData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,28 +116,75 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    [_header free];
+    [_footer free];
+}
 #pragma mark - UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 20;
+    return _fakeColor.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
-
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    UICollectionViewCell *cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"MY_CELL" forIndexPath:indexPath];
-    
-    // Configure thecell's content
-    
-    // cell.imageView.image= ...
-    
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MyCollectionCellID forIndexPath:indexPath];
+    cell.backgroundColor = _fakeColor[indexPath.row];
     return cell;
-    
+}
 
+#pragma mark - refresh view
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
+{
+    // 刷新表格
+    [self.collectionView reloadData];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
+}
+#pragma mark - Refresh Delegate
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView
+{
+    NSLog(@"%@----开始进入刷新状态", refreshView.class);
+    
+    // 1.添加假数据
+    for (int i = 0; i<5; i++) {
+        UIColor *color = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
+        
+        if ([refreshView isKindOfClass:[MJRefreshHeaderView class]]) {
+            [_fakeColor insertObject:color atIndex:0];
+        } else {
+            [_fakeColor addObject:color];
+        }
+    }
+    
+    // 2.2秒后刷新表格UI
+    [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
+}
+
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView
+{
+    NSLog(@"%@----刷新完毕", refreshView.class);
+}
+
+- (void)refreshView:(MJRefreshBaseView *)refreshView stateChange:(MJRefreshState)state
+{
+    switch (state) {
+        case MJRefreshStateNormal:
+            NSLog(@"%@----切换到：普通状态", refreshView.class);
+            break;
+            
+        case MJRefreshStatePulling:
+            NSLog(@"%@----切换到：松开即可刷新的状态", refreshView.class);
+            break;
+            
+        case MJRefreshStateRefreshing:
+            NSLog(@"%@----切换到：正在刷新状态", refreshView.class);
+            break;
+        default:
+            break;
+    }
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {

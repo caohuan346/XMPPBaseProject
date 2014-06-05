@@ -13,7 +13,25 @@
 #import "Message.h"
 #import "User.h"
 #import "AppDelegate.h"
-
+/*
+ //到服务器上请求联系人名片信息
+ - (void)fetchvCardTempForJID:(XMPPJID *)jid;
+ 
+ //请求联系人的名片，如果数据库有就不请求，没有就发送名片请求
+ - (void)fetchvCardTempForJID:(XMPPJID *)jid ignoreStorage:(BOOL)ignoreStorage;
+ 
+ //获取联系人的名片，如果数据库有就返回，没有返回空，并到服务器上抓取
+ - (XMPPvCardTemp *)vCardTempForJID:(XMPPJID *)jid shouldFetch:(BOOL)shouldFetch;
+ 
+ //更新自己的名片信息
+ - (void)updateMyvCardTemp:(XMPPvCardTemp *)vCardTemp;
+ 
+ //获取到一盒联系人的名片信息的回调
+ - (void)xmppvCardTempModule:(XMPPvCardTempModule *)vCardTempModule
+ didReceivevCardTemp:(XMPPvCardTemp *)vCardTemp
+ forJID:(XMPPJID *)jid
+ 
+ */
 @interface BuddyViewController (){
 }
 
@@ -24,10 +42,6 @@
 @end
 
 @implementation BuddyViewController
-
-@synthesize subscribeBothUsers = _subscribeBothUsers;
-@synthesize subscribeFromUsers = _subscribeFromUsers;
-@synthesize subscribeToUsers = _subscribeToUsers;
 
 #pragma mark - life circle
 

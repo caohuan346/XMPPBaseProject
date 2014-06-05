@@ -50,7 +50,13 @@
 		470EFF1018F5707000018AFF /* header_icon_set@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF0E18F5707000018AFF /* header_icon_set@2x.png */; };
 		470EFF1318F5711D00018AFF /* fresh_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF1118F5711D00018AFF /* fresh_friends.png */; };
 		470EFF1418F5711D00018AFF /* fresh_friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EFF1218F5711D00018AFF /* fresh_friends@2x.png */; };
+		471573251926100600E88EC9 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4715731B1926100600E88EC9 /* MJRefresh.bundle */; };
+		471573261926100600E88EC9 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4715731E1926100600E88EC9 /* MJRefreshBaseView.m */; };
+		471573271926100600E88EC9 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573201926100600E88EC9 /* MJRefreshConst.m */; };
+		471573281926100600E88EC9 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573221926100600E88EC9 /* MJRefreshFooterView.m */; };
+		471573291926100600E88EC9 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573241926100600E88EC9 /* MJRefreshHeaderView.m */; };
 		472A0902191FC92400AA278D /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472A0901191FC92400AA278D /* AppViewController.m */; };
+		472E513B193AE42000261F6E /* ChatMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E5139193AE42000261F6E /* ChatMsgCell.m */; };
 		473D75211922316C00D68735 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473D75201922316C00D68735 /* AssetsLibrary.framework */; };
 		477577D51907F994006300BC /* MoreOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 477577D41907F994006300BC /* MoreOptionCell.m */; };
 		47A3730619205F5500F2FBB7 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47A3730519205F5500F2FBB7 /* Cell.m */; };
@@ -478,8 +484,20 @@
 		470EFF0E18F5707000018AFF /* header_icon_set@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "header_icon_set@2x.png"; sourceTree = "<group>"; };
 		470EFF1118F5711D00018AFF /* fresh_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fresh_friends.png; sourceTree = "<group>"; };
 		470EFF1218F5711D00018AFF /* fresh_friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fresh_friends@2x.png"; sourceTree = "<group>"; };
+		4715731B1926100600E88EC9 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		4715731C1926100600E88EC9 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		4715731D1926100600E88EC9 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		4715731E1926100600E88EC9 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		4715731F1926100600E88EC9 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		471573201926100600E88EC9 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		471573211926100600E88EC9 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		471573221926100600E88EC9 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		471573231926100600E88EC9 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		471573241926100600E88EC9 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
 		472A0900191FC92400AA278D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		472A0901191FC92400AA278D /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
+		472E5138193AE42000261F6E /* ChatMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMsgCell.h; sourceTree = "<group>"; };
+		472E5139193AE42000261F6E /* ChatMsgCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMsgCell.m; sourceTree = "<group>"; };
 		473D75201922316C00D68735 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		477577D31907F994006300BC /* MoreOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreOptionCell.h; sourceTree = "<group>"; };
 		477577D41907F994006300BC /* MoreOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreOptionCell.m; sourceTree = "<group>"; };
@@ -1187,6 +1205,23 @@
 				4705D245190266B4006D1D2E /* pl_picture_normal@2x.png */,
 			);
 			path = accessory;
+			sourceTree = "<group>";
+		};
+		4715731A1926100600E88EC9 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				4715731B1926100600E88EC9 /* MJRefresh.bundle */,
+				4715731C1926100600E88EC9 /* MJRefresh.h */,
+				4715731D1926100600E88EC9 /* MJRefreshBaseView.h */,
+				4715731E1926100600E88EC9 /* MJRefreshBaseView.m */,
+				4715731F1926100600E88EC9 /* MJRefreshConst.h */,
+				471573201926100600E88EC9 /* MJRefreshConst.m */,
+				471573211926100600E88EC9 /* MJRefreshFooterView.h */,
+				471573221926100600E88EC9 /* MJRefreshFooterView.m */,
+				471573231926100600E88EC9 /* MJRefreshHeaderView.h */,
+				471573241926100600E88EC9 /* MJRefreshHeaderView.m */,
+			);
+			path = MJRefresh;
 			sourceTree = "<group>";
 		};
 		47F6B51A18F8E75F00246D68 /* emoji-master */ = {
@@ -2305,6 +2340,8 @@
 				BBDCFCE518F526D7008A4DA7 /* BuddyViewController.m */,
 				BBDCFCE718F526D7008A4DA7 /* ChatViewController.h */,
 				BBDCFCE818F526D7008A4DA7 /* ChatViewController.m */,
+				472E5138193AE42000261F6E /* ChatMsgCell.h */,
+				472E5139193AE42000261F6E /* ChatMsgCell.m */,
 				BBDCFCE118F526D7008A4DA7 /* AddBuddyViewCtl.h */,
 				BBDCFCE218F526D7008A4DA7 /* AddBuddyViewCtl.m */,
 				BB17CD411908EC7F00FCA7F7 /* LocationViewController.h */,
@@ -2364,6 +2401,7 @@
 				BBDCFF7518F52806008A4DA7 /* CustomSVProgress */,
 				BBDCFF7918F52806008A4DA7 /* KeyBoard */,
 				BB7CD0AC18FE240800D96C1A /* EGORefreshView */,
+				4715731A1926100600E88EC9 /* MJRefresh */,
 			);
 			path = customCtl;
 			sourceTree = "<group>";
@@ -2903,6 +2941,7 @@
 				4705D250190266B4006D1D2E /* pl_message_normal.png in Resources */,
 				4705D25C1903750D006D1D2E /* chat_input_bar.png in Resources */,
 				47B6DB1518F83F1100DB4328 /* ToolViewBkg_Black@2x.png in Resources */,
+				471573251926100600E88EC9 /* MJRefresh.bundle in Resources */,
 				BBDC02C518F53F89008A4DA7 /* tabbar_home_highlighted@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2941,6 +2980,7 @@
 				BBDC014A18F52807008A4DA7 /* SBJsonStreamWriter.m in Sources */,
 				BBDC01B418F52808008A4DA7 /* NSXMLElement+XEP_0297.m in Sources */,
 				BBDC015318F52807008A4DA7 /* XMPPDigestMD5Authentication.m in Sources */,
+				471573291926100600E88EC9 /* MJRefreshHeaderView.m in Sources */,
 				477577D51907F994006300BC /* MoreOptionCell.m in Sources */,
 				BBDC013118F52807008A4DA7 /* XMPPServer.m in Sources */,
 				BBDC017E18F52808008A4DA7 /* XMPPRoomMemoryStorage.m in Sources */,
@@ -2974,6 +3014,7 @@
 				BBDC019F18F52808008A4DA7 /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				BBDC016318F52807008A4DA7 /* XMPPGoogleSharedStatus.m in Sources */,
 				BBDC014D18F52807008A4DA7 /* SBJsonTokeniser.m in Sources */,
+				472E513B193AE42000261F6E /* ChatMsgCell.m in Sources */,
 				BBDC015B18F52807008A4DA7 /* XMPPJID.m in Sources */,
 				BBDC019118F52808008A4DA7 /* NSXMLElement+XEP_0059.m in Sources */,
 				BBDC018E18F52808008A4DA7 /* XMPPvCardTempLabel.m in Sources */,
@@ -3012,6 +3053,7 @@
 				BBDC019418F52808008A4DA7 /* XMPPPubSub.m in Sources */,
 				BBDC017C18F52808008A4DA7 /* XMPPRoomMessageHybridCoreDataStorageObject.m in Sources */,
 				BBDC015818F52807008A4DA7 /* NSXMLElement+XMPP.m in Sources */,
+				471573261926100600E88EC9 /* MJRefreshBaseView.m in Sources */,
 				BBDC018B18F52808008A4DA7 /* XMPPvCardTempAdrTypes.m in Sources */,
 				BBDC013218F52807008A4DA7 /* Message.m in Sources */,
 				BBDC016818F52807008A4DA7 /* XMPPRoster.xcdatamodel in Sources */,
@@ -3025,6 +3067,7 @@
 				BBDC01CE18F52808008A4DA7 /* KKMessageCell.m in Sources */,
 				BBDC019C18F52808008A4DA7 /* NSString+XEP_0106.m in Sources */,
 				47A3730A1920608F00F2FBB7 /* LineLayout.m in Sources */,
+				471573271926100600E88EC9 /* MJRefreshConst.m in Sources */,
 				BBDCFEBD18F526D8008A4DA7 /* GroupViewController.m in Sources */,
 				BBDC019618F52808008A4DA7 /* XMPPIQ+XEP_0066.m in Sources */,
 				BBDC015118F52807008A4DA7 /* XMPPDeprecatedDigestAuthentication.m in Sources */,
@@ -3052,6 +3095,7 @@
 				BBDC01AF18F52808008A4DA7 /* XMPPTime.m in Sources */,
 				BBDC016418F52807008A4DA7 /* XMPPProcessOne.m in Sources */,
 				BBDC015218F52807008A4DA7 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
+				471573281926100600E88EC9 /* MJRefreshFooterView.m in Sources */,
 				BBDC014118F52807008A4DA7 /* FMDatabasePool.m in Sources */,
 				BBDC012618F52807008A4DA7 /* SVProgressHUD.m in Sources */,
 				BBDC017518F52808008A4DA7 /* XMPPPrivacy.m in Sources */,
@@ -3185,8 +3229,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3210,7 +3254,8 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=*]" = "B7C53093-E36B-42FB-9410-461455AA3FB5";
+				PROVISIONING_PROFILE = "3FD5165A-F6EC-44DC-A4A1-839A172BEB16";
+				"PROVISIONING_PROFILE[sdk=*]" = "3FD5165A-F6EC-44DC-A4A1-839A172BEB16";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -3232,7 +3277,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3262,8 +3307,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yongda Xie (4S2HS5YB3Q)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMPPBaseProject/XMPPBaseProject-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3296,7 +3341,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
 				CLANG_CXX_LIBRARY = "compiler-default";
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "XMPPBaseProject/XMPPBaseProject-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

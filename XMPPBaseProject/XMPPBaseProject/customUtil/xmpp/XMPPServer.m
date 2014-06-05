@@ -868,6 +868,7 @@ static XMPPServer *singleton = nil;
     <c xmlns="http://jabber.org/protocol/caps" hash="sha-1" node="http://vacuum-im.googlecode.com" ver="nvOfScxvX/KRll5e2pqmMEBIls0="/>
  </presence>
  */
+//收到添加好友的请求  
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     //好友状态
@@ -922,6 +923,7 @@ static XMPPServer *singleton = nil;
  * Sent when the initial roster has been populated into storage.
  *
  */
+//获取完好友列表
 - (void)xmppRosterDidEndPopulating:(XMPPRoster *)sender{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
@@ -936,6 +938,8 @@ static XMPPServer *singleton = nil;
  * </item>
  *
  */
+
+//获取到一个好友节点
 - (void)xmppRoster:(XMPPRoster *)sender didRecieveRosterItem:(NSXMLElement *)item{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 //    NSString *jid = [item attributeStringValueForName:@"jid"];

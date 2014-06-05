@@ -149,7 +149,7 @@
     NSString *msg = [dict objectForKey:@"msg"];
     
     CGSize textSize = {260.0 , 10000.0};
-    CGSize size = [msg sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:UILineBreakModeWordWrap];
+    CGSize size = [msg sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     
     size.height += padding*2;
     
@@ -205,6 +205,10 @@
 //是否已经加入房间
 -(void)xmppRoomDidJoin:(XMPPRoom *)sender{
     NSLog(@"xmppRoomDidJoin");
+    [_xmppRoom fetchConfigurationForm];
+    [_xmppRoom fetchBanList];
+    [_xmppRoom fetchMembersList];
+    [_xmppRoom fetchModeratorsList];
 }
 
 //是否已经离开
@@ -212,7 +216,32 @@
     NSLog(@"xmppRoomDidLeave");
 }
 
-//收到群聊消息
+#pragma mark - 房间存在，会调用委托
+// 收到禁止名单列表
+- (void)xmppRoom:(XMPPRoom *)sender didFetchBanList:(NSArray *)items{
+     NSLog(@"%s", __FUNCTION__);
+}
+// 收到好友名单列表
+- (void)xmppRoom:(XMPPRoom *)sender didFetchMembersList:(NSArray *)items{
+    NSLog(@"%s", __FUNCTION__);
+}
+// 收到主持人名单列表
+- (void)xmppRoom:(XMPPRoom *)sender didFetchModeratorsList:(NSArray *)items{
+    NSLog(@"%s", __FUNCTION__);
+}
+#pragma mark - 房间不存在，调用委托
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchBanList:(XMPPIQ *)iqError{
+    NSLog(@"%s", __FUNCTION__);
+}
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchMembersList:(XMPPIQ *)iqError{
+    NSLog(@"%s", __FUNCTION__);
+}
+- (void)xmppRoom:(XMPPRoom *)sender didNotFetchModeratorsList:(XMPPIQ *)iqError{
+    NSLog(@"%s", __FUNCTION__);
+}
+
+#pragma mark - 
+//有人在群里发言
 -(void)xmppRoom:(XMPPRoom *)sender didReceiveMessage:(XMPPMessage *)message fromOccupant:(XMPPJID *)occupantJID{
     NSLog(@"xmppRoom:didReceiveMessage:fromOccupant:");
 //    NSLog(@"%@,%@,%@",occupantJID.user,occupantJID.domain,occupantJID.resource);

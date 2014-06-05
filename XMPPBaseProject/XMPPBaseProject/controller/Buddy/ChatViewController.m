@@ -15,6 +15,7 @@
 #import "XMPPHelper.h"
 #import "FaceToolBar.h"
 #import "AccessoryView.h"
+#import "ChatMsgCell.h"
 
 #define padding 20
 
@@ -86,8 +87,24 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *identifier = @"msgCell";
+    static NSString *CellIdentifier = @"msgCell";
     
+    ChatMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (!cell) {
+        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+        cell=[nibs objectAtIndex: 0];
+    }
+    
+    Message *aMsg = [self.messages objectAtIndex:indexPath.row];
+    
+    if ([aMsg.isFrom isEqualToString:@"0"]) {
+        
+    }
+    
+    else{
+        
+    }
+    /*
     KKMessageCell *cell =(KKMessageCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
     if (cell == nil) {
@@ -126,6 +143,17 @@
     }
     
     cell.bgImageView.image = bgImage;
+    */
+    
+    
+    UIImage *headerImage;
+    UIImage *normalImage;
+    UIImage *highlightedImage;
+    
+    CGRect iconRect = cell.iconImgV.frame;
+    CGRect btnRect = cell.bubbleBtn.frame;
+    
+    UIEdgeInsets insets;
     
     return cell;
     
