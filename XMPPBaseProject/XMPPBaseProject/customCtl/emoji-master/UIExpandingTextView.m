@@ -95,7 +95,7 @@
         internalTextView.layer.cornerRadius =5.0;
         
         internalTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-        
+        NSLog(@"%@",NSStringFromCGSize(internalTextView.contentSize));
         /* set placeholder */
         placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(8,3,self.bounds.size.width - 16,self.bounds.size.height)];
         placeholderLabel.text = placeholder;
@@ -172,6 +172,12 @@
     internalTextView.text     = newText;
     didChange = (maximumHeight != internalTextView.contentSize.height);
     maximumHeight             = internalTextView.contentSize.height;
+#warning mark ---- avoid ios7
+//    CGSize size = internalTextView.contentSize;
+//    size.height = 268;
+//    internalTextView.contentSize = size;
+//    maximumHeight = size.height;
+    
     maximumNumberOfLines      = n;
     internalTextView.text     = saveText;
     internalTextView.hidden   = NO;
@@ -205,7 +211,7 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     
-    NSLog(@"走textViewDidChange%@",textView);
+    NSLog(@"走textViewDidChange");
     if(textView.text.length == 0)
         placeholderLabel.alpha = 1;
     else
