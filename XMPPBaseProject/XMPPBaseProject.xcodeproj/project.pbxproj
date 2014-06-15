@@ -80,6 +80,10 @@
 		47F6B53318F8E75F00246D68 /* FacialView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52818F8E75F00246D68 /* FacialView.m */; };
 		47F6B53418F8E75F00246D68 /* UIExpandingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */; };
 		47F6B53518F8E75F00246D68 /* UIExpandingTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */; };
+		47F77178194D66B9000BCA83 /* ReceiverTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47F77174194D66B9000BCA83 /* ReceiverTextNodeBkg@2x.png */; };
+		47F77179194D66B9000BCA83 /* ReceiverTextNodeBkgHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47F77175194D66B9000BCA83 /* ReceiverTextNodeBkgHL@2x.png */; };
+		47F7717A194D66B9000BCA83 /* SenderTextNodeBkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47F77176194D66B9000BCA83 /* SenderTextNodeBkg@2x.png */; };
+		47F7717B194D66B9000BCA83 /* SenderTextNodeBkgHL@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47F77177194D66B9000BCA83 /* SenderTextNodeBkgHL@2x.png */; };
 		BB17CD0D1908977800FCA7F7 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB17CD0C1908977800FCA7F7 /* WebViewController.m */; };
 		BB17CD3C1908DF6B00FCA7F7 /* mapapi.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BB17CD3B1908DF6B00FCA7F7 /* mapapi.bundle */; };
 		BB17CD3E1908E04900FCA7F7 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB17CD3D1908E04900FCA7F7 /* OpenGLES.framework */; };
@@ -532,6 +536,10 @@
 		47F6B52A18F8E75F00246D68 /* UIExpandingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextView.m; sourceTree = "<group>"; };
 		47F6B52B18F8E75F00246D68 /* UIExpandingTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIExpandingTextViewInternal.h; sourceTree = "<group>"; };
 		47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIExpandingTextViewInternal.m; sourceTree = "<group>"; };
+		47F77174194D66B9000BCA83 /* ReceiverTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkg@2x.png"; sourceTree = "<group>"; };
+		47F77175194D66B9000BCA83 /* ReceiverTextNodeBkgHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReceiverTextNodeBkgHL@2x.png"; sourceTree = "<group>"; };
+		47F77176194D66B9000BCA83 /* SenderTextNodeBkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderTextNodeBkg@2x.png"; sourceTree = "<group>"; };
+		47F77177194D66B9000BCA83 /* SenderTextNodeBkgHL@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SenderTextNodeBkgHL@2x.png"; sourceTree = "<group>"; };
 		BB17CD0B1908977800FCA7F7 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		BB17CD0C1908977800FCA7F7 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		BB17CD111908DF6B00FCA7F7 /* BMapKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BMapKit.h; sourceTree = "<group>"; };
@@ -1247,6 +1255,17 @@
 				47F6B52C18F8E75F00246D68 /* UIExpandingTextViewInternal.m */,
 			);
 			path = "emoji-master";
+			sourceTree = "<group>";
+		};
+		47F77172194D66AA000BCA83 /* bubble */ = {
+			isa = PBXGroup;
+			children = (
+				47F77174194D66B9000BCA83 /* ReceiverTextNodeBkg@2x.png */,
+				47F77175194D66B9000BCA83 /* ReceiverTextNodeBkgHL@2x.png */,
+				47F77176194D66B9000BCA83 /* SenderTextNodeBkg@2x.png */,
+				47F77177194D66B9000BCA83 /* SenderTextNodeBkgHL@2x.png */,
+			);
+			name = bubble;
 			sourceTree = "<group>";
 		};
 		BB17CD0F1908DF6B00FCA7F7 /* BaiduMapApi */ = {
@@ -2054,6 +2073,7 @@
 		BBDC021218F53F88008A4DA7 /* chat */ = {
 			isa = PBXGroup;
 			children = (
+				47F77172194D66AA000BCA83 /* bubble */,
 				4705D26219037742006D1D2E /* chat_bottombar_voice_sending.png */,
 				4705D26319037742006D1D2E /* chat_bottombar_voice_sending@2x.png */,
 				4705D25E1903772F006D1D2E /* chat_bottombar_voice_normal.png */,
@@ -2800,6 +2820,7 @@
 				BBDC02EA18F53F89008A4DA7 /* userinfo_relationship_followbutton_background_highlighted.png in Resources */,
 				BBDC02CF18F53F89008A4DA7 /* tabbar_more@2x.png in Resources */,
 				BBDC028618F53F89008A4DA7 /* BlueBubble2.png in Resources */,
+				47F7717B194D66B9000BCA83 /* SenderTextNodeBkgHL@2x.png in Resources */,
 				BBDC029018F53F89008A4DA7 /* login-button_normal.png in Resources */,
 				BB98A5191907BF4F004FC8F7 /* MoreViewCtlOptions.plist in Resources */,
 				BBDC02BD18F53F89008A4DA7 /* tabbar_discover@2x.png in Resources */,
@@ -2887,9 +2908,11 @@
 				BBDC029118F53F89008A4DA7 /* login-button_normal@2x.png in Resources */,
 				BB98A5221907C137004FC8F7 /* yy_scan_normal@2x.png in Resources */,
 				BBDC02D418F53F89008A4DA7 /* tabbar_profile.png in Resources */,
+				47F7717A194D66B9000BCA83 /* SenderTextNodeBkg@2x.png in Resources */,
 				BBDC02A718F53F89008A4DA7 /* new_features_1@2x.jpg in Resources */,
 				BBDC029B18F53F89008A4DA7 /* navigationbar_compose_highlighted.png in Resources */,
 				BBDC02E218F53F89008A4DA7 /* tb_session_normal.png in Resources */,
+				47F77179194D66B9000BCA83 /* ReceiverTextNodeBkgHL@2x.png in Resources */,
 				BBDC02E018F53F89008A4DA7 /* tb_group_normal.png in Resources */,
 				4705D22A190257BD006D1D2E /* Speak.png in Resources */,
 				BBDC02C118F53F89008A4DA7 /* tabbar_discover_selected@2x.png in Resources */,
@@ -2905,6 +2928,7 @@
 				BBDC029218F53F89008A4DA7 /* male.png in Resources */,
 				BBDC02DB18F53F89008A4DA7 /* tabbar_slider@2x.png in Resources */,
 				BBDC02BE18F53F89008A4DA7 /* tabbar_discover_highlighted.png in Resources */,
+				47F77178194D66B9000BCA83 /* ReceiverTextNodeBkg@2x.png in Resources */,
 				470EFF1418F5711D00018AFF /* fresh_friends@2x.png in Resources */,
 				BBDC02A218F53F89008A4DA7 /* new_features_0-568h@2x.jpg in Resources */,
 				4705D249190266B4006D1D2E /* pl_dial_normal@2x.png in Resources */,

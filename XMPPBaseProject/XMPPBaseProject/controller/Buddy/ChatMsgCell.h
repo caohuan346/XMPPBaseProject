@@ -9,11 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ChatMsgCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *iconImgV;
-//@property (weak, nonatomic) IBOutlet UIImageView *bubbleImgV;
-//@property (weak, nonatomic) IBOutlet UIImageView *chatImgV;
-@property (weak, nonatomic) IBOutlet UIButton *bubbleBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *bubbleImgV;
 @property (weak, nonatomic) IBOutlet UILabel *msgLabel;
 
 @end

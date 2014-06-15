@@ -18,6 +18,9 @@
 #import "ChatMsgCell.h"
 
 #define padding 20
+#define kChatPadding 10
+#define kChatIconWidth 40
+#define kChatFont [UIFont systemFontOfSize:15]
 
 @interface ChatViewController (){
     
@@ -97,13 +100,61 @@
     
     Message *aMsg = [self.messages objectAtIndex:indexPath.row];
     
+    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 4*kChatPadding ,10000.0};
+    CGSize size = [aMsg.content sizeWithFont:kChatFont constrainedToSize:textSize lineBreakMode:cell.msgLabel.lineBreakMode];
+    if (size.height < 20) {
+        size.height = 20;
+    }
+    
+    UIImage *headImg;
+    UIImage *bubbleImg;
+    
+//    cell.backgroundColor = [UIColor yellowColor];
+//    cell.iconImgV.backgroundColor = [UIColor purpleColor];
+//    cell.bubbleImgV.backgroundColor = [UIColor grayColor];
+//    cell.msgLabel.backgroundColor = [UIColor orangeColor];
+    
+    CGRect iconRect = cell.iconImgV.frame;
+    CGRect msgULRect = cell.msgLabel.frame;
+    msgULRect.size = size;
+    CGRect bubbleImgVRect = cell.bubbleImgV.frame;
+
+    //self
     if ([aMsg.isFrom isEqualToString:@"0"]) {
+        headImg = [UIImage imageNamed:@"pl_message_normal"];
+
+        iconRect.origin.x = self.view.bounds.size.width - 10 - 40;
+      
+        bubbleImgVRect = CGRectMake(CGRectGetWidth(self.view.frame) - 5*kChatPadding - kChatIconWidth-size.width, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
+        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+12, iconRect.origin.y+5, size.width+5, size.height);
         
+        bubbleImg = [UIImage imageNamed:@"SenderTextNodeBkg"];
     }
     
     else{
+        headImg = [UIImage imageNamed:@"pl_picture_normal"];
+        
+        iconRect.origin.x = 10;
+        
+        bubbleImgVRect = CGRectMake(kChatIconWidth + 2*kChatPadding, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
+        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+15, iconRect.origin.y+5, size.width, size.height);
+        
+        bubbleImg = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
         
     }
+  
+    cell.iconImgV.frame = iconRect;
+    cell.iconImgV.image = headImg;
+    
+    cell.bubbleImgV.frame = bubbleImgVRect;
+    NSInteger leftCapWidth = bubbleImg.size.width * 0.5f;
+    NSInteger topCapHeight = bubbleImg.size.height * 0.5f;
+    bubbleImg = [bubbleImg stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:topCapHeight];
+    cell.bubbleImgV.image = bubbleImg;
+    
+    cell.msgLabel.frame = msgULRect;
+    cell.msgLabel.text = aMsg.content;
+    
     /*
     KKMessageCell *cell =(KKMessageCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
     
@@ -146,15 +197,6 @@
     */
     
     
-    UIImage *headerImage;
-    UIImage *normalImage;
-    UIImage *highlightedImage;
-    
-    CGRect iconRect = cell.iconImgV.frame;
-    CGRect btnRect = cell.bubbleBtn.frame;
-    
-    UIEdgeInsets insets;
-    
     return cell;
     
 }
@@ -164,13 +206,13 @@
     
     Message *aMsg  = [self.messages objectAtIndex:indexPath.row];
     
-    CGSize textSize = {260.0 , 10000.0};
+    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 4*kChatPadding ,10000.0};
+    CGSize size = [aMsg.content sizeWithFont:kChatFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     
-    CGSize size = [aMsg.content sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
+    size.height = size.height+kChatPadding*3;
+
+    CGFloat height = size.height < 60 ? 60 : size.height;
     
-    size.height += padding*2;
-    
-    CGFloat height = size.height < 65 ? 65 : size.height;
     return height;
 }
 

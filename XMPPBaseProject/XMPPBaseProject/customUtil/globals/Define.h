@@ -20,7 +20,7 @@
 //#define XMPPServerHostName @"openfire"
 
 //macbook of
-#define XMPPServerURL      @"192.168.199.222"
+#define XMPPServerURL      @"192.168.1.57"
 #define XMPPServerHostName @"macbook-pro.lan"
 
 //本机tigase
