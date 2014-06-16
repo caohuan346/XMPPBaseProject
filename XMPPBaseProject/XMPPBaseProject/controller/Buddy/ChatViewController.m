@@ -40,6 +40,8 @@
     self.tView.delegate = self;
     self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    //[self.tView registerClass:[ChatMsgCell class] forCellReuseIdentifier:@"ChatMsgCell"];
 
     self.messages = [NSMutableArray array];
 //    [_messageTextField becomeFirstResponder];
@@ -90,12 +92,14 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *CellIdentifier = @"msgCell";
+    static NSString *CellIdentifier = @"ChatMsgCell";
     
-    ChatMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ChatMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     if (!cell) {
-        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell=[nibs objectAtIndex: 0];
+//        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+//        cell=[nibs objectAtIndex: 0];
+
+        cell =  [[ChatMsgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     Message *aMsg = [self.messages objectAtIndex:indexPath.row];
@@ -108,11 +112,6 @@
     
     UIImage *headImg;
     UIImage *bubbleImg;
-    
-//    cell.backgroundColor = [UIColor yellowColor];
-//    cell.iconImgV.backgroundColor = [UIColor purpleColor];
-//    cell.bubbleImgV.backgroundColor = [UIColor grayColor];
-//    cell.msgLabel.backgroundColor = [UIColor orangeColor];
     
     CGRect iconRect = cell.iconImgV.frame;
     CGRect msgULRect = cell.msgLabel.frame;
@@ -129,20 +128,20 @@
         msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+12, iconRect.origin.y+5, size.width+5, size.height);
         
         bubbleImg = [UIImage imageNamed:@"SenderTextNodeBkg"];
-    }
-    
-    else{
+    } else{
         headImg = [UIImage imageNamed:@"pl_picture_normal"];
         
         iconRect.origin.x = 10;
         
         bubbleImgVRect = CGRectMake(kChatIconWidth + 2*kChatPadding, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
+        
         msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+15, iconRect.origin.y+5, size.width, size.height);
         
         bubbleImg = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
         
     }
   
+    iconRect.size.height = 40;
     cell.iconImgV.frame = iconRect;
     cell.iconImgV.image = headImg;
     

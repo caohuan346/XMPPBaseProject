@@ -47,7 +47,8 @@
         [[XMPPServer sharedServer] connectWithUserInfo:userInfo];
     }
      */
-    [self toLogin:nil];
+    
+//    [self toLogin:nil];
     
     [self initAnim6];
 }

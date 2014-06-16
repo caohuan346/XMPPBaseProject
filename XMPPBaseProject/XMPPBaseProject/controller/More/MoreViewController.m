@@ -62,8 +62,8 @@
     static NSString *CellIdentifier = @"MoreOptionCell";
     MoreOptionCell *cell = (MoreOptionCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (!cell) {
-        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-        cell=[nibs objectAtIndex: 0];
+//        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
+//        cell=[nibs objectAtIndex: 0];
     }
     NSArray *itemArray = [self.optionsDic objectForKey:[NSString stringWithFormat:@"section%d",indexPath.section]];
     
