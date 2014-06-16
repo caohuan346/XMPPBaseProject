@@ -15,13 +15,13 @@
 //#define XMPPServerURL      @"192.168.2.226"
 //#define XMPPServerHostName @"192.168.2.226"
 
-//本机of
-//#define XMPPServerURL      @"192.168.2.226"
-//#define XMPPServerHostName @"openfire"
+//mini of
+#define XMPPServerURL      @"192.168.8.53"
+#define XMPPServerHostName @"hc-mini.local"
 
 //macbook of
-#define XMPPServerURL      @"192.168.1.57"
-#define XMPPServerHostName @"macbook-pro.lan"
+//#define XMPPServerURL      @"192.168.1.57"
+//#define XMPPServerHostName @"macbook-pro.lan"
 
 //本机tigase
 //#define XMPPServerURL      @"192.168.2.226"

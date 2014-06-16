@@ -126,6 +126,14 @@
                 
                 i++;
             }
+            
+            //limit part
+            if (condition.limitSize > 0) {
+                [orderSql appendFormat:@" limit %d ",condition.limitSize];
+            }
+            if (condition.offset > 0) {
+                [orderSql appendFormat:@" offset %d ",condition.offset];
+            }
         }
         
         if (i>0) {
@@ -1207,30 +1215,12 @@
 
 //
 //  ConditionBean.m
-
-
-
-//  KuaiKuai
+//  XmppBaseProject
 //
-//  Created by caohuan on 13-11-18.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Created by ch on 13-11-18.
+//  Copyright (c) 2013年 ch. All rights reserved.
 //
 @implementation ConditionBean
-
-@synthesize filedValue = _filedValue;
-@synthesize comparisonMark = _comparisonMark;
-@synthesize orderMark = _orderMark;
-@synthesize filedName = _filedName;
-
-- (id)initWithField:(NSString *)fieldName compare:(NSString *)comparisonMark withValue:(NSObject *)filedValue inOrder:(NSString *)orderMark{
-    if (self = [super init]) {
-        self.filedName = fieldName;
-        self.filedValue = filedValue;
-        self.comparisonMark = comparisonMark;
-        self.orderMark = orderMark;
-    }
-    return self;
-}
 
 //条件、排序
 +(id)conditionWhereAndOrderBeanWithField:(NSString *)fieldName compare:(NSString *)comparisonMark withValue:(NSObject *)filedValue inOrder:(NSString *)orderMark{
@@ -1259,5 +1249,12 @@
     return bean;
 }
 
+//分页查询 bean
++(id)conditionLimitBeanWithSize:(NSInteger)size offset:(NSInteger)offset {
+    ConditionBean *bean = [[ConditionBean alloc]init];
+    bean.limitSize = size;
+    bean.offset = offset;
+    return bean;
+}
 
 @end

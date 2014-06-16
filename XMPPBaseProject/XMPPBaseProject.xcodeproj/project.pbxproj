@@ -70,6 +70,7 @@
 		47B6DB1218F83EC300DB4328 /* TypeSelectorBtn_Black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB1018F83EC300DB4328 /* TypeSelectorBtn_Black@2x.png */; };
 		47B6DB1318F83EC300DB4328 /* TypeSelectorBtnHL_Black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB1118F83EC300DB4328 /* TypeSelectorBtnHL_Black@2x.png */; };
 		47B6DB1518F83F1100DB4328 /* ToolViewBkg_Black@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47B6DB1418F83F1100DB4328 /* ToolViewBkg_Black@2x.png */; };
+		47BEFBA9194EE319008F4701 /* ChatService.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BEFBA8194EE319008F4701 /* ChatService.m */; };
 		47C489BF1922FEBE00FEEA83 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BBDC01DD18F5288A008A4DA7 /* libxml2.dylib */; };
 		47F6B52D18F8E75F00246D68 /* Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B51C18F8E75F00246D68 /* Emoji.m */; };
 		47F6B52E18F8E75F00246D68 /* EmojiEmoticons.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B51E18F8E75F00246D68 /* EmojiEmoticons.m */; };
@@ -518,6 +519,8 @@
 		47B6DB1018F83EC300DB4328 /* TypeSelectorBtn_Black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TypeSelectorBtn_Black@2x.png"; sourceTree = "<group>"; };
 		47B6DB1118F83EC300DB4328 /* TypeSelectorBtnHL_Black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TypeSelectorBtnHL_Black@2x.png"; sourceTree = "<group>"; };
 		47B6DB1418F83F1100DB4328 /* ToolViewBkg_Black@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ToolViewBkg_Black@2x.png"; sourceTree = "<group>"; };
+		47BEFBA7194EE319008F4701 /* ChatService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatService.h; sourceTree = "<group>"; };
+		47BEFBA8194EE319008F4701 /* ChatService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatService.m; sourceTree = "<group>"; };
 		47F6B51B18F8E75F00246D68 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
 		47F6B51C18F8E75F00246D68 /* Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emoji.m; sourceTree = "<group>"; };
 		47F6B51D18F8E75F00246D68 /* EmojiEmoticons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiEmoticons.h; sourceTree = "<group>"; };
@@ -2468,6 +2471,8 @@
 				BBDCFF8518F52806008A4DA7 /* NSObject+Property.m */,
 				BBDCFF8618F52806008A4DA7 /* SessionService.h */,
 				BBDCFF8718F52806008A4DA7 /* SessionService.m */,
+				47BEFBA7194EE319008F4701 /* ChatService.h */,
+				47BEFBA8194EE319008F4701 /* ChatService.m */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -3137,6 +3142,7 @@
 				BBDC019218F52808008A4DA7 /* XMPPResultSet.m in Sources */,
 				BBDC018718F52808008A4DA7 /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				BBDC01FF18F52A71008A4DA7 /* ASIDataCompressor.m in Sources */,
+				47BEFBA9194EE319008F4701 /* ChatService.m in Sources */,
 				BBDC015518F52807008A4DA7 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				BBDC01BE18F52808008A4DA7 /* DDASLLogger.m in Sources */,
 				BBDC014C18F52807008A4DA7 /* SBJsonStreamWriterState.m in Sources */,

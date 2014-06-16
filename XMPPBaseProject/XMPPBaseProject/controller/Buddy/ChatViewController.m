@@ -16,13 +16,19 @@
 #import "FaceToolBar.h"
 #import "AccessoryView.h"
 #import "ChatMsgCell.h"
+#import "MJRefresh.h"
 
-#define padding 20
+#define kLimitSize 10
+
 #define kChatPadding 10
 #define kChatIconWidth 40
 #define kChatFont [UIFont systemFontOfSize:15]
 
 @interface ChatViewController (){
+    
+    MJRefreshHeaderView *_header;
+
+    NSInteger _displayMsgCount;  //界面展示的消息
     
 }
 @property(nonatomic,retain)NSMutableArray *messages;
@@ -41,10 +47,9 @@
     self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    //[self.tView registerClass:[ChatMsgCell class] forCellReuseIdentifier:@"ChatMsgCell"];
-
+    [self addHeader];
+    
     self.messages = [NSMutableArray array];
-//    [_messageTextField becomeFirstResponder];
     
 	// Do any additional setup after loading the view, typically from a nib.
     
@@ -55,14 +60,17 @@
     //init chat tool bar
     [self.chatToolBar initSubviewsWithFrame:self.chatToolBar.frame superView:self.view];
     self.chatToolBar.chatDelegate=self;
+    
+    [self goBottom];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveXMPPMsg:) name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
+    [self goBottom];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self refreshData];
+    //[self refreshData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -81,6 +89,241 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+#pragma mark - private
+-(void)initData{
+    ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"chatUserId" compare:CHComparisonMarkEQ withValue:_chatTargetUser.userId];
+    ConditionBean *bean2 = [ConditionBean conditionOrderBeanWithField:@"sendTime" inOrder:CHOrderMarkDesc];
+    ConditionBean *bean3 = [ConditionBean conditionLimitBeanWithSize:kLimitSize offset:_displayMsgCount];
+    
+    NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
+    
+    NSArray *tempMsgArray = [SharedAppDelegate.databaseService.baseDBManager queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    
+    //reverse the msgs
+    NSArray* reversedArray = [[tempMsgArray reverseObjectEnumerator] allObjects];
+    
+    self.messages = [NSMutableArray arrayWithArray:reversedArray];
+    
+    // //next offset
+    _displayMsgCount += tempMsgArray.count;
+}
+
+-(void)seekData{
+    ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"chatUserId" compare:CHComparisonMarkEQ withValue:_chatTargetUser.userId];
+    ConditionBean *bean2 = [ConditionBean conditionOrderBeanWithField:@"sendTime" inOrder:CHOrderMarkDesc];
+    ConditionBean *bean3 = [ConditionBean conditionLimitBeanWithSize:kLimitSize offset:_displayMsgCount];
+    
+    NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
+    
+    NSArray *tempMsgArray = [SharedAppDelegate.databaseService.baseDBManager queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    
+    if (tempMsgArray.count > 0) {
+        //reverse the msgs
+        NSArray* reversedArray = [[tempMsgArray reverseObjectEnumerator] allObjects];
+        
+        //insert data at front
+        NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, reversedArray.count)];
+        [self.messages insertObjects:reversedArray atIndexes:indexSet];
+        
+        //refreshData
+        [self.tView reloadData];
+        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        
+        //next offset
+        _displayMsgCount += tempMsgArray.count;
+    }
+    
+    [self performSelector:@selector(doneWithView:) withObject:_header afterDelay:1.0f];
+}
+
+-(void)initaccessoryView{
+    CGRect accessoryRect = CGRectMake(0, (isInch4 ? self.view.frame.size.height+88:self.view.frame.size.height), self.view.frame.size.width, keyboardHeight);
+    accessoryView = [[AccessoryView alloc] initWithFrame:accessoryRect sessionType:1];
+    accessoryView.accessoryDelegate = self;
+    [self.view addSubview:accessoryView];
+}
+
+//收到xmpp消息
+- (void)didReceiveXMPPMsg:(NSNotification*)aNotification{
+    
+    XMPPMsg *aXmppMsg = (XMPPMsg *)aNotification.object;
+    XMPPType type = aXmppMsg.msgType;
+    
+    if (type == XMPPTypeMessagePersonalNormal) {
+        Message *aChatMsg = [[Message alloc] init];
+        aChatMsg.content = aXmppMsg.content;
+        aChatMsg.sendTime = [NSDate date];
+        
+        XMPPJID *jid = [XMPPJID jidWithString:SharedAppDelegate.globals.userId];
+        aChatMsg.chatUserId = jid.user;
+        aChatMsg.chatUserJID = aXmppMsg.senderId;
+        
+        [self.messages addObject:aChatMsg];
+        
+        [self refreshData];
+    }
+    
+    else if (type == XMPPTypeMessageIsComposing){
+        NSLog(@"%@正在输入",aXmppMsg.senderId);
+    }
+    
+    else if (type == XMPPTypeMessageHasPaused){
+        NSLog(@"%@正在输入",aXmppMsg.senderId);
+    }
+}
+
+/*
+ - (IBAction)sendButton:(id)sender {
+ 
+ //本地输入框中的信息
+ NSString *message = self.messageTextField.text;
+ 
+ if (message.length > 0) {
+ //发送xmpp
+ XMPPMsg *aXmppMsg = [[XMPPMsg alloc] init];
+ aXmppMsg.msgType = XMPPTypeMessagePersonalNormal;//个人聊天消息
+ aXmppMsg.content = message;
+ aXmppMsg.targetId = _chatTargetUser.userId;
+ [XMPPHelper xmppSendMessage:aXmppMsg];
+ 
+ //当前界面操作
+ self.messageTextField.text = @"";
+ [self.messageTextField resignFirstResponder];
+ 
+ Message *myMsg = [[Message alloc] init];
+ myMsg.messageType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
+ myMsg.content = message;
+ myMsg.sendTime = [NSDate date];
+ myMsg.chatUserId = _chatTargetUser.userId;
+ myMsg.chatUserJID = [NSString stringWithFormat:@"%@@%@",_chatTargetUser.userId,SharedAppDelegate.globals.xmppServerDomain];
+ myMsg.isFrom = @"0";
+ BOOL insertFlag = [SharedAppDelegate.databaseService.baseDBManager insertObject:myMsg];
+ if (!insertFlag) {
+ NSLog(@"保存失败");
+ }
+ 
+ [self.messages addObject:myMsg];
+ [self refreshData];
+ }
+ }
+ */
+
+-(void)refreshData{
+    [self.tView reloadData];
+    [self goBottom];
+}
+
+
+#pragma mark - subviews position handle
+//tableview go buttom
+-(void)goBottom{
+    if (self.messages.count > 1) {
+//        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]
+//                          atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        
+        NSUInteger ii[2] = {0, self.messages.count - 1};
+        NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
+        [self.tView scrollToRowAtIndexPath:indexPath
+                              atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+}
+
+-(void)goBottomEnhance {
+    if (self.messages.count > 1) {
+        CGPoint tViewOffset = self.tView.contentOffset;
+        tViewOffset.y = self.tView.contentSize.height;
+        self.tView.contentOffset = tViewOffset;
+    }
+}
+
+//chat tool bar position restore
+-(void)restoreChatToolBarFrame:(FaceToolBar *)faceToolBar{
+    [UIView animateWithDuration:Time
+                          delay:0
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut
+                     animations:^{
+                         //附件view frame
+                         CGRect frame = accessoryView.frame;
+                         frame.origin.y = self.view.frame.size.height;
+                         accessoryView.frame = frame;
+                         
+                         //tool bar frame
+                         faceToolBar.toolBar.frame = CGRectMake(0, self.view.frame.size.height-faceToolBar.toolBar.frame.size.height,  self.view.bounds.size.width,faceToolBar.toolBar.frame.size.height);
+                         
+                         //tView
+                         [self tViewMoreUp:NO];
+                     }
+                     completion:^(BOOL finished){
+                         accessoryView.hidden=YES;
+                         faceToolBar.moreButton.selected=NO;
+                     }];
+}
+
+//tView位置上下调整
+-(void)tViewMoreUp:(BOOL)upFlag{
+    CGRect tFrame = self.tView.frame;
+    tFrame.size.height = upFlag?tFrame.size.height - accessoryView.frame.size.height:tFrame.size.height + accessoryView.frame.size.height;
+    self.tView.frame = tFrame;
+    [self goBottom];
+}
+
+#pragma mark - MJRefreshView
+
+- (void)addHeader
+{
+    
+    MJRefreshHeaderView *header = [MJRefreshHeaderView header];
+    header.scrollView = _tView;
+    
+    header.beginRefreshingBlock = ^(MJRefreshBaseView *refreshView) {
+        // 进入刷新状态就会回调这个Block
+        // 增加5条假数据
+        
+        [self seekData];
+        
+        // 模拟延迟加载数据，因此2秒后才调用）
+        // 这里的refreshView其实就是header
+        [self performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:30.0f];
+        
+        NSLog(@"%@开始进入刷新状态", refreshView.class);
+    };
+    header.endStateChangeBlock = ^(MJRefreshBaseView *refreshView) {
+        // 刷新完毕就会回调这个Block
+        NSLog(@"%@刷新完毕", refreshView.class);
+    };
+    header.refreshStateChangeBlock = ^(MJRefreshBaseView *refreshView, MJRefreshState state) {
+        // 控件的刷新状态切换了就会调用这个block
+        switch (state) {
+            case MJRefreshStateNormal:
+                NSLog(@"%@切换到：普通状态", refreshView.class);
+                break;
+                
+            case MJRefreshStatePulling:
+                NSLog(@"%@切换到：松开即可刷新的状态", refreshView.class);
+                break;
+                
+            case MJRefreshStateRefreshing:
+                NSLog(@"%@切换到：正在刷新状态", refreshView.class);
+                break;
+            default:
+                break;
+        }
+    };
+    _header = header;
+    //[header beginRefreshing];
+}
+
+
+- (void)doneWithView:(MJRefreshBaseView *)refreshView
+{
+    // 刷新表格
+    //[myTableView reloadData];
+    // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+    [refreshView endRefreshing];
+}
+
+
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -95,12 +338,6 @@
     static NSString *CellIdentifier = @"ChatMsgCell";
     
     ChatMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (!cell) {
-//        NSArray *nibs=[[NSBundle mainBundle] loadNibNamed:CellIdentifier owner:self options:nil];
-//        cell=[nibs objectAtIndex: 0];
-
-        cell =  [[ChatMsgCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
     
     Message *aMsg = [self.messages objectAtIndex:indexPath.row];
     
@@ -359,133 +596,6 @@
 //文件
 -(void)accessaryBtnSendFile{
     
-}
-
-
-#pragma mark - private 
--(void)initData{
-    ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"chatUserId" compare:CHComparisonMarkEQ withValue:_chatTargetUser.userId];
-    ConditionBean *bean2 = [ConditionBean conditionOrderBeanWithField:@"sendTime" inOrder:CHOrderMarkAsc];
-    NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1, bean2,nil];
-    NSArray *msgList = [SharedAppDelegate.databaseService.baseDBManager queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
-    self.messages = [NSMutableArray arrayWithArray:msgList];
-}
-
--(void)initaccessoryView{
-    CGRect accessoryRect = CGRectMake(0, (isInch4 ? self.view.frame.size.height+88:self.view.frame.size.height), self.view.frame.size.width, keyboardHeight);
-    accessoryView = [[AccessoryView alloc] initWithFrame:accessoryRect sessionType:1];
-    accessoryView.accessoryDelegate = self;
-    [self.view addSubview:accessoryView];
-}
-
-//收到xmpp消息
-- (void)didReceiveXMPPMsg:(NSNotification*)aNotification{
-    
-    XMPPMsg *aXmppMsg = (XMPPMsg *)aNotification.object;
-    XMPPType type = aXmppMsg.msgType;
-    
-    if (type == XMPPTypeMessagePersonalNormal) {
-        Message *aChatMsg = [[Message alloc] init];
-        aChatMsg.content = aXmppMsg.content;
-        aChatMsg.sendTime = [NSDate date];
-        
-        XMPPJID *jid = [XMPPJID jidWithString:SharedAppDelegate.globals.userId];
-        aChatMsg.chatUserId = jid.user;
-        aChatMsg.chatUserJID = aXmppMsg.senderId;
-        
-        [self.messages addObject:aChatMsg];
-        [self refreshData];
-    }
-    
-    else if (type == XMPPTypeMessageIsComposing){
-        NSLog(@"%@正在输入",aXmppMsg.senderId);
-    }
-    
-    else if (type == XMPPTypeMessageHasPaused){
-        NSLog(@"%@正在输入",aXmppMsg.senderId);
-    }
-}
-
-/*
-- (IBAction)sendButton:(id)sender {
-    
-    //本地输入框中的信息
-    NSString *message = self.messageTextField.text;
-    
-    if (message.length > 0) {
-        //发送xmpp
-        XMPPMsg *aXmppMsg = [[XMPPMsg alloc] init];
-        aXmppMsg.msgType = XMPPTypeMessagePersonalNormal;//个人聊天消息
-        aXmppMsg.content = message;
-        aXmppMsg.targetId = _chatTargetUser.userId;
-        [XMPPHelper xmppSendMessage:aXmppMsg];
-        
-        //当前界面操作
-        self.messageTextField.text = @"";
-        [self.messageTextField resignFirstResponder];
-        
-        Message *myMsg = [[Message alloc] init];
-        myMsg.messageType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
-        myMsg.content = message;
-        myMsg.sendTime = [NSDate date];
-        myMsg.chatUserId = _chatTargetUser.userId;
-        myMsg.chatUserJID = [NSString stringWithFormat:@"%@@%@",_chatTargetUser.userId,SharedAppDelegate.globals.xmppServerDomain];
-        myMsg.isFrom = @"0";
-        BOOL insertFlag = [SharedAppDelegate.databaseService.baseDBManager insertObject:myMsg];
-        if (!insertFlag) {
-            NSLog(@"保存失败");
-        }
-        
-        [self.messages addObject:myMsg];
-        [self refreshData];
-    }
-}
-*/
-
--(void)refreshData{
-    [self.tView reloadData];
-    [self goBottom];
-}
-
-
-#pragma mark - subviews position handle
-//tableview go buttom
--(void)goBottom{
-    if (self.messages.count > 1) {
-        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]
-                          atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-}
-
-//chat tool bar position restore
--(void)restoreChatToolBarFrame:(FaceToolBar *)faceToolBar{
-    [UIView animateWithDuration:Time
-                          delay:0
-                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseOut
-                     animations:^{
-                         //附件view frame
-                         CGRect frame = accessoryView.frame;
-                         frame.origin.y = self.view.frame.size.height;
-                         accessoryView.frame = frame;
-                         
-                         //tool bar frame
-                         faceToolBar.toolBar.frame = CGRectMake(0, self.view.frame.size.height-faceToolBar.toolBar.frame.size.height,  self.view.bounds.size.width,faceToolBar.toolBar.frame.size.height);
-                         
-                         //tView
-                         [self tViewMoreUp:NO];
-                     }
-                     completion:^(BOOL finished){
-                         accessoryView.hidden=YES;
-                         faceToolBar.moreButton.selected=NO;
-                     }];
-}
-
-//tView位置上下调整
--(void)tViewMoreUp:(BOOL)upFlag{
-    CGRect tFrame = self.tView.frame;
-    tFrame.size.height = upFlag?tFrame.size.height - accessoryView.frame.size.height:tFrame.size.height + accessoryView.frame.size.height;
-    self.tView.frame = tFrame;
-    [self goBottom];
 }
 
 @end

@@ -120,19 +120,20 @@
 //
 @interface ConditionBean : NSObject
 @property(nonatomic,copy)   NSString    *filedName;         //字段值
-@property(nonatomic,retain) NSObject    *filedValue;        //字段值
+@property(nonatomic,strong) NSObject    *filedValue;        //字段值
 @property(nonatomic,copy)   NSString    *comparisonMark;    //条件比较标记
 @property(nonatomic,copy)   NSString    *orderMark;         //排序标记
+@property(nonatomic,assign)  NSInteger  limitSize;         //排序标记
+@property(nonatomic,assign)  NSInteger  offset;         //排序标记
 
-- (id)initWithField:(NSString *)fieldName compare:(NSString *)comparisonMark withValue:(NSObject *)filedValue inOrder:(NSString *)orderMark;
 
 //条件、排序
 +(id)conditionWhereAndOrderBeanWithField:(NSString *)fieldName compare:(NSString *)comparisonMark withValue:(NSObject *)filedValue inOrder:(NSString *)orderMark;
 //条件bean
 +(id)conditionWhereBeanWithField:(NSString *)fieldName compare:(NSString *)comparisonMark withValue:(NSObject *)filedValue;
-
 //排序bean
 +(id)conditionOrderBeanWithField:(NSString *)fieldName inOrder:(NSString *)orderMark;
-
+//分页查询bean
++(id)conditionLimitBeanWithSize:(NSInteger)size offset:(NSInteger)offset;
 
 @end
