@@ -46,7 +46,8 @@
     self.tView.delegate = self;
     self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    NSLog(@"%@",NSStringFromCGRect(self.view.frame));
+    NSLog(@"%@",NSStringFromCGRect(self.tView.frame));
     [self addHeader];
     
     self.messages = [NSMutableArray array];
@@ -66,7 +67,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveXMPPMsg:) name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
-    [self goBottom];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -107,6 +107,9 @@
     
     // //next offset
     _displayMsgCount += tempMsgArray.count;
+    
+    [self.tView reloadData];
+    [self goBottom];
 }
 
 -(void)seekData{
@@ -128,7 +131,7 @@
         
         //refreshData
         [self.tView reloadData];
-        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:reversedArray.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
         
         //next offset
         _displayMsgCount += tempMsgArray.count;
@@ -219,21 +222,25 @@
 //tableview go buttom
 -(void)goBottom{
     if (self.messages.count > 1) {
-//        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]
-//                          atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-        
-        NSUInteger ii[2] = {0, self.messages.count - 1};
-        NSIndexPath* indexPath = [NSIndexPath indexPathWithIndexes:ii length:2];
-        [self.tView scrollToRowAtIndexPath:indexPath
-                              atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]
+                          atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
 
 -(void)goBottomEnhance {
     if (self.messages.count > 1) {
-        CGPoint tViewOffset = self.tView.contentOffset;
-        tViewOffset.y = self.tView.contentSize.height;
-        self.tView.contentOffset = tViewOffset;
+//        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:self.messages.count - 1 inSection:0]];
+//        
+//        CGPoint tViewOffset = self.tView.contentOffset;
+//
+//        tViewOffset.y = CGRectGetMaxY(cell.frame);
+//        NSLog(@"%@",NSStringFromCGSize(self.tView.contentSize));
+//        self.tView.contentOffset = tViewOffset;
+        
+        NSIndexPath *localIndexPath = [NSIndexPath indexPathForRow:[self.messages count] inSection:0];
+        UITableViewCell *cell = [self.tView cellForRowAtIndexPath:localIndexPath];
+        [self.tView scrollRectToVisible:cell.frame animated:YES];
+
     }
 }
 
@@ -335,6 +342,79 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+//    static NSString *CellIdentifier = @"ChatMsgCell";//ChatMsgCell_target
+    static NSString *CellIdentifier = @"ChatMsgCell_target";
+    static NSString *CellIdentifier2 = @"ChatMsgCell_self";
+    
+    Message *aMsg = [self.messages objectAtIndex:indexPath.row];
+    
+    ChatMsgCell *cell;
+    if ([aMsg.isFrom isEqualToString:@"0"]) {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2 forIndexPath:indexPath];
+    }else  {
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    }
+    
+    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 5*kChatPadding ,10000.0};
+    CGSize size = [aMsg.content sizeWithFont:kChatFont constrainedToSize:textSize lineBreakMode:cell.msgLabel.lineBreakMode];
+    if (size.height < 20) {
+        size.height = 20;
+    }
+    
+    UIImage *headImg;
+    UIImage *bubbleImg;
+    
+    CGRect iconRect = cell.iconImgV.frame;
+    CGRect msgULRect = cell.msgLabel.frame;
+    msgULRect.size = size;
+    CGRect bubbleImgVRect = cell.bubbleImgV.frame;
+    
+    cell.backgroundColor = [UIColor grayColor];
+    cell.msgLabel.backgroundColor = [UIColor yellowColor];
+    cell.iconImgV.backgroundColor = [UIColor purpleColor];
+    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
+
+    //self
+    if ([aMsg.isFrom isEqualToString:@"0"]) {
+        headImg = [UIImage imageNamed:@"pl_message_normal"];
+        bubbleImg = [UIImage imageNamed:@"SenderTextNodeBkg"];
+        
+//        iconRect.origin.x = self.view.bounds.size.width - 10 - 40;
+//      
+        bubbleImgVRect = CGRectMake(CGRectGetWidth(self.view.frame) - 5*kChatPadding - kChatIconWidth-size.width, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
+        
+//        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+12, iconRect.origin.y+5, size.width+5, size.height);
+        NSLog(@"1111");
+    } else{
+        headImg = [UIImage imageNamed:@"pl_picture_normal"];
+        bubbleImg = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
+        
+//        iconRect.origin.x = 10;
+//        
+        bubbleImgVRect = CGRectMake(kChatIconWidth + 2*kChatPadding, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
+        NSLog(@"22");
+//
+//        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+15, iconRect.origin.y+5, size.width, size.height);
+    }
+  
+    //cell.iconImgV.frame = iconRect;
+    cell.iconImgV.image = headImg;
+    
+    cell.bubbleImgV.frame = bubbleImgVRect;
+    NSInteger leftCapWidth = bubbleImg.size.width * 0.5f;
+    NSInteger topCapHeight = bubbleImg.size.height * 0.5f;
+    bubbleImg = [bubbleImg stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:topCapHeight];
+    cell.bubbleImgV.image = bubbleImg;
+    
+    cell.msgLabel.frame = msgULRect;
+    cell.msgLabel.text = aMsg.content;
+    
+    return cell;
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath22:(NSIndexPath *)indexPath{
+    
     static NSString *CellIdentifier = @"ChatMsgCell";
     
     ChatMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
@@ -354,13 +434,18 @@
     CGRect msgULRect = cell.msgLabel.frame;
     msgULRect.size = size;
     CGRect bubbleImgVRect = cell.bubbleImgV.frame;
-
+    
+    cell.backgroundColor = [UIColor grayColor];
+    cell.msgLabel.backgroundColor = [UIColor yellowColor];
+    cell.iconImgV.backgroundColor = [UIColor purpleColor];
+    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
+    
     //self
     if ([aMsg.isFrom isEqualToString:@"0"]) {
         headImg = [UIImage imageNamed:@"pl_message_normal"];
-
+        
         iconRect.origin.x = self.view.bounds.size.width - 10 - 40;
-      
+        
         bubbleImgVRect = CGRectMake(CGRectGetWidth(self.view.frame) - 5*kChatPadding - kChatIconWidth-size.width, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
         msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+12, iconRect.origin.y+5, size.width+5, size.height);
         
@@ -377,7 +462,7 @@
         bubbleImg = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
         
     }
-  
+    
     iconRect.size.height = 40;
     cell.iconImgV.frame = iconRect;
     cell.iconImgV.image = headImg;
@@ -391,61 +476,21 @@
     cell.msgLabel.frame = msgULRect;
     cell.msgLabel.text = aMsg.content;
     
-    /*
-    KKMessageCell *cell =(KKMessageCell *)[tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell == nil) {
-        cell = [[KKMessageCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier];
-    }
-    
-    Message *aMsg = [self.messages objectAtIndex:indexPath.row];
-    
-    CGSize textSize = {260.0 ,10000.0};
-    CGSize size = [aMsg.content sizeWithFont:[UIFont boldSystemFontOfSize:13] constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
-    
-    size.width +=(padding/2);
-    
-    cell.messageContentView.text = aMsg.content;
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.userInteractionEnabled = NO;
-    
-    UIImage *bgImage = nil;
-    
-    //自己发送
-    if ([aMsg.isFrom isEqualToString:@"0"]) {
-        bgImage = [[UIImage imageNamed:@"GreenBubble2.png"] stretchableImageWithLeftCapWidth:14 topCapHeight:15];
-        
-        [cell.messageContentView setFrame:CGRectMake(320-size.width - padding, padding*2, size.width, size.height)];
-        [cell.bgImageView setFrame:CGRectMake(cell.messageContentView.frame.origin.x - padding/2, cell.messageContentView.frame.origin.y - padding/2, size.width + padding, size.height + padding)];
-        
-        cell.senderAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@", SharedAppDelegate.globals.userId, [NSString stringWithFormat:@"%@",aMsg.sendTime]];
-        
-    }else {
-        bgImage = [[UIImage imageNamed:@"BlueBubble2.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:15];
-        [cell.messageContentView setFrame:CGRectMake(padding, padding*2, size.width, size.height)];
-        
-        [cell.bgImageView setFrame:CGRectMake(cell.messageContentView.frame.origin.x - padding/2, cell.messageContentView.frame.origin.y - padding/2, size.width + padding, size.height + padding)];
-        
-        cell.senderAndTimeLabel.text = [NSString stringWithFormat:@"%@ %@", aMsg.chatUserJID, [NSString stringWithFormat:@"%@",aMsg.sendTime]];
-    }
-    
-    cell.bgImageView.image = bgImage;
-    */
-    
-    
     return cell;
     
 }
+
 
 //每一行的高度
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     Message *aMsg  = [self.messages objectAtIndex:indexPath.row];
     
-    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 4*kChatPadding ,10000.0};
+    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 5*kChatPadding ,10000.0};
     CGSize size = [aMsg.content sizeWithFont:kChatFont constrainedToSize:textSize lineBreakMode:NSLineBreakByWordWrapping];
     
-    size.height = size.height+kChatPadding*3;
+    //size.height = size.height+kChatPadding*3;
+    size.height = size.height+kChatPadding*4;
 
     CGFloat height = size.height < 60 ? 60 : size.height;
     
