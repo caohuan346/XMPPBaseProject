@@ -535,26 +535,26 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMsgCell_target" rowHeight="60" id="8rm-LS-XEh" userLabel="Chat Msg Cell - ChatMsgCell-target" customClass="ChatMsgCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMsgCell_target" id="sPi-VN-QfX" userLabel="Chat Msg Cell -target" customClass="ChatMsgCell">
                                         <rect key="frame" x="0.0" y="86" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8rm-LS-XEh" id="ikV-vz-WkO">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sPi-VN-QfX" id="ina-w8-0Az">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R3z-0B-zc6" userLabel="icon">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gX7-Wp-a3l" userLabel="icon">
                                                     <rect key="frame" x="10" y="10" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="BhS-ax-6YG"/>
-                                                        <constraint firstAttribute="height" constant="40" id="vgB-An-U1w"/>
+                                                        <constraint firstAttribute="height" constant="40" id="3IT-JE-zrG"/>
+                                                        <constraint firstAttribute="width" constant="40" id="B7g-cr-Nzh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4DF-LH-M8h" userLabel="bubbleImgV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oFu-dg-fBG" userLabel="bubbleImgV">
                                                     <rect key="frame" x="60" y="10" width="220" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" ambiguous="YES" misplaced="YES" text="content" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="RTR-aI-M1W" userLabel="msgUL - content">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" text="content" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="190" translatesAutoresizingMaskIntoConstraints="NO" id="nQe-fS-w3O" userLabel="msgUL - content">
                                                     <rect key="frame" x="80" y="15" width="190" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -563,22 +563,24 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="4DF-LH-M8h" secondAttribute="bottom" constant="9" id="5O1-PE-nKD"/>
-                                                <constraint firstAttribute="bottom" secondItem="RTR-aI-M1W" secondAttribute="bottom" constant="26" id="GpZ-E1-Qon"/>
-                                                <constraint firstItem="R3z-0B-zc6" firstAttribute="top" secondItem="4DF-LH-M8h" secondAttribute="top" id="Jxe-Xw-CmC"/>
-                                                <constraint firstItem="RTR-aI-M1W" firstAttribute="leading" secondItem="R3z-0B-zc6" secondAttribute="trailing" constant="30" id="M04-KA-8NB"/>
-                                                <constraint firstItem="4DF-LH-M8h" firstAttribute="leading" secondItem="R3z-0B-zc6" secondAttribute="trailing" constant="10" id="ZA6-LM-vih"/>
-                                                <constraint firstItem="R3z-0B-zc6" firstAttribute="top" secondItem="ikV-vz-WkO" secondAttribute="top" constant="10" id="t71-Fg-jMp"/>
-                                                <constraint firstItem="RTR-aI-M1W" firstAttribute="top" secondItem="ikV-vz-WkO" secondAttribute="top" constant="15" id="uOd-la-Ouq"/>
+                                                <constraint firstAttribute="bottom" secondItem="oFu-dg-fBG" secondAttribute="bottom" constant="9" id="Gfb-dO-E3O"/>
+                                                <constraint firstItem="gX7-Wp-a3l" firstAttribute="leading" secondItem="ina-w8-0Az" secondAttribute="leading" constant="10" id="JrF-ji-pQf"/>
+                                                <constraint firstItem="oFu-dg-fBG" firstAttribute="leading" secondItem="gX7-Wp-a3l" secondAttribute="trailing" constant="10" id="NyQ-xO-oZs"/>
+                                                <constraint firstItem="gX7-Wp-a3l" firstAttribute="top" secondItem="ina-w8-0Az" secondAttribute="top" constant="10" id="Q0E-8l-J9U"/>
+                                                <constraint firstItem="nQe-fS-w3O" firstAttribute="width" secondItem="oFu-dg-fBG" secondAttribute="width" constant="-30" id="ZoE-6E-91S" userLabel="Equal Widths - (30) - msgUL - content - bubbleImgV"/>
+                                                <constraint firstItem="nQe-fS-w3O" firstAttribute="top" secondItem="ina-w8-0Az" secondAttribute="top" constant="15" id="cQ9-Ot-gRX"/>
+                                                <constraint firstAttribute="bottom" secondItem="nQe-fS-w3O" secondAttribute="bottom" constant="26" id="eQh-NU-CXs"/>
+                                                <constraint firstItem="oFu-dg-fBG" firstAttribute="top" secondItem="ina-w8-0Az" secondAttribute="top" constant="10" id="hX9-eV-cgY"/>
+                                                <constraint firstItem="nQe-fS-w3O" firstAttribute="leading" secondItem="gX7-Wp-a3l" secondAttribute="trailing" constant="30" id="w5a-1q-RLr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="bubbleImgV" destination="4DF-LH-M8h" id="tI4-2D-wLG"/>
-                                            <outlet property="iconImgV" destination="R3z-0B-zc6" id="jtn-B1-ADu"/>
-                                            <outlet property="msgLabel" destination="RTR-aI-M1W" id="yGY-eL-W4j"/>
+                                            <outlet property="bubbleImgV" destination="oFu-dg-fBG" id="xJZ-h1-Mdc"/>
+                                            <outlet property="iconImgV" destination="gX7-Wp-a3l" id="u0X-PG-rKr"/>
+                                            <outlet property="msgLabel" destination="nQe-fS-w3O" id="4JU-Pd-Kpn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMsgCell_self" id="t7N-u0-doB" userLabel="Chat Msg Cell - ChatMsgCell-self" customClass="ChatMsgCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ChatMsgCell_self" id="t7N-u0-doB" userLabel="Chat Msg Cell -self" customClass="ChatMsgCell">
                                         <rect key="frame" x="0.0" y="146" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="t7N-u0-doB" id="W8B-Ie-2aj">
@@ -593,7 +595,7 @@
                                                         <constraint firstAttribute="width" constant="40" id="sx1-Sx-fDM"/>
                                                     </constraints>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFr-sv-6ln" userLabel="bubbleImgV">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YFr-sv-6ln" userLabel="bubbleImgV">
                                                     <rect key="frame" x="40" y="10" width="220" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -607,6 +609,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8mm-qQ-J9B" firstAttribute="top" secondItem="W8B-Ie-2aj" secondAttribute="top" constant="15" id="6bt-Cj-ZJa"/>
+                                                <constraint firstItem="8mm-qQ-J9B" firstAttribute="width" secondItem="YFr-sv-6ln" secondAttribute="width" constant="-30" id="9pV-Ay-Bne" userLabel="Equal Widths - (30) - msgUL - content - bubbleImgV"/>
                                                 <constraint firstItem="EP9-EC-Vf3" firstAttribute="top" secondItem="W8B-Ie-2aj" secondAttribute="top" constant="10" id="AQh-Fl-Pta"/>
                                                 <constraint firstItem="EP9-EC-Vf3" firstAttribute="leading" secondItem="8mm-qQ-J9B" secondAttribute="trailing" constant="30" id="Ltm-yE-jTJ"/>
                                                 <constraint firstItem="EP9-EC-Vf3" firstAttribute="leading" secondItem="YFr-sv-6ln" secondAttribute="trailing" constant="10" id="QuS-Nc-QPb"/>
@@ -649,10 +652,6 @@
                         <segue destination="OU3-IC-Jdf" kind="push" identifier="toLocation" id="5qZ-Ao-BFk"/>
                     </connections>
                 </viewController>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gdw-4o-WWA" userLabel="bubbleImgV">
-                    <rect key="frame" x="0.0" y="0.0" width="220" height="40"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Fw-8F-PbY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2270" y="87"/>
@@ -929,6 +928,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mLH-ke-O8r"/>
+        <segue reference="3kp-9E-dGb"/>
     </inferredMetricsTieBreakers>
 </document>

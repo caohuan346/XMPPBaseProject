@@ -349,64 +349,38 @@
     Message *aMsg = [self.messages objectAtIndex:indexPath.row];
     
     ChatMsgCell *cell;
+    
     if ([aMsg.isFrom isEqualToString:@"0"]) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier2 forIndexPath:indexPath];
     }else  {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     }
     
-    CGSize textSize = {CGRectGetWidth(self.view.frame) - 2*kChatIconWidth - 5*kChatPadding ,10000.0};
-    CGSize size = [aMsg.content sizeWithFont:kChatFont constrainedToSize:textSize lineBreakMode:cell.msgLabel.lineBreakMode];
-    if (size.height < 20) {
-        size.height = 20;
-    }
-    
     UIImage *headImg;
     UIImage *bubbleImg;
     
-    CGRect iconRect = cell.iconImgV.frame;
-    CGRect msgULRect = cell.msgLabel.frame;
-    msgULRect.size = size;
-    CGRect bubbleImgVRect = cell.bubbleImgV.frame;
-    
-    cell.backgroundColor = [UIColor grayColor];
-    cell.msgLabel.backgroundColor = [UIColor yellowColor];
-    cell.iconImgV.backgroundColor = [UIColor purpleColor];
-    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
+//    cell.backgroundColor = [UIColor grayColor];
+//    cell.msgLabel.backgroundColor = [UIColor yellowColor];
+//    cell.iconImgV.backgroundColor = [UIColor purpleColor];
+//    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
 
     //self
     if ([aMsg.isFrom isEqualToString:@"0"]) {
         headImg = [UIImage imageNamed:@"pl_message_normal"];
         bubbleImg = [UIImage imageNamed:@"SenderTextNodeBkg"];
-        
-//        iconRect.origin.x = self.view.bounds.size.width - 10 - 40;
-//      
-        bubbleImgVRect = CGRectMake(CGRectGetWidth(self.view.frame) - 5*kChatPadding - kChatIconWidth-size.width, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
-        
-//        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+12, iconRect.origin.y+5, size.width+5, size.height);
-        NSLog(@"1111");
-    } else{
+    }
+    else{
         headImg = [UIImage imageNamed:@"pl_picture_normal"];
         bubbleImg = [UIImage imageNamed:@"ReceiverTextNodeBkg"];
-        
-//        iconRect.origin.x = 10;
-//        
-        bubbleImgVRect = CGRectMake(kChatIconWidth + 2*kChatPadding, CGRectGetMinY(iconRect), size.width + 3*kChatPadding, size.height +2*kChatPadding);
-        NSLog(@"22");
-//
-//        msgULRect = CGRectMake(CGRectGetMinX(bubbleImgVRect)+15, iconRect.origin.y+5, size.width, size.height);
     }
   
-    //cell.iconImgV.frame = iconRect;
     cell.iconImgV.image = headImg;
     
-    cell.bubbleImgV.frame = bubbleImgVRect;
     NSInteger leftCapWidth = bubbleImg.size.width * 0.5f;
     NSInteger topCapHeight = bubbleImg.size.height * 0.5f;
     bubbleImg = [bubbleImg stretchableImageWithLeftCapWidth:leftCapWidth topCapHeight:topCapHeight];
     cell.bubbleImgV.image = bubbleImg;
     
-    cell.msgLabel.frame = msgULRect;
     cell.msgLabel.text = aMsg.content;
     
     return cell;
