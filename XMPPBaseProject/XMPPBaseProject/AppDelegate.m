@@ -25,10 +25,10 @@
 
 @implementation AppDelegate
 
+#pragma life circle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //NSString *const AppDelegateConstant = @"12121312312";
-    
+
     // 启动BaiduMapManager使用百度地图
 	_mapManager = [[BMKMapManager alloc]init];
 	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];
@@ -53,7 +53,16 @@
     //1. 将app注册notification里面,
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
     
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    //首先到登陆页面
+    LoginViewController *loginViewController = [[LoginViewController alloc]init];
+    self.window.rootViewController = loginViewController;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     // Override point for customization after application launch.
+    
     return YES;
 }
 							

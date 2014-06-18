@@ -19,4 +19,5 @@
 //login
 - (IBAction)toLogin:(id)sender;
 
+- (IBAction)toRegister:(id)sender;
 @end

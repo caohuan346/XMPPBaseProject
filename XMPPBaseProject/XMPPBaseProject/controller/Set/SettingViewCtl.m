@@ -8,6 +8,7 @@
 
 #import "SettingViewCtl.h"
 #import "AppDelegate.h"
+#import "LoginViewController.h"
 
 @interface SettingViewCtl ()
 
@@ -37,10 +38,20 @@
 }
 
 - (IBAction)loginOut:(id)sender {
-    [SharedAppDelegate logout];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    
+//    UIWindow *window = SharedAppDelegate.window;
+//    UIViewController *vc = window.rootViewController;
+//    UIViewController *initialVC = vc.storyboard.instantiateInitialViewController;
+//    window.rootViewController = initialVC;
+    
+    //首先到登陆页面
+    LoginViewController *loginViewController = [[LoginViewController alloc]init];
+    SharedAppDelegate.window.rootViewController = loginViewController;
+    
+//    [SharedAppDelegate logout];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
 }
 
 

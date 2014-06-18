@@ -16,7 +16,7 @@
 //#define XMPPServerHostName @"192.168.2.226"
 
 //mini of
-#define XMPPServerURL      @"192.168.8.53"
+#define XMPPServerURL      @"192.168.8.62"
 #define XMPPServerHostName @"hc-mini.local"
 
 //macbook of

@@ -55,6 +55,15 @@
 		471573271926100600E88EC9 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573201926100600E88EC9 /* MJRefreshConst.m */; };
 		471573281926100600E88EC9 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573221926100600E88EC9 /* MJRefreshFooterView.m */; };
 		471573291926100600E88EC9 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 471573241926100600E88EC9 /* MJRefreshHeaderView.m */; };
+		47260FEF1951630F00AE4BAD /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47260FEE1951630F00AE4BAD /* LoginViewController.xib */; };
+		47260FF1195163CF00AE4BAD /* RegisterViewCtl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47260FF0195163CF00AE4BAD /* RegisterViewCtl.xib */; };
+		4726100219517FA100AE4BAD /* Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 47260FF619517FA100AE4BAD /* Animations.m */; };
+		4726100319517FA100AE4BAD /* FTAnimation+UIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47260FF919517FA100AE4BAD /* FTAnimation+UIView.m */; };
+		4726100419517FA100AE4BAD /* FTAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 47260FFC19517FA100AE4BAD /* FTAnimationManager.m */; };
+		4726100519517FA100AE4BAD /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 47260FFE19517FA100AE4BAD /* FTUtils+NSObject.m */; };
+		4726100619517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100019517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m */; };
+		4726100E1951918B00AE4BAD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100D1951918B00AE4BAD /* SSKeychain.m */; };
+		472610111951928900AE4BAD /* GlobalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 472610101951928900AE4BAD /* GlobalHelper.m */; };
 		472A0902191FC92400AA278D /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472A0901191FC92400AA278D /* AppViewController.m */; };
 		472E513B193AE42000261F6E /* ChatMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 472E5139193AE42000261F6E /* ChatMsgCell.m */; };
 		473D75211922316C00D68735 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473D75201922316C00D68735 /* AssetsLibrary.framework */; };
@@ -499,6 +508,24 @@
 		471573221926100600E88EC9 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
 		471573231926100600E88EC9 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
 		471573241926100600E88EC9 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		47260FEE1951630F00AE4BAD /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		47260FF0195163CF00AE4BAD /* RegisterViewCtl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewCtl.xib; sourceTree = "<group>"; };
+		47260FF519517FA100AE4BAD /* Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animations.h; sourceTree = "<group>"; };
+		47260FF619517FA100AE4BAD /* Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animations.m; sourceTree = "<group>"; };
+		47260FF819517FA100AE4BAD /* FTAnimation+UIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTAnimation+UIView.h"; sourceTree = "<group>"; };
+		47260FF919517FA100AE4BAD /* FTAnimation+UIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTAnimation+UIView.m"; sourceTree = "<group>"; };
+		47260FFA19517FA100AE4BAD /* FTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimation.h; sourceTree = "<group>"; };
+		47260FFB19517FA100AE4BAD /* FTAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTAnimationManager.h; sourceTree = "<group>"; };
+		47260FFC19517FA100AE4BAD /* FTAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTAnimationManager.m; sourceTree = "<group>"; };
+		47260FFD19517FA100AE4BAD /* FTUtils+NSObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTUtils+NSObject.h"; sourceTree = "<group>"; };
+		47260FFE19517FA100AE4BAD /* FTUtils+NSObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTUtils+NSObject.m"; sourceTree = "<group>"; };
+		47260FFF19517FA100AE4BAD /* FTUtils+UIGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FTUtils+UIGestureRecognizer.h"; sourceTree = "<group>"; };
+		4726100019517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FTUtils+UIGestureRecognizer.m"; sourceTree = "<group>"; };
+		4726100119517FA100AE4BAD /* FTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUtils.h; sourceTree = "<group>"; };
+		4726100C1951918B00AE4BAD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
+		4726100D1951918B00AE4BAD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
+		4726100F1951928900AE4BAD /* GlobalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHelper.h; sourceTree = "<group>"; };
+		472610101951928900AE4BAD /* GlobalHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalHelper.m; sourceTree = "<group>"; };
 		472A0900191FC92400AA278D /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppViewController.h; sourceTree = "<group>"; };
 		472A0901191FC92400AA278D /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppViewController.m; sourceTree = "<group>"; };
 		472E5138193AE42000261F6E /* ChatMsgCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMsgCell.h; sourceTree = "<group>"; };
@@ -1233,6 +1260,42 @@
 				471573241926100600E88EC9 /* MJRefreshHeaderView.m */,
 			);
 			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		47260FF419517FA100AE4BAD /* animtion */ = {
+			isa = PBXGroup;
+			children = (
+				47260FF519517FA100AE4BAD /* Animations.h */,
+				47260FF619517FA100AE4BAD /* Animations.m */,
+				47260FF719517FA100AE4BAD /* FTAnim */,
+			);
+			path = animtion;
+			sourceTree = "<group>";
+		};
+		47260FF719517FA100AE4BAD /* FTAnim */ = {
+			isa = PBXGroup;
+			children = (
+				47260FFA19517FA100AE4BAD /* FTAnimation.h */,
+				47260FF819517FA100AE4BAD /* FTAnimation+UIView.h */,
+				47260FF919517FA100AE4BAD /* FTAnimation+UIView.m */,
+				47260FFB19517FA100AE4BAD /* FTAnimationManager.h */,
+				47260FFC19517FA100AE4BAD /* FTAnimationManager.m */,
+				47260FFD19517FA100AE4BAD /* FTUtils+NSObject.h */,
+				47260FFE19517FA100AE4BAD /* FTUtils+NSObject.m */,
+				47260FFF19517FA100AE4BAD /* FTUtils+UIGestureRecognizer.h */,
+				4726100019517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m */,
+				4726100119517FA100AE4BAD /* FTUtils.h */,
+			);
+			path = FTAnim;
+			sourceTree = "<group>";
+		};
+		4726100B1951918B00AE4BAD /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				4726100C1951918B00AE4BAD /* SSKeychain.h */,
+				4726100D1951918B00AE4BAD /* SSKeychain.m */,
+			);
+			path = SSKeychain;
 			sourceTree = "<group>";
 		};
 		47F6B51A18F8E75F00246D68 /* emoji-master */ = {
@@ -2390,8 +2453,10 @@
 			children = (
 				BBDCFCF218F526D7008A4DA7 /* LoginViewController.h */,
 				BBDCFCF318F526D7008A4DA7 /* LoginViewController.m */,
+				47260FEE1951630F00AE4BAD /* LoginViewController.xib */,
 				BBDCFCF518F526D7008A4DA7 /* RegisterViewCtl.h */,
 				BBDCFCF618F526D7008A4DA7 /* RegisterViewCtl.m */,
+				47260FF0195163CF00AE4BAD /* RegisterViewCtl.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -2456,6 +2521,7 @@
 				BBDCFF7F18F52806008A4DA7 /* db */,
 				BBDCFF8818F52806008A4DA7 /* globals */,
 				BBDCFF8F18F52806008A4DA7 /* xmpp */,
+				47260FF419517FA100AE4BAD /* animtion */,
 			);
 			path = customUtil;
 			sourceTree = "<group>";
@@ -2486,6 +2552,8 @@
 				BBDCFF8C18F52806008A4DA7 /* Globals.m */,
 				BBDCFF8D18F52806008A4DA7 /* PathService.h */,
 				BBDCFF8E18F52806008A4DA7 /* PathService.m */,
+				4726100F1951928900AE4BAD /* GlobalHelper.h */,
+				472610101951928900AE4BAD /* GlobalHelper.m */,
 			);
 			path = globals;
 			sourceTree = "<group>";
@@ -2522,6 +2590,7 @@
 				BB17CD0F1908DF6B00FCA7F7 /* BaiduMapApi */,
 				BBDC01E518F52A71008A4DA7 /* ASI */,
 				BBDCFFB718F52806008A4DA7 /* FMDB */,
+				4726100B1951918B00AE4BAD /* SSKeychain */,
 				BBDCFFC218F52806008A4DA7 /* SBJson */,
 				BBDCFFDC18F52806008A4DA7 /* XMPP */,
 			);
@@ -2838,6 +2907,7 @@
 				4705D246190266B4006D1D2E /* pl_camera_normal.png in Resources */,
 				BBDC029618F53F89008A4DA7 /* navigationbar_back_highlighted@2x.png in Resources */,
 				BBDCFCB518F52342008A4DA7 /* InfoPlist.strings in Resources */,
+				47260FEF1951630F00AE4BAD /* LoginViewController.xib in Resources */,
 				BBDC02B018F53F89008A4DA7 /* new_features_startbutton_background_highlighted.png in Resources */,
 				BBDC02D718F53F89008A4DA7 /* tabbar_profile_highlighted@2x.png in Resources */,
 				BBDCFCBE18F52342008A4DA7 /* Main.storyboard in Resources */,
@@ -2948,6 +3018,7 @@
 				BBDC02E318F53F89008A4DA7 /* tb_session_normal@2x.png in Resources */,
 				47B6DB0718F83E6600DB4328 /* ToolViewInputVoiceHL@2x.png in Resources */,
 				BBDC02D818F53F89008A4DA7 /* tabbar_profile_selected.png in Resources */,
+				47260FF1195163CF00AE4BAD /* RegisterViewCtl.xib in Resources */,
 				BBDC028718F53F89008A4DA7 /* GreenBubble2.png in Resources */,
 				BBDC02A118F53F89008A4DA7 /* new_feature.plist in Resources */,
 				BBDC029D18F53F89008A4DA7 /* navigationbar_refresh.png in Resources */,
@@ -3024,6 +3095,7 @@
 				BBDC01A918F52808008A4DA7 /* XMPPPresence+XEP_0172.m in Sources */,
 				BBDC017B18F52808008A4DA7 /* XMPPRoomHybridStorage.m in Sources */,
 				BBDC018418F52808008A4DA7 /* XMPPvCard.xcdatamodeld in Sources */,
+				4726100519517FA100AE4BAD /* FTUtils+NSObject.m in Sources */,
 				BBDC01BA18F52808008A4DA7 /* XMPPSRVResolver.m in Sources */,
 				BBDC01B718F52808008A4DA7 /* GCDMulticastDelegate.m in Sources */,
 				47F6B52E18F8E75F00246D68 /* EmojiEmoticons.m in Sources */,
@@ -3032,6 +3104,7 @@
 				BBDCFEC718F526D8008A4DA7 /* SessionListViewCtl.m in Sources */,
 				BBDC014918F52807008A4DA7 /* SBJsonStreamParserState.m in Sources */,
 				BBDCFCBB18F52342008A4DA7 /* AppDelegate.m in Sources */,
+				4726100619517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m in Sources */,
 				BBDC01C518F52808008A4DA7 /* NSString+DDXML.m in Sources */,
 				BBDC012B18F52807008A4DA7 /* NSObject+Property.m in Sources */,
 				BBDC016C18F52808008A4DA7 /* XMPPRosterMemoryStorage.m in Sources */,
@@ -3040,6 +3113,7 @@
 				47F6B53318F8E75F00246D68 /* FacialView.m in Sources */,
 				BB7CD0AF18FE240800D96C1A /* EGORefreshTableHeaderView.m in Sources */,
 				BBDC016D18F52808008A4DA7 /* XMPPUserMemoryStorageObject.m in Sources */,
+				4726100319517FA100AE4BAD /* FTAnimation+UIView.m in Sources */,
 				BBDC019F18F52808008A4DA7 /* XMPPCapsCoreDataStorageObject.m in Sources */,
 				BBDC016318F52807008A4DA7 /* XMPPGoogleSharedStatus.m in Sources */,
 				BBDC014D18F52807008A4DA7 /* SBJsonTokeniser.m in Sources */,
@@ -3057,6 +3131,7 @@
 				BBDC014018F52807008A4DA7 /* FMDatabaseAdditions.m in Sources */,
 				BBDC018C18F52808008A4DA7 /* XMPPvCardTempBase.m in Sources */,
 				BBDC016F18F52808008A4DA7 /* XMPPSystemInputActivityMonitor.m in Sources */,
+				472610111951928900AE4BAD /* GlobalHelper.m in Sources */,
 				BBDC01A418F52808008A4DA7 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				BBDC01A818F52808008A4DA7 /* XMPPMessage+XEP_0172.m in Sources */,
 				BBDC018518F52808008A4DA7 /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
@@ -3141,6 +3216,7 @@
 				BBDC01AB18F52808008A4DA7 /* XMPPMessageDeliveryReceipts.m in Sources */,
 				BBDC019218F52808008A4DA7 /* XMPPResultSet.m in Sources */,
 				BBDC018718F52808008A4DA7 /* XMPPvCardCoreDataStorageObject.m in Sources */,
+				4726100E1951918B00AE4BAD /* SSKeychain.m in Sources */,
 				BBDC01FF18F52A71008A4DA7 /* ASIDataCompressor.m in Sources */,
 				47BEFBA9194EE319008F4701 /* ChatService.m in Sources */,
 				BBDC015518F52807008A4DA7 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
@@ -3149,9 +3225,11 @@
 				BBDC017818F52808008A4DA7 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
 				BBDC01AE18F52808008A4DA7 /* XMPPAutoTime.m in Sources */,
 				BBDC01B918F52808008A4DA7 /* XMPPIDTracker.m in Sources */,
+				4726100419517FA100AE4BAD /* FTAnimationManager.m in Sources */,
 				BBDC017618F52808008A4DA7 /* XMPPRoom.xcdatamodeld in Sources */,
 				BBDC018618F52808008A4DA7 /* XMPPvCardCoreDataStorage.m in Sources */,
 				BBDCFEBE18F526D8008A4DA7 /* MultiUserChatViewCtl.m in Sources */,
+				4726100219517FA100AE4BAD /* Animations.m in Sources */,
 				BBDC019B18F52808008A4DA7 /* XMPPTransports.m in Sources */,
 				BBDC014418F52807008A4DA7 /* NSObject+SBJson.m in Sources */,
 				BBDC01B318F52808008A4DA7 /* XMPPMessage+XEP_0224.m in Sources */,

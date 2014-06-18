@@ -102,10 +102,21 @@
     }
 }
 
+- (IBAction)toRegister:(id)sender{
+    RegisterViewCtl *registerVC = [[RegisterViewCtl alloc] init];
+    [self presentViewController:registerVC animated:YES completion:^{
+        
+    }];
+}
+
 #pragma mark - xmppServer delegate
 -(void)xmppServerLoginSuccess{
     [SharedAppDelegate initUserData];
-    [self performSegueWithIdentifier:@"login" sender:self];
+    //[self performSegueWithIdentifier:@"login" sender:self];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SharedAppDelegate.window.rootViewController = [storyBoard instantiateInitialViewController];
+    
     [SVProgressHUD dismissWithSuccess:@"登录成功!" afterDelay:2];
 }
 
