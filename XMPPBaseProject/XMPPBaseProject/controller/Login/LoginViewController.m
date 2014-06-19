@@ -86,9 +86,7 @@
         userInfo.userName = self.userTextField.text;
         userInfo.password = self.passTextField.text;
         [[XMPPServer sharedServer] connectWithUserInfo:userInfo];
-        [XMPPServer sharedServer].delegate = self;
-#warning mark - 测试使用
-        //[self performSegueWithIdentifier:@"login" sender:self];
+        [XMPPServer sharedServer].delegate = SharedAppDelegate;
         
         //超时检测
         [self performSelector:@selector(checkTimeOut) withObject:nil afterDelay:15];

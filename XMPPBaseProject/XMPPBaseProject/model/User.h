@@ -16,6 +16,11 @@
 
 @end
 
+@interface AppUser : User
+
+@property(nonatomic,copy)NSString *password;
+
+@end
 
 @interface XmppUserInfo : User
 

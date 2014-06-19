@@ -8,6 +8,7 @@
 
 #import "GlobalHelper.h"
 #import "SSKeychain.h"
+#import "User.h"
 
 static NSString *kSSToolkitTestsServiceName = @"SSToolkitTestService";
 static NSString *kSSToolkitTestsAccountName = @"SSToolkitTestAccount";
@@ -56,6 +57,15 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 
 +(BOOL)deletePasswordForAccount:(NSString *)account {
     return  [SSKeychain deletePasswordForService:kTDIMServiceName account:account];
+}
+
++(AppUser *)lastLoginPerson{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userId = [defaults stringForKey:kUserID];
+    AppUser *user = [[AppUser alloc] init];
+    user.userId = userId;
+    user.password = [GlobalHelper passwordForAccount:userId];;
+    return user;
 }
 
 @end

@@ -10,7 +10,7 @@
 				<key>icon</key>
 				<string>yy_file_normal</string>
 				<key>title</key>
-				<string>文件</string>
+				<string>附近的人</string>
 				<key>segue</key>
 				<string></string>
 			</dict>

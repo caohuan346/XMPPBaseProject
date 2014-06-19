@@ -38,20 +38,9 @@
 }
 
 - (IBAction)loginOut:(id)sender {
-    
-//    UIWindow *window = SharedAppDelegate.window;
-//    UIViewController *vc = window.rootViewController;
-//    UIViewController *initialVC = vc.storyboard.instantiateInitialViewController;
-//    window.rootViewController = initialVC;
-    
-    //首先到登陆页面
     LoginViewController *loginViewController = [[LoginViewController alloc]init];
     SharedAppDelegate.window.rootViewController = loginViewController;
-    
-//    [SharedAppDelegate logout];
-//    [self dismissViewControllerAnimated:YES completion:^{
-//        
-//    }];
+    [SharedAppDelegate logout];
 }
 
 

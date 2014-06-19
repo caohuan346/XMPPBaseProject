@@ -13,6 +13,12 @@
 
 @end
 
+@implementation AppUser
+
+
+@end
+
+
 @implementation XmppUserInfo
 
 

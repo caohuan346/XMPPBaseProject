@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class AppUser;
 @interface GlobalHelper : NSObject
 //set password
 +(BOOL)setPassword:(NSString *)password forAccount:(NSString *)account;
@@ -15,5 +16,7 @@
 +(NSString *)passwordForAccount:(NSString *)account;
 //delete password
 +(BOOL)deletePasswordForAccount:(NSString *)account;
+
++(AppUser *)lastLoginPerson;
 
 @end

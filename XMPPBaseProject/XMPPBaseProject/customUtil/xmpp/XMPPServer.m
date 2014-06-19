@@ -280,14 +280,8 @@ static XMPPServer *singleton = nil;
     [self readPushDataAndLastLoginOutTime];
     
     //从本地取得用户名，密码和服务器地址
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *userId = [defaults stringForKey:kUserID];
-    
-#warning 从plist中获取服务器信息
-    /*
-    NSString *serverIP = [defaults stringForKey:kXMPPServerIP];
-    NSString *serverDomain = [defaults stringForKey:kXMPPServerDomain];
-     */
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *userId = [defaults stringForKey:kUserID];
     
     NSString *serverIP = XMPPServerURL;
     NSString *serverDomain = XMPPServerHostName;
@@ -296,7 +290,7 @@ static XMPPServer *singleton = nil;
         return YES;
     }
     
-    //设置用户：user1@chtekimacbook-pro.local格式的用户名
+    //设置用户：user1@domain格式的用户名
     XMPPJID *myJid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",userInfo.userName,serverDomain]];
     [xmppStream setMyJID:myJid];
     
@@ -468,9 +462,9 @@ static XMPPServer *singleton = nil;
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    [self goOnline];//上线
+    [self goOnline];
     
-    [self loginAllRoom];//登陆房间
+    [self loginAllRoom];
 }
 
 /**
@@ -507,7 +501,6 @@ static XMPPServer *singleton = nil;
 }
 
 /*
- 
  名册
  <iq xmlns="jabber:client" from="192.168.2.119" type="result" id="1234567" to="caoh@192.168.2.119/tigase-1">
     <query xmlns="jabber:iq:roster">

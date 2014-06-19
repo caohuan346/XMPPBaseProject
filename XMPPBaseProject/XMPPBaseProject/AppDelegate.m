@@ -11,6 +11,8 @@
 #import "Globals.h"
 #import "SVProgressHUD.h"
 #import "XMPPHelper.h"
+#import "User.h"
+#import "XMPPServer.h"
 
 #define KEEP_ALIVE_INTERVAL 600
 
@@ -52,15 +54,29 @@
     
     //1. 将app注册notification里面,
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
-    //首先到登陆页面
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    LoginViewController *loginViewController = [[LoginViewController alloc]init];
-    self.window.rootViewController = loginViewController;
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    self.xmppServer = [XMPPServer sharedServer];
+
+    AppUser *appUser = [GlobalHelper lastLoginPerson];
+    if (appUser.password) {
+        [self toHomePage];
+        
+        //登录xmpp服务器
+        XmppUserInfo *userInfo = [[XmppUserInfo alloc] init];
+        userInfo.userName = appUser.userId;
+        userInfo.password = appUser.password;
+        [self.xmppServer connectWithUserInfo:userInfo];
+        
+    }else{
+        //首先到登陆页面
+        LoginViewController *loginViewController = [[LoginViewController alloc]init];
+        self.window.rootViewController = loginViewController;
+    }
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
     // Override point for customization after application launch.
     
     return YES;
@@ -181,18 +197,18 @@
 
 
 #pragma mark - private
+-(void)toHomePage{
+    [self initUserData];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.window.rootViewController = [storyBoard instantiateInitialViewController];
+}
+
 -(void)logout{
     [[XMPPServer sharedServer] disconnect];
     //[self.viewController dismissModalViewControllerAnimated:YES];
     
     //self.selectedViewCtl = loginViewController;
-}
-
--(void)login{
-    [self initUserData];
-    
-    //mainViewController = [[MainViewController alloc] init];
-    //[self.viewController presentModalViewController:mainViewController animated:YES];
 }
 
 
@@ -241,8 +257,8 @@
 
 #pragma mark XMPPServerDelegate
 -(void)xmppServerLoginSuccess{
+    [self performSelector:@selector(toHomePage) withObject:nil afterDelay:1.0];
     [SVProgressHUD dismissWithSuccess:@"登录成功！" afterDelay:1.0];
-    [self performSelector:@selector(login) withObject:nil afterDelay:1.0];
 }
 
 -(void)xmppServerLoginFail{

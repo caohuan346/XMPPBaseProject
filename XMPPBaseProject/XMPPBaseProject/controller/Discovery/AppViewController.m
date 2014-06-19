@@ -7,8 +7,6 @@
 //
 
 #import "AppViewController.h"
-#import "Cell.h"
-#import "LineLayout.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "MJRefresh.h"
 

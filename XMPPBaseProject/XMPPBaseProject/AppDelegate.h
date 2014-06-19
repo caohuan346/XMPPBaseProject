@@ -16,7 +16,7 @@ extern NSString *const AppDelegateConstant;
 @class LoginViewController;
 @class Globals;
 @class DBCenter;
-@interface AppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate,XMPPServerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,retain) UIViewController *viewController;

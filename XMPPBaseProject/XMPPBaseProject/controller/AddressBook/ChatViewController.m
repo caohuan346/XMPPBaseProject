@@ -7,7 +7,6 @@
 //
 
 #import "ChatViewController.h"
-#import "KKMessageCell.h"
 #import "Globals.h"
 #import "Message.h"
 #import "User.h"
