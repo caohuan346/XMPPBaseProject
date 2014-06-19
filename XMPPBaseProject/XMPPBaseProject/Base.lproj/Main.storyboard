@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evk-Pj-hb4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="evk-Pj-hb4">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -9,7 +9,7 @@
         <scene sceneID="Iwf-ye-2JO">
             <objects>
                 <navigationController definesPresentationContext="YES" id="hYf-ts-yo4" userLabel="Navigation Controller - 消息" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="消息" image="tabbar_message_center.png" id="JfB-7s-H2n" userLabel="Tab Bar Item - 消息"/>
+                    <tabBarItem key="tabBarItem" title="消息" image="tb_session_normal.png" id="JfB-7s-H2n" userLabel="Tab Bar Item - 消息"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rBd-qm-GAi">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -550,7 +550,7 @@
         <scene sceneID="8za-LV-dYd">
             <objects>
                 <navigationController definesPresentationContext="YES" id="Tzp-88-JP6" userLabel="Navigation Controller - 我" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我" image="header_icon_set.png" id="aMd-Sz-MkZ" userLabel="Tab Bar Item - 我"/>
+                    <tabBarItem key="tabBarItem" title="我" image="tb_address_normal.png" id="aMd-Sz-MkZ" userLabel="Tab Bar Item - 我"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xrv-TX-Q1B">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -597,7 +597,7 @@
         <scene sceneID="2MY-px-3GR">
             <objects>
                 <navigationController definesPresentationContext="YES" id="yhF-Dx-I3Y" userLabel="Navigation Controller - 发现" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="发现" image="tabbar_more.png" id="lzI-7s-7RX" userLabel="Tab Bar Item - 发现"/>
+                    <tabBarItem key="tabBarItem" title="发现" image="tb_set_normal.png" id="lzI-7s-7RX" userLabel="Tab Bar Item - 发现"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JTt-IK-BS2">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -613,7 +613,7 @@
         <scene sceneID="Dnu-fH-dCZ">
             <objects>
                 <navigationController definesPresentationContext="YES" id="ran-9A-MNy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="通讯录" image="fresh_friends.png" id="LIw-Ld-OG5"/>
+                    <tabBarItem key="tabBarItem" title="通讯录" image="tb_group_normal.png" id="LIw-Ld-OG5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vr6-Rw-PCN">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -627,11 +627,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fresh_friends.png" width="28" height="28"/>
-        <image name="header_icon_set.png" width="24" height="24"/>
         <image name="setting_logout_button_normal.png" width="300" height="44"/>
-        <image name="tabbar_message_center.png" width="30" height="30"/>
-        <image name="tabbar_more.png" width="30" height="30"/>
+        <image name="tb_address_normal.png" width="30" height="30"/>
+        <image name="tb_group_normal.png" width="30" height="30"/>
+        <image name="tb_session_normal.png" width="30" height="30"/>
+        <image name="tb_set_normal.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

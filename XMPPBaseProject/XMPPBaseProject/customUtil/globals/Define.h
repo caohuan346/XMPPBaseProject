@@ -11,21 +11,14 @@
 
 #endif
 
-//本机tigase
-//#define XMPPServerURL      @"192.168.2.226"
-//#define XMPPServerHostName @"192.168.2.226"
-
 //mini of
-#define XMPPServerURL      @"192.168.8.62"
-#define XMPPServerHostName @"hc-mini.local"
+//#define XMPPServerURL      @"192.168.8.62"
+//#define XMPPServerHostName @"hc-mini.local"
 
 //macbook of
-//#define XMPPServerURL      @"192.168.1.57"
-//#define XMPPServerHostName @"macbook-pro.lan"
+#define XMPPServerURL      @"192.168.1.53"
+#define XMPPServerHostName @"macbook-pro.lan"
 
-//本机tigase
-//#define XMPPServerURL      @"192.168.2.226"
-//#define XMPPServerHostName @"Mac-mini.local"
 
 #define kUserID @"loginId"
 #define kPassword @"pwd"
