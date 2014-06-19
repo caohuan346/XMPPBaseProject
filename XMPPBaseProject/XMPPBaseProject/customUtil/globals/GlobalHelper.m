@@ -13,6 +13,8 @@ static NSString *kSSToolkitTestsServiceName = @"SSToolkitTestService";
 static NSString *kSSToolkitTestsAccountName = @"SSToolkitTestAccount";
 static NSString *kSSToolkitTestsPassword = @"SSToolkitTestPassword";
 
+static NSString *kTDIMServiceName = @"kTDIMServiceName";
+
 @implementation GlobalHelper
 
 - (void)testAll {
@@ -42,6 +44,18 @@ static NSString *kSSToolkitTestsPassword = @"SSToolkitTestPassword";
 		}
 	}
 	return NO;
+}
+
++(BOOL)setPassword:(NSString *)password forAccount:(NSString *)account {
+    return  [SSKeychain setPassword:password forService:kTDIMServiceName account:account];
+}
+
++(NSString *)passwordForAccount:(NSString *)account {
+    return  [SSKeychain passwordForService:kTDIMServiceName account:account];
+}
+
++(BOOL)deletePasswordForAccount:(NSString *)account {
+    return  [SSKeychain deletePasswordForService:kTDIMServiceName account:account];
 }
 
 @end

@@ -31,7 +31,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userId = [defaults stringForKey:kUserID];
-    NSString *password = [defaults stringForKey:kPassword];
+    //NSString *password = [defaults stringForKey:kPassword];
+    NSString *password = [GlobalHelper passwordForAccount:userId];
+    
     //NSString *xmppServer = [defaults stringForKey:kXMPPServerDomain];
     
     self.userTextField.text = userId;
@@ -63,12 +65,19 @@
 #pragma mark -private
 - (IBAction)toLogin:(id)sender{
     if ([self validateWithUser:_userTextField.text andPass:_passTextField.text]) {
-        
+        /*
         //持久化登录消息
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.userTextField.text forKey:kUserID];
         [defaults setObject:self.passTextField.text forKey:kPassword];
         [defaults synchronize];
+        */
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:self.userTextField.text forKey:kUserID];
+        
+        //persist pwd with keychain
+        [GlobalHelper setPassword:_passTextField.text forAccount:_userTextField.text];
         
         [SVProgressHUD showInView:SharedAppDelegate.selectedViewCtl.view status:@"正在登录，请稍候..." networkIndicator:YES];
         

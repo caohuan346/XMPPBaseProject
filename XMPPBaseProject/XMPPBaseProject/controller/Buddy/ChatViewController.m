@@ -359,10 +359,10 @@
     UIImage *headImg;
     UIImage *bubbleImg;
     
-//    cell.backgroundColor = [UIColor grayColor];
-//    cell.msgLabel.backgroundColor = [UIColor yellowColor];
-//    cell.iconImgV.backgroundColor = [UIColor purpleColor];
-//    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
+    cell.backgroundColor = [UIColor grayColor];
+    cell.msgLabel.backgroundColor = [UIColor yellowColor];
+    cell.iconImgV.backgroundColor = [UIColor purpleColor];
+    cell.bubbleImgV.backgroundColor = [UIColor orangeColor];
 
     //self
     if ([aMsg.isFrom isEqualToString:@"0"]) {

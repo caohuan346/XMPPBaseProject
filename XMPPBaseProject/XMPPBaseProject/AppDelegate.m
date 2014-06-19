@@ -52,9 +52,9 @@
     
     //1. 将app注册notification里面,
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     //首先到登陆页面
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
     LoginViewController *loginViewController = [[LoginViewController alloc]init];
     self.window.rootViewController = loginViewController;
     

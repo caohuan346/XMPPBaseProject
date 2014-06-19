@@ -18,4 +18,6 @@
 #import "XMPPServer+Add.h"
 #import "Define.h"
 #import "EnumDefine.h"
+#import "GlobalHelper.h"
+
 #endif
