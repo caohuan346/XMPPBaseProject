@@ -22,6 +22,8 @@
 		4726100619517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100019517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m */; };
 		4726100E1951918B00AE4BAD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100D1951918B00AE4BAD /* SSKeychain.m */; };
 		472610111951928900AE4BAD /* GlobalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 472610101951928900AE4BAD /* GlobalHelper.m */; };
+		472DB92B1953BCA10032EEE2 /* MineCtlOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 472DB92A1953BCA10032EEE2 /* MineCtlOptions.plist */; };
+		472DB92F1953BCF80032EEE2 /* MySelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472DB92E1953BCF80032EEE2 /* MySelfViewController.m */; };
 		473D75211922316C00D68735 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473D75201922316C00D68735 /* AssetsLibrary.framework */; };
 		4797698C1952E02800CA5FBA /* SettingViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797698B1952E02800CA5FBA /* SettingViewCtl.m */; };
 		479769991952E07F00CA5FBA /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797698F1952E07F00CA5FBA /* AppViewController.m */; };
@@ -376,6 +378,9 @@
 		4726100D1951918B00AE4BAD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
 		4726100F1951928900AE4BAD /* GlobalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHelper.h; sourceTree = "<group>"; };
 		472610101951928900AE4BAD /* GlobalHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalHelper.m; sourceTree = "<group>"; };
+		472DB92A1953BCA10032EEE2 /* MineCtlOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MineCtlOptions.plist; sourceTree = "<group>"; };
+		472DB92D1953BCF80032EEE2 /* MySelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelfViewController.h; sourceTree = "<group>"; };
+		472DB92E1953BCF80032EEE2 /* MySelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelfViewController.m; sourceTree = "<group>"; };
 		473D75201922316C00D68735 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		4797698A1952E02800CA5FBA /* SettingViewCtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewCtl.h; sourceTree = "<group>"; };
 		4797698B1952E02800CA5FBA /* SettingViewCtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewCtl.m; sourceTree = "<group>"; };
@@ -1035,6 +1040,9 @@
 		479769891952E02800CA5FBA /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				472DB92D1953BCF80032EEE2 /* MySelfViewController.h */,
+				472DB92E1953BCF80032EEE2 /* MySelfViewController.m */,
+				472DB92A1953BCA10032EEE2 /* MineCtlOptions.plist */,
 				4797698A1952E02800CA5FBA /* SettingViewCtl.h */,
 				4797698B1952E02800CA5FBA /* SettingViewCtl.m */,
 			);
@@ -2532,6 +2540,7 @@
 				47D89E3D19532723001871A9 /* ReceiverTextNodeBkg@2x.png in Resources */,
 				47D89E3A19532723001871A9 /* chat_bottombar_voice_normal@2x.png in Resources */,
 				47D89E3519532723001871A9 /* pl_news_sending.png in Resources */,
+				472DB92B1953BCA10032EEE2 /* MineCtlOptions.plist in Resources */,
 				BBDCFCB518F52342008A4DA7 /* InfoPlist.strings in Resources */,
 				47260FEF1951630F00AE4BAD /* LoginViewController.xib in Resources */,
 				47D89E8819533539001871A9 /* tb_session_normal@2x.png in Resources */,
@@ -2762,6 +2771,7 @@
 				BBDC01C618F52808008A4DA7 /* DDXMLDocument.m in Sources */,
 				BBDC017418F52808008A4DA7 /* XMPPLastActivity.m in Sources */,
 				BBDC01C118F52808008A4DA7 /* DDTTYLogger.m in Sources */,
+				472DB92F1953BCF80032EEE2 /* MySelfViewController.m in Sources */,
 				BBDC01AB18F52808008A4DA7 /* XMPPMessageDeliveryReceipts.m in Sources */,
 				BBDC019218F52808008A4DA7 /* XMPPResultSet.m in Sources */,
 				BBDC018718F52808008A4DA7 /* XMPPvCardCoreDataStorageObject.m in Sources */,

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>title</key>
+			<string>照片</string>
+			<key>normalImg</key>
+			<string>pl_picture_normal</string>
+			<key>selectedImg</key>
+			<string>pl_picture_normal</string>
+			<key>selector</key>
+			<string>accessaryBtnChoosePhoto</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>拍照</string>
+			<key>normalImg</key>
+			<string>pl_message_normal</string>
+			<key>selectedImg</key>
+			<string>pl_message_normal</string>
+			<key>selector</key>
+			<string>accessaryBtnTakePhoto</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>位置</string>
+			<key>normalImg</key>
+			<string>pl_location_normal</string>
+			<key>selectedImg</key>
+			<string>pl_location_normal</string>
+			<key>selector</key>
+			<string>accessaryBtnLocation</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>消息</string>
+			<key>normalImg</key>
+			<string>pl_message_normal</string>
+			<key>selectedImg</key>
+			<string>pl_message_normal</string>
+			<key>selector</key>
+			<string>accessaryBtnNormalMsg</string>
+		</dict>
+		<dict>
+			<key>title</key>
+			<string>文件</string>
+			<key>normalImg</key>
+			<string>pl_file_normal</string>
+			<key>selectedImg</key>
+			<string>pl_file_normal</string>
+			<key>selector</key>
+			<string>accessaryBtnSendFile</string>
+		</dict>
+	</array>
+</dict>
+</plist>

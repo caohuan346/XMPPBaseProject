@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SettingViewCtl : UIViewController
+@interface SettingViewCtl : UITableViewController
 
 - (IBAction)loginOut:(id)sender;
 
