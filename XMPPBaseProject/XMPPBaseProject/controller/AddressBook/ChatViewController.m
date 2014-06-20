@@ -2,8 +2,8 @@
 //  ChatViewController.m
 //  BaseProject
 //
-//  Created by Huan Cho on 13-12-19.
-//  Copyright (c) 2013年 ch. All rights reserved.
+//  Created by hc on 14-12-19.
+//  Copyright (c) 2014年 hc. All rights reserved.
 //
 
 #import "ChatViewController.h"
@@ -47,6 +47,7 @@
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
     NSLog(@"%@",NSStringFromCGRect(self.view.frame));
     NSLog(@"%@",NSStringFromCGRect(self.tView.frame));
+    
     [self addHeader];
     
     self.messages = [NSMutableArray array];
@@ -61,7 +62,7 @@
     [self.chatToolBar initSubviewsWithFrame:self.chatToolBar.frame superView:self.view];
     self.chatToolBar.chatDelegate=self;
     
-    [self goBottom];
+    [self performSelectorOnMainThread:@selector(refreshDataToButtom) withObject:nil waitUntilDone:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -106,9 +107,7 @@
     
     // //next offset
     _displayMsgCount += tempMsgArray.count;
-    
-    [self.tView reloadData];
-    [self goBottom];
+//    [self goBottom];
 }
 
 -(void)seekData{
@@ -129,8 +128,7 @@
         [self.messages insertObjects:reversedArray atIndexes:indexSet];
         
         //refreshData
-        [self.tView reloadData];
-        [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:reversedArray.count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [self performSelector:@selector(refreshDataToPrevious:) withObject:reversedArray afterDelay:0.1];
         
         //next offset
         _displayMsgCount += tempMsgArray.count;
@@ -163,7 +161,7 @@
         
         [self.messages addObject:aChatMsg];
         
-        [self refreshData];
+        [self refreshDataToButtom];
     }
     
     else if (type == XMPPTypeMessageIsComposing){
@@ -211,9 +209,14 @@
  }
  */
 
--(void)refreshData{
+-(void)refreshDataToButtom{
     [self.tView reloadData];
     [self goBottom];
+}
+
+-(void)refreshDataToPrevious:(NSArray *)resultArray{
+    [self.tView reloadData];
+    [self.tView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:resultArray.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 
@@ -494,7 +497,7 @@
         }
         
         [self.messages addObject:myMsg];
-        [self refreshData];
+        [self refreshDataToButtom];
     }
 }
 

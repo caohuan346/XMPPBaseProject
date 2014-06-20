@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iWO-pe-pLy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2295" y="-94"/>
+            <point key="canvasLocation" x="2259" y="254"/>
         </scene>
         <!--Location View Controller - 位置-->
         <scene sceneID="cCU-Ma-U88">
@@ -299,7 +299,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hwJ-xj-gDb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4256" y="1371"/>
+            <point key="canvasLocation" x="3300" y="1915"/>
         </scene>
         <!--Chat View Controller - 聊天-->
         <scene sceneID="2fs-Qx-zDH">
