@@ -31,8 +31,6 @@ extern NSString *const AppDelegateConstant;
 
 //注销
 -(void)logout;
-//初始化用户信息
--(void)initUserData;
 //显示提示信息
 -(void)showRemarkMsg:(NSString *)remarkMsg;
 

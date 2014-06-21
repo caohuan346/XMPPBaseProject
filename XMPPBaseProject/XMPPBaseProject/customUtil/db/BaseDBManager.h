@@ -1,9 +1,9 @@
 //
 //  BaseDBManager.h
-//  KuaiKuai
+//  XMPPBaseProject
 //
-//  Created by caohuan on 13-11-18.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Created by hc on 14-06-21.
+//  Copyright (c) 2014年 hc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -119,12 +119,13 @@
 //  Copyright (c) 2013年 MONTNETS. All rights reserved.
 //
 @interface ConditionBean : NSObject
+
 @property(nonatomic,copy)   NSString    *filedName;         //字段值
 @property(nonatomic,strong) NSObject    *filedValue;        //字段值
 @property(nonatomic,copy)   NSString    *comparisonMark;    //条件比较标记
 @property(nonatomic,copy)   NSString    *orderMark;         //排序标记
-@property(nonatomic,assign)  NSInteger  limitSize;         //排序标记
-@property(nonatomic,assign)  NSInteger  offset;         //排序标记
+@property(nonatomic,assign)  NSInteger  limitSize;          //排序标记
+@property(nonatomic,assign)  NSInteger  offset;             //排序标记
 
 
 //条件、排序

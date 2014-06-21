@@ -47,7 +47,6 @@
 
 //插入sql，:方式（Deprecated）
 -(NSString *)createInsertSqlByDictionary:(NSDictionary *)dict tablename:(NSString *)table{
-    
     NSMutableString *sql = [[NSMutableString alloc] init];
     [sql appendFormat:@"insert into %@ (",table] ;
     NSInteger i = 0;
@@ -277,6 +276,9 @@
     if ([self isExistsTable:classname]) {
         return YES;
     }
+    
+    
+    
     id obj = [[NSClassFromString(classname) alloc] init];
     if (obj==nil) {
         return NO;

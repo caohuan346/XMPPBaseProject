@@ -13,6 +13,7 @@
 #import "XMPPHelper.h"
 #import "User.h"
 #import "XMPPServer.h"
+#import "PathService.h"
 
 #define KEEP_ALIVE_INTERVAL 600
 
@@ -59,6 +60,8 @@
     
     self.xmppServer = [XMPPServer sharedServer];
 
+    [self initUsersPublicData];
+    
     AppUser *appUser = [GlobalHelper lastLoginPerson];
     if (appUser.password) {
         [self toHomePage];
@@ -198,7 +201,7 @@
 
 #pragma mark - private
 -(void)toHomePage{
-    [self initUserData];
+    [self initPersonalData];
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     self.window.rootViewController = [storyBoard instantiateInitialViewController];
@@ -293,10 +296,17 @@
 
 
 #pragma mark - public instance method
--(void)initUserData{
+//init all users public data
+-(void)initUsersPublicData{
+   [PathService pathForAllConfigFile];
+   [PathService pathForAllUserDataFile];
+}
+
+//init personal data for currentUser
+-(void)initPersonalData{
     
     self.globals.userId= [[NSUserDefaults standardUserDefaults] objectForKey:kUserID];
-    
+
     //创建数据库
     [self.databaseService createDb];
     

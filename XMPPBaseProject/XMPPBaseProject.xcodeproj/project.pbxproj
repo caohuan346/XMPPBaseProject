@@ -2220,10 +2220,10 @@
 			children = (
 				BBDCFF8918F52806008A4DA7 /* Define.h */,
 				BBDCFF8A18F52806008A4DA7 /* EnumDefine.h */,
-				BBDCFF8B18F52806008A4DA7 /* Globals.h */,
-				BBDCFF8C18F52806008A4DA7 /* Globals.m */,
 				BBDCFF8D18F52806008A4DA7 /* PathService.h */,
 				BBDCFF8E18F52806008A4DA7 /* PathService.m */,
+				BBDCFF8B18F52806008A4DA7 /* Globals.h */,
+				BBDCFF8C18F52806008A4DA7 /* Globals.m */,
 				4726100F1951928900AE4BAD /* GlobalHelper.h */,
 				472610101951928900AE4BAD /* GlobalHelper.m */,
 			);

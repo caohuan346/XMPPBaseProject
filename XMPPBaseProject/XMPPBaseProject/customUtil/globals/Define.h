@@ -19,7 +19,6 @@
 //#define XMPPServerURL      @"192.168.1.53"
 //#define XMPPServerHostName @"macbook-pro.lan"
 
-
 #define kUserID @"loginId"
 #define kPassword @"pwd"
 
@@ -30,6 +29,8 @@
 #define XMPPRequest_MaxTime 4          //http请求超时最大重连次数
 
 #define kMessageSoundName            @"sms-received"
+//数据库版本号：如果数据库表结构有变动，递增更新此版本号
+#define KNextDBVersion    @"1.0"
 
 //Local notification
 #define  LOCAL_NOTIFICATION_UNREADMESSAGENUMBERCHANGE @"LocalNotificationUnReadMessageNumberChange"

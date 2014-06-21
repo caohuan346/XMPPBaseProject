@@ -38,19 +38,6 @@
     
     self.userTextField.text = userId;
     self.passTextField.text = password;
-    //self.serverTextField.text = xmppServer;
-    
-     //自动登录：
-    /*
-    if (userId && password) {
-        XmppUserInfo *userInfo = [[XmppUserInfo alloc] init];
-        userInfo.userName = userId;
-        userInfo.password = password;
-        [[XMPPServer sharedServer] connectWithUserInfo:userInfo];
-    }
-     */
-    
-//    [self toLogin:nil];
     
     [self initAnim6];
 }
@@ -65,13 +52,6 @@
 #pragma mark -private
 - (IBAction)toLogin:(id)sender{
     if ([self validateWithUser:_userTextField.text andPass:_passTextField.text]) {
-        /*
-        //持久化登录消息
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:self.userTextField.text forKey:kUserID];
-        [defaults setObject:self.passTextField.text forKey:kPassword];
-        [defaults synchronize];
-        */
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:self.userTextField.text forKey:kUserID];
@@ -114,25 +94,6 @@
     [self presentViewController:registerVC animated:YES completion:^{
         
     }];
-}
-
-#pragma mark - xmppServer delegate
--(void)xmppServerLoginSuccess{
-    [SharedAppDelegate initUserData];
-    //[self performSegueWithIdentifier:@"login" sender:self];
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SharedAppDelegate.window.rootViewController = [storyBoard instantiateInitialViewController];
-    
-    [SVProgressHUD dismissWithSuccess:@"登录成功!" afterDelay:2];
-}
-
--(void)xmppServerLoginFail{
-    [SVProgressHUD dismissWithError:@"连接服务器失败"];
-}
-
--(void)xmppServerAuthenticateFail{
-    [SVProgressHUD dismissWithError:@"登录失败，请检查用户名或密码"];
 }
 
 //#pragma mark - segue

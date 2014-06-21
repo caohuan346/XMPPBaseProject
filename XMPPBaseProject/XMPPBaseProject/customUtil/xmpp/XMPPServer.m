@@ -632,6 +632,9 @@ static XMPPServer *singleton = nil;
         if (optFlag) {
             NSLog(@"插入聊天信息session成功");
         }
+        
+        //播放消息
+        [SharedAppDelegate.globals globalSystemSoundPlay];
     }
     
     //正在输入
@@ -807,7 +810,7 @@ static XMPPServer *singleton = nil;
             xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:self jid:roomJID];
             [xmppRoom activate:xmppStream];
             NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
-            [history addAttributeWithName:@"since" stringValue:[Globals dateToStr_Format:[NSDate date]]];
+            [history addAttributeWithName:@"since" stringValue:[GlobalHelper dateToStr_Format:[NSDate date]]];
             [xmppRoom addDelegate:self delegateQueue:dispatch_get_current_queue()];
             [xmppRoom joinRoomUsingNickname:globals.userId history:history];
         }

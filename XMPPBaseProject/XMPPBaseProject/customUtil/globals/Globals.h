@@ -7,60 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Globals : NSObject {
-    NSString  *userId;
-    NSString  *userToken;
-    NSString  *userPassword;
-    NSInteger userType;
-    NSString  *userAllType;
-    NSString  *userName;      //姓名
-    NSInteger userClassId;
-    NSInteger userSchoolId;
-    NSInteger userPrivelege;
-    
-    NSString  *account;   //账户id
-    NSString  *password;
-    NSString  *position;
-    NSString  *job;       //老师职务
-	NSString  *name;      //账户姓名
-    NSString  *headUrl;
-	UIImage   *head;		
-	NSString  *signature;	
-	NSInteger sex;        //0－女；1－男；
-    NSString  *birthday;
-	NSString  *mobile;	
-	NSString  *telphone;
-    NSString  *qq;
-    NSString  *email;
-    NSString  *msn;
-    NSInteger groupLimit;
-    NSDate    *updateTime;
-    
-    NSTimeInterval lastDBUpdateTime;
-    NSTimeInterval lastOnlineUpdateTime;
-    
-	BOOL		loginState;
-    BOOL        soundOn;
-    BOOL        vibrateOn;//震动开关状态
-    
-    NSTimeInterval currentInterval;//当前消息的接收时间
-    NSTimeInterval  previousInterval;//上一条消息的接收时间
-    
-    NSInteger   currentTheme;
-	NSString	*firmwareInfo;    //手机固件信息
-	NSString	*deviceToken;     //苹果推送令牌
-	NSString	*deviceId;        //设备ID
-    
-    NSTimeInterval  lastLoginOutTime;
-    
-    NSString    *fileServerIP;
-    NSString    *fileServerPort;
-    NSString    *fileServerUrl;
-	
-	NSInteger	unreadMessageNumbers;
-    NSInteger   unreadOperateNumbers;
-    NSInteger   unreadClassZoneNumbers;
-}
+@interface Globals : NSObject
+
 @property(nonatomic,copy)NSString *userId;
 @property(nonatomic,copy) NSString   *userToken;
 @property(nonatomic,copy) NSString   *userPassword;
@@ -94,7 +42,6 @@
 
 @property(nonatomic,assign)NSInteger currentTheme;
 @property(nonatomic)		BOOL		loginState;
-@property(nonatomic)		BOOL		soundOn;
 @property(nonatomic,retain) NSString	*firmwareInfo;
 @property(nonatomic,retain) NSString	*deviceToken;
 @property(nonatomic,retain) NSString	*deviceId;
@@ -109,37 +56,19 @@
 @property(nonatomic,retain) NSString	*fileServerPort;
 @property(nonatomic,retain,getter = fileServerUrl) NSString	*fileServerUrl;
 
-@property(nonatomic,setter = setUnreadMessageNumbers:)		NSInteger	unreadMessageNumbers;	//未读的消息条数
-@property(nonatomic,setter = setUnreadOperateNumbers:)		NSInteger	unreadOperateNumbers;	//未读的推送条数
-@property(nonatomic,setter = setUnreadClassZoneNumbers:)    NSInteger	unreadClassZoneNumbers;	//未读的动态条数
+//@property(nonatomic,setter = setUnreadMessageNumbers:)		NSInteger	unreadMessageNumbers;	//未读的消息条数
+//@property(nonatomic,setter = setUnreadOperateNumbers:)		NSInteger	unreadOperateNumbers;	//未读的推送条数
+//@property(nonatomic,setter = setUnreadClassZoneNumbers:)    NSInteger	unreadClassZoneNumbers;	//未读的动态条数
+
+#pragma mark - setting
+//声音与震动
+@property(nonatomic,assign) BOOL	soundOn;  //声音提醒
+@property(nonatomic,assign) BOOL	vibrateOn;//震动开关状态
+@property(nonatomic,assign) NSTimeInterval currentInterval;//当前消息的接收时间
+@property(nonatomic,assign) NSTimeInterval  previousInterval;//上一条消息的接收时间
 
 - (id)init;
-- (void)dealloc;
 - (void)clearWhenLogOut;
-
-+ (NSTimeInterval)strToTimeInterval:(NSString *)dateString;
-+ (NSString *)dateToStr:(NSDate *)date;
-+ (NSString *)dateToStr_v2:(NSDate *)date;
-+ (NSString *)dateToStr_v3:(NSDate *)date;
-+ (NSString *)dateToStr_v4:(NSDate *)date;
-+ (NSString *)dateToStr_v5:(NSDate *)date;
-+ (NSString *)dateToStr_v6:(NSDate *)date;
-+ (NSString *)dateToStr_v7:(NSDate *)date;
-+ (NSString *)dateToStr_v8:(NSString *)dateString;
-+ (NSString *)dateToStr_Format:(NSDate *)date;
-+ (NSString *)dateToStr_dbFormat:(NSDate *)date;
-+ (NSString *)dateToStr_dbFormatWithoutHMS:(NSDate *)date;
-+ (NSDate *)strToDate:(NSString* )year month:(NSString *)month day:(NSString *)day hour:(NSString *)hour minute:(NSString *)minute;
-- (void)clearUserDatasWhenLogOut:(BOOL)isHotLogout;
-+ (NSString *)getAstroWithMonth:(int)m day:(int)d;
-+ (NSString *)getAstroWithDate:(NSDate *)_date;
-+ (NSString *)stringByDeleteBlankLines:(NSString *)sourceStr;
-
-+ (NSString *)GetLocalIPAddress;
-+ (NSString *)getCurrentTime;
-+ (NSString *) UnicodeToUtf8:(NSString *)string;
-+ (NSString *) Utf8ToUnicode:(NSString *)string;
-+(id )JsonStringToDict:(NSString *)jsonString;
-// ascII 码转换
-+ (NSString *)intToAscII:(int)num;
+- (void)globalInfoPersist;
+- (void)globalSystemSoundPlay;
 @end

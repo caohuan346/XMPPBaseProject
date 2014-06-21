@@ -74,8 +74,8 @@
      
      */
     
-    //创建数据库
-    NSString *filePath = [PathService pathForUserDataBaseFileOfUser:globals.userId];
+    //create db
+    NSString *filePath = [PathService pathOfDataBaseFileForCurrentUser:globals.userId];
     
     fmdbQueue=[[FMDatabaseQueue alloc] initWithPath:filePath];
     database = [[FMDatabase alloc]initWithPath:filePath];
@@ -86,21 +86,38 @@
         NSLog(@"Failed to open db!");
     }
     
-    //创建session表
+    //User
     BOOL tUserFlag = [_baseDBManager createTableWithPKByClass:[User class]];
-    
-    //创建session表
+    //session
     BOOL tSessionFlag = [_baseDBManager createTableWithPKByClass:[Session class]];
-    
-    //创建session表
+    //Message
     BOOL tMsgFlag = [_baseDBManager createTableWithPKByClass:[Message class]];
     
 	return tUserFlag && tSessionFlag && tMsgFlag;
 }
 
-+ (NSString *)currentVersion {
-	//当前数据库的版本号，每次更改库结构时必须修正此版本号
-	return @"1.0";
+#pragma mark Customized:General
+//local db update handle
+- (void)handleDbUpdate {
+    
+	NSString *allConfigFilePath = [PathService pathForAllConfigFile];
+    
+	if ([[NSFileManager defaultManager] fileExistsAtPath:allConfigFilePath]) {
+		NSMutableDictionary *allConfigDictionary = [[NSMutableDictionary alloc]
+							   initWithContentsOfFile:allConfigFilePath];
+        //sandbox中数据库版本
+		NSString *lastDBVersion = [allConfigDictionary objectForKey:@"dbVersion"];
+        
+        //如果sandbox中存在数据库版本大于等于目标版本，不需要更新
+		if ([lastDBVersion compare:KNextDBVersion] != NSOrderedAscending) {
+			NSLog(@"save db ver, do nothing.");
+		}
+        //change db
+        else{
+            
+        }
+	}
+
 }
 
 #pragma mark customized: Public (Syncronization)
