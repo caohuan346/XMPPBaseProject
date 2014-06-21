@@ -9,6 +9,7 @@
 #import "Globals.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation Globals
 @synthesize userId;
@@ -438,6 +439,36 @@
         return [NSString stringWithFormat:@"http://%@:%@/upload/UploadServlet",fileServerIP,fileServerPort];
     }
     return nil;
+}
+
+#pragma mark - sound play
+- (void)playSystemSound
+{
+    currentInterval = [[NSDate date]timeIntervalSinceReferenceDate];
+    if ((currentInterval - previousInterval) > 0.5) {
+        //发出消息提示音
+        if (soundOn || vibrateOn) {
+            previousInterval = currentInterval;
+        }
+        if (soundOn) {
+            @autoreleasepool{
+                SystemSoundID soundID;
+                //调用NSBundle类的方法mainBundle返回一个NSBundle对象，该对象对应于当前程序可执行二进制文件所属的目录
+                NSString *soundFile = [[NSBundle mainBundle] pathForResource:kMessageSoundName ofType:@"caf"];
+                //一个指向文件位置的CFURLRef对象和一个指向要设置的SystemSoundID变量的指针
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef) [NSURL fileURLWithPath:soundFile], &soundID);
+                AudioServicesPlaySystemSound(soundID);
+            }
+        }
+        //震动提示
+        if (vibrateOn) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        }
+    }else {
+        if (soundOn || vibrateOn) {
+            previousInterval = currentInterval;
+        }
+    }
 }
 
 @end

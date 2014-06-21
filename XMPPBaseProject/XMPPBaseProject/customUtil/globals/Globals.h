@@ -41,6 +41,11 @@
     
 	BOOL		loginState;
     BOOL        soundOn;
+    BOOL        vibrateOn;//震动开关状态
+    
+    NSTimeInterval currentInterval;//当前消息的接收时间
+    NSTimeInterval  previousInterval;//上一条消息的接收时间
+    
     NSInteger   currentTheme;
 	NSString	*firmwareInfo;    //手机固件信息
 	NSString	*deviceToken;     //苹果推送令牌

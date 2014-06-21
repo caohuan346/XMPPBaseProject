@@ -47,6 +47,7 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 	return NO;
 }
 
+#pragma mark - login password persist etc.
 +(BOOL)setPassword:(NSString *)password forAccount:(NSString *)account {
     return  [SSKeychain setPassword:password forService:kTDIMServiceName account:account];
 }
@@ -67,5 +68,8 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
     user.password = [GlobalHelper passwordForAccount:userId];;
     return user;
 }
+
+
+#pragma mark - gloab setting
 
 @end

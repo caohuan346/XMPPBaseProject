@@ -98,6 +98,8 @@
 		47D89E8719533539001871A9 /* tb_group_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47D89E8319533539001871A9 /* tb_group_normal@2x.png */; };
 		47D89E8819533539001871A9 /* tb_session_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47D89E8419533539001871A9 /* tb_session_normal@2x.png */; };
 		47D89E8919533539001871A9 /* tb_set_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47D89E8519533539001871A9 /* tb_set_normal@2x.png */; };
+		47D89E9119546AA8001871A9 /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47D89E9019546AA8001871A9 /* DiscoveryViewController.m */; };
+		47D89E931954733A001871A9 /* sms-received.caf in Resources */ = {isa = PBXBuildFile; fileRef = 47D89E921954733A001871A9 /* sms-received.caf */; };
 		47F6B52D18F8E75F00246D68 /* Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B51C18F8E75F00246D68 /* Emoji.m */; };
 		47F6B52E18F8E75F00246D68 /* EmojiEmoticons.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B51E18F8E75F00246D68 /* EmojiEmoticons.m */; };
 		47F6B52F18F8E75F00246D68 /* EmojiMapSymbols.m in Sources */ = {isa = PBXBuildFile; fileRef = 47F6B52018F8E75F00246D68 /* EmojiMapSymbols.m */; };
@@ -470,6 +472,9 @@
 		47D89E8319533539001871A9 /* tb_group_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_group_normal@2x.png"; sourceTree = "<group>"; };
 		47D89E8419533539001871A9 /* tb_session_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_session_normal@2x.png"; sourceTree = "<group>"; };
 		47D89E8519533539001871A9 /* tb_set_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tb_set_normal@2x.png"; sourceTree = "<group>"; };
+		47D89E8F19546AA8001871A9 /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoveryViewController.h; sourceTree = "<group>"; };
+		47D89E9019546AA8001871A9 /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoveryViewController.m; sourceTree = "<group>"; };
+		47D89E921954733A001871A9 /* sms-received.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "sms-received.caf"; sourceTree = "<group>"; };
 		47F6B51B18F8E75F00246D68 /* Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Emoji.h; sourceTree = "<group>"; };
 		47F6B51C18F8E75F00246D68 /* Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Emoji.m; sourceTree = "<group>"; };
 		47F6B51D18F8E75F00246D68 /* EmojiEmoticons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmojiEmoticons.h; sourceTree = "<group>"; };
@@ -1052,6 +1057,8 @@
 		4797698D1952E07F00CA5FBA /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				47D89E8F19546AA8001871A9 /* DiscoveryViewController.h */,
+				47D89E9019546AA8001871A9 /* DiscoveryViewController.m */,
 				4797698E1952E07F00CA5FBA /* AppViewController.h */,
 				4797698F1952E07F00CA5FBA /* AppViewController.m */,
 				479769901952E07F00CA5FBA /* MoreOptionCell.h */,
@@ -2094,6 +2101,7 @@
 		BBDCFCB118F52342008A4DA7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				47D89E921954733A001871A9 /* sms-received.caf */,
 				BBDCFCB218F52342008A4DA7 /* XMPPBaseProject-Info.plist */,
 				BBDCFCB318F52342008A4DA7 /* InfoPlist.strings */,
 				BBDCFCB618F52342008A4DA7 /* main.m */,
@@ -2580,6 +2588,7 @@
 				47D89E4F19532723001871A9 /* InputBack@2x.png in Resources */,
 				47D89E3819532723001871A9 /* pl_picture_normal@2x.png in Resources */,
 				47D89E2F19532723001871A9 /* pl_file_normal.png in Resources */,
+				47D89E931954733A001871A9 /* sms-received.caf in Resources */,
 				47D89E3919532723001871A9 /* chat_bottombar_voice_normal.png in Resources */,
 				47D89E3719532723001871A9 /* pl_picture_normal.png in Resources */,
 				47D89E8619533539001871A9 /* tb_address_normal@2x.png in Resources */,
@@ -2801,6 +2810,7 @@
 				BBDC012818F52807008A4DA7 /* UIView+Add.m in Sources */,
 				BBDC017718F52808008A4DA7 /* XMPPRoomCoreDataStorage.m in Sources */,
 				BBDC018118F52808008A4DA7 /* XMPPMessage+XEP0045.m in Sources */,
+				47D89E9119546AA8001871A9 /* DiscoveryViewController.m in Sources */,
 				BBDC01AD18F52808008A4DA7 /* XMPPPing.m in Sources */,
 				BBDC016B18F52808008A4DA7 /* XMPPResourceMemoryStorageObject.m in Sources */,
 				BBDC020218F52A71008A4DA7 /* ASIFormDataRequest.m in Sources */,

@@ -29,6 +29,8 @@
 #define XMPPRequest_TimeOut 20         //http请求超时时间
 #define XMPPRequest_MaxTime 4          //http请求超时最大重连次数
 
+#define kMessageSoundName            @"sms-received"
+
 //Local notification
 #define  LOCAL_NOTIFICATION_UNREADMESSAGENUMBERCHANGE @"LocalNotificationUnReadMessageNumberChange"
 #define  LOCAL_NOTIFICATION_LOGIN_SUCESS @"LocalNotificationLoginSuccess"
