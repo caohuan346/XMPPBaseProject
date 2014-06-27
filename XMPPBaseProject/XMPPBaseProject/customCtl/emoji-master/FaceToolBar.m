@@ -455,6 +455,7 @@
         NSLog(@"点击其他后更新%d,%@",str.length,_textView.text);
     }
 }
+
 -(void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIKeyboardWillShowNotification
@@ -463,6 +464,40 @@
                                                     name:UIKeyboardDidShowNotification
                                                   object:nil];
 }
+
+#pragma mark - tableView的键盘跟随移动
+/*
+ //
+ //将键盘推出时候，view重新回到原来位置
+ //
+ -(void)viewKeyboardDisappearChangeRect {
+ NSTimeInterval animationDuration = 0.30f;
+ [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+ [UIView setAnimationDuration:animationDuration];
+ //把view设置回默认的Rect
+ CGRect rect = CGRectMake(0.0, 0, self.view.frame.size.width, self.view.frame.size.height);
+ self.view.frame = rect;
+ //cardTableView.frame = rect;
+ [UIView commitAnimations];
+ }
+ 
+ //
+ //view要往上推
+ //@offset:要推的高度偏移
+ //
+ -(void)viewKeyboardAppearChangeRect:(int)offset {
+ [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+ [UIView setAnimationDuration:0.30f];
+ float width = self.view.frame.size.width;
+ float height = self.view.frame.size.height;
+ if (offset > 0) {
+ //self.view.frame = CGRectMake(0, -offset, width, height);
+ self.view.frame = CGRectMake(0, -offset, width, height);
+ }
+ [UIView commitAnimations];
+ }
+*/
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
