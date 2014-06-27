@@ -43,7 +43,7 @@
 + (NSString *) UnicodeToUtf8:(NSString *)string;
 + (NSString *) Utf8ToUnicode:(NSString *)string;
 +(id )JsonStringToDict:(NSString *)jsonString;
-// ascII 码转换
+// ascII
 + (NSString *)intToAscII:(int)num;
 
 #pragma mark - other util

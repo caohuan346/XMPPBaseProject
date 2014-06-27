@@ -545,7 +545,7 @@
     [self.dataSource addObjectsFromArray:[self sortDataArray:self.contactsSource]];
     */
     [_tableView reloadData];
-    //[self hideHud];
+    [self hideHud];
 }
 
 #pragma mark - action

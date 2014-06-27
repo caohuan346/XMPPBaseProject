@@ -20,4 +20,6 @@
 #import "EnumDefine.h"
 #import "GlobalHelper.h"
 
+#import "ARCSingletonTemplate.h"
+
 #endif

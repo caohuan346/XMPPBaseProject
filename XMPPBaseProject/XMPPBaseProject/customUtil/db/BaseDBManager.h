@@ -26,6 +26,9 @@
     DBCenter *dbCenter;
 }
 
+//singleton
+SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDBManager)
+
 //创建
 -(id)initWithDBCenter:(DBCenter *)param_dbCenter;
 

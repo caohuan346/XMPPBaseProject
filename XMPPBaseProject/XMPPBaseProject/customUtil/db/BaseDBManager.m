@@ -11,7 +11,11 @@
 
 @implementation BaseDBManager
 
+#pragma mark - singleton
+SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDBManager)
+
 #pragma mark - life circle
+
 -(id)initWithDBCenter:(DBCenter *)param_dbCenter
 {
     if ((self = [super init])) {

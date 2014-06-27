@@ -71,4 +71,5 @@
 - (void)clearWhenLogOut;
 - (void)globalInfoPersist;
 - (void)globalSystemSoundPlay;
+
 @end

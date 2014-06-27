@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "XMPPFramework.h"
 #import "XMPPAutoPing.h"
+#import "ARCSingletonTemplate.h"
 
 //MPPServer代理接口
 @protocol XMPPServerDelegate <NSObject>
@@ -70,8 +71,10 @@
     
     BOOL isOpen;            //xmppStream是否开着
     BOOL isReConnect;       //是否是重连
-    NSInteger     tryCount; //尝试次数
+    NSInteger  tryCount; //尝试次数
 }
+
+
 
 @property (nonatomic, strong, readonly) XMPPStream *xmppStream;
 @property (nonatomic, strong, readonly) XMPPReconnect *xmppReconnect;
@@ -91,6 +94,8 @@
 @property(nonatomic, assign)id<XMPPDataSyncDelegate>   dataSyncDelegate;   //数据同步类接口
 
 @property(nonatomic,assign) BOOL isRegister;//是否是注册
+
+SYNTHESIZE_SINGLETON_FOR_HEADER(XMPPServer)
 
 +(XMPPServer *)sharedServer;
 //连接

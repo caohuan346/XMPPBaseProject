@@ -52,6 +52,9 @@ static XMPPServer *singleton = nil;
 @synthesize messageDelegate;
 
 #pragma mark - singleton
+
+SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
+
 +(XMPPServer *)sharedServer{
     @synchronized(self){
         if (singleton == nil) {
