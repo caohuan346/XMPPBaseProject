@@ -130,7 +130,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eHl-bI-vIY">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eHl-bI-vIY" id="gcE-f7-gRI">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -150,14 +150,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="BjQ-d0-iD3" kind="push" identifier="chat" id="mLH-ke-O8r"/>
-                        <segue destination="Nkl-JW-gju" kind="push" identifier="add" id="wfv-q7-5E9"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tpw-ul-wjd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1561" y="-82"/>
+            <point key="canvasLocation" x="1907" y="550"/>
         </scene>
         <!--Add Buddy View Ctl - 添加好友-->
         <scene sceneID="Ieq-kT-hfc">
@@ -1176,12 +1172,58 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Xl9-P7-UDK" kind="relationship" relationship="rootViewController" id="omL-OX-Hnk"/>
+                        <segue destination="8iR-7h-zpq" kind="relationship" relationship="rootViewController" id="JVb-UJ-OX5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ISg-Ok-y4Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1040" y="-94"/>
+        </scene>
+        <!--View Controller - 通讯录-->
+        <scene sceneID="iUb-da-q0N">
+            <objects>
+                <viewController id="8iR-7h-zpq" userLabel="View Controller - 通讯录" customClass="ContactsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="md5-Bb-9iy"/>
+                        <viewControllerLayoutGuide type="bottom" id="pTR-1v-l3Q"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lMy-iK-bzO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="g3G-aL-7Mb" customClass="EMSearchBar">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yv5-Ic-CdE">
+                                <rect key="frame" x="0.0" y="108" width="320" height="409"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yv5-Ic-CdE" firstAttribute="top" secondItem="g3G-aL-7Mb" secondAttribute="bottom" id="3bI-bR-2Dg"/>
+                            <constraint firstItem="yv5-Ic-CdE" firstAttribute="leading" secondItem="lMy-iK-bzO" secondAttribute="leading" id="5os-Ji-f22"/>
+                            <constraint firstAttribute="bottom" secondItem="yv5-Ic-CdE" secondAttribute="bottom" constant="51" id="Jba-eE-f8l"/>
+                            <constraint firstItem="g3G-aL-7Mb" firstAttribute="top" secondItem="md5-Bb-9iy" secondAttribute="bottom" id="NiN-52-B43"/>
+                            <constraint firstAttribute="trailing" secondItem="g3G-aL-7Mb" secondAttribute="trailing" id="UNu-7I-J1m"/>
+                            <constraint firstItem="g3G-aL-7Mb" firstAttribute="leading" secondItem="lMy-iK-bzO" secondAttribute="leading" id="cQc-gu-Fsh"/>
+                            <constraint firstAttribute="trailing" secondItem="yv5-Ic-CdE" secondAttribute="trailing" id="mSa-KJ-wX9"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="YpF-ba-Y56"/>
+                    <connections>
+                        <outlet property="searchBar" destination="g3G-aL-7Mb" id="ZwL-XF-NZx"/>
+                        <outlet property="tableView" destination="yv5-Ic-CdE" id="PvU-PB-yLf"/>
+                        <segue destination="BjQ-d0-iD3" kind="push" id="ffu-qN-Zd9"/>
+                        <segue destination="Nkl-JW-gju" kind="push" id="nTD-jn-dJQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r5G-ME-H6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1566" y="-94"/>
         </scene>
     </scenes>
     <resources>
@@ -1196,6 +1238,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mLH-ke-O8r"/>
+        <segue reference="ffu-qN-Zd9"/>
     </inferredMetricsTieBreakers>
 </document>
