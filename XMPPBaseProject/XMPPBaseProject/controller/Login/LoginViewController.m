@@ -32,7 +32,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userId = [defaults stringForKey:kUserID];
     //NSString *password = [defaults stringForKey:kPassword];
-    NSString *password = [GlobalHelper passwordForAccount:userId];
+    NSString *password = [GlobalHandler handlePasswordGetForAccount:userId];
     
     //NSString *xmppServer = [defaults stringForKey:kXMPPServerDomain];
     
@@ -57,7 +57,7 @@
         [defaults setObject:self.userTextField.text forKey:kUserID];
         
         //persist pwd with keychain
-        [GlobalHelper setPassword:_passTextField.text forAccount:_userTextField.text];
+        [GlobalHandler handlePasswordSet:_passTextField.text forAccount:_userTextField.text];
         
         [SVProgressHUD showInView:SharedAppDelegate.selectedViewCtl.view status:@"正在登录，请稍候..." networkIndicator:YES];
         

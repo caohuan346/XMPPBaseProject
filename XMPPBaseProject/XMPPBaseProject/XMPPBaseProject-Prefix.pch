@@ -18,7 +18,8 @@
 #import "XMPPServer+Add.h"
 #import "Define.h"
 #import "EnumDefine.h"
-#import "GlobalHelper.h"
+
+#import "GlobalHandler.h"
 
 #import "ARCSingletonTemplate.h"
 

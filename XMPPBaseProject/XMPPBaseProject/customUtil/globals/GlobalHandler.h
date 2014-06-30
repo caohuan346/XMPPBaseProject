@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class AppUser;
 @interface GlobalHandler : NSObject
 
 #pragma mark - login pwd handle

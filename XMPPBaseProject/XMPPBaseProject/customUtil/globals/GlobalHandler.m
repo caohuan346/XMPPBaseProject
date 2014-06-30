@@ -67,7 +67,7 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
     NSString *userId = [defaults stringForKey:kUserID];
     AppUser *user = [[AppUser alloc] init];
     user.userId = userId;
-    user.password = [GlobalHelper passwordForAccount:userId];;
+    user.password = [GlobalHandler handlePasswordGetForAccount:userId];
     return user;
 }
 

@@ -8,6 +8,23 @@
 
 #define SYNTHESIZE_SINGLETON_FOR_HEADER(className) \
 \
++ (className *) sharedInstance;
+
+
+#define SYNTHESIZE_SINGLETON_FOR_CLASS(className) \
+\
++ (className *)sharedInstance { \
+    static className *sharedInstance = nil; \
+    static dispatch_once_t onceToken; \
+    dispatch_once(&onceToken, ^{ \
+        sharedInstance = [[self alloc] init]; \
+    }); \
+    return sharedInstance; \
+}
+
+/*
+#define SYNTHESIZE_SINGLETON_FOR_HEADER(className) \
+\
 + (className *)shared##className;
 
 
@@ -21,3 +38,4 @@
     }); \
     return shared##className; \
 }
+ */

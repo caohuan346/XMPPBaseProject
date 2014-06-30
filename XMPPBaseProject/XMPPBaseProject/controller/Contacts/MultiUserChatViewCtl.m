@@ -187,7 +187,7 @@
         [dictionary setObject:message forKey:@"msg"];
         [dictionary setObject:@"me" forKey:@"sender"];
         //加入发送时间
-        [dictionary setObject:[GlobalHelper getCurrentTime] forKey:@"time"];
+        [dictionary setObject:[GlobalHandler handleCurrentTimeGet] forKey:@"time"];
         
         [self.messages addObject:dictionary];
         
@@ -260,7 +260,7 @@
             }
 
             //消息接收到的时间
-            [dict setObject:[GlobalHelper getCurrentTime] forKey:@"time"];
+            [dict setObject:[GlobalHandler handleCurrentTimeGet] forKey:@"time"];
             [self.messages addObject:dict];
             [self.tView reloadData];
         }

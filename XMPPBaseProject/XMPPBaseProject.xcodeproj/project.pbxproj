@@ -21,7 +21,6 @@
 		4726100519517FA100AE4BAD /* FTUtils+NSObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 47260FFE19517FA100AE4BAD /* FTUtils+NSObject.m */; };
 		4726100619517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100019517FA100AE4BAD /* FTUtils+UIGestureRecognizer.m */; };
 		4726100E1951918B00AE4BAD /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4726100D1951918B00AE4BAD /* SSKeychain.m */; };
-		472610111951928900AE4BAD /* GlobalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 472610101951928900AE4BAD /* GlobalHelper.m */; };
 		472DB92B1953BCA10032EEE2 /* MineCtlOptions.plist in Resources */ = {isa = PBXBuildFile; fileRef = 472DB92A1953BCA10032EEE2 /* MineCtlOptions.plist */; };
 		472DB92F1953BCF80032EEE2 /* MySelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 472DB92E1953BCF80032EEE2 /* MySelfViewController.m */; };
 		473D75211922316C00D68735 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 473D75201922316C00D68735 /* AssetsLibrary.framework */; };
@@ -398,8 +397,6 @@
 		4726100119517FA100AE4BAD /* FTUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTUtils.h; sourceTree = "<group>"; };
 		4726100C1951918B00AE4BAD /* SSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSKeychain.h; sourceTree = "<group>"; };
 		4726100D1951918B00AE4BAD /* SSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSKeychain.m; sourceTree = "<group>"; };
-		4726100F1951928900AE4BAD /* GlobalHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHelper.h; sourceTree = "<group>"; };
-		472610101951928900AE4BAD /* GlobalHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalHelper.m; sourceTree = "<group>"; };
 		472DB92A1953BCA10032EEE2 /* MineCtlOptions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MineCtlOptions.plist; sourceTree = "<group>"; };
 		472DB92D1953BCF80032EEE2 /* MySelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySelfViewController.h; sourceTree = "<group>"; };
 		472DB92E1953BCF80032EEE2 /* MySelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MySelfViewController.m; sourceTree = "<group>"; };
@@ -1100,6 +1097,13 @@
 				4726100D1951918B00AE4BAD /* SSKeychain.m */,
 			);
 			path = SSKeychain;
+			sourceTree = "<group>";
+		};
+		4747D9231961A467003A5A62 /* service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = service;
 			sourceTree = "<group>";
 		};
 		47783A41195D3E6300A3CE57 /* Base */ = {
@@ -2334,6 +2338,7 @@
 			isa = PBXGroup;
 			children = (
 				BBDCFF7F18F52806008A4DA7 /* db */,
+				4747D9231961A467003A5A62 /* service */,
 				BBDCFF8818F52806008A4DA7 /* globals */,
 				BBDCFF8F18F52806008A4DA7 /* xmpp */,
 				47260FF419517FA100AE4BAD /* animtion */,
@@ -2369,8 +2374,6 @@
 				BBDCFF8E18F52806008A4DA7 /* PathService.m */,
 				BBDCFF8B18F52806008A4DA7 /* Globals.h */,
 				BBDCFF8C18F52806008A4DA7 /* Globals.m */,
-				4726100F1951928900AE4BAD /* GlobalHelper.h */,
-				472610101951928900AE4BAD /* GlobalHelper.m */,
 				47BC004B195DAFB6000DEF9E /* ARCSingletonTemplate.h */,
 				47BC004D195DBED1000DEF9E /* GlobalHandler.h */,
 				47BC004E195DBED1000DEF9E /* GlobalHandler.m */,
@@ -2857,7 +2860,6 @@
 				BBDC014018F52807008A4DA7 /* FMDatabaseAdditions.m in Sources */,
 				BBDC018C18F52808008A4DA7 /* XMPPvCardTempBase.m in Sources */,
 				BBDC016F18F52808008A4DA7 /* XMPPSystemInputActivityMonitor.m in Sources */,
-				472610111951928900AE4BAD /* GlobalHelper.m in Sources */,
 				BBDC01A418F52808008A4DA7 /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				479769991952E07F00CA5FBA /* AppViewController.m in Sources */,
 				BBDC01A818F52808008A4DA7 /* XMPPMessage+XEP_0172.m in Sources */,

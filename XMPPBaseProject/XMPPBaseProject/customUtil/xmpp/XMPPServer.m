@@ -813,7 +813,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
             xmppRoom = [[XMPPRoom alloc] initWithRoomStorage:self jid:roomJID];
             [xmppRoom activate:xmppStream];
             NSXMLElement *history = [NSXMLElement elementWithName:@"history"];
-            [history addAttributeWithName:@"since" stringValue:[GlobalHelper dateToStr_Format:[NSDate date]]];
+            [history addAttributeWithName:@"since" stringValue:[GlobalHandler handleDateToStr_Format:[NSDate date]]];
             [xmppRoom addDelegate:self delegateQueue:dispatch_get_current_queue()];
             [xmppRoom joinRoomUsingNickname:globals.userId history:history];
         }

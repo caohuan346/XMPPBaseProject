@@ -62,7 +62,7 @@
 
     [self initUsersPublicData];
     
-    AppUser *appUser = [GlobalHelper lastLoginPerson];
+    AppUser *appUser = [GlobalHandler handleLastLoginPersonGet];
     if (appUser.password) {
         [self toHomePage];
         
