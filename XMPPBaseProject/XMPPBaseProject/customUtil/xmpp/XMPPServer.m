@@ -18,7 +18,7 @@
 #import "DDTTYLogger.h"
 #import "Message.h"
 #import "User.h"
-#import "SessionService.h"
+#import "SessionDao.h"
 
 #if DEBUG
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -631,7 +631,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
         aSession.lastestMsgTime = [NSDate date];
         aSession.sessionType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
         aSession.detailType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
-        BOOL optFlag = [SessionService insertOrUpdateSession:aSession];
+        BOOL optFlag = [SessionDao insertOrUpdateSession:aSession];
         if (optFlag) {
             NSLog(@"插入聊天信息session成功");
         }

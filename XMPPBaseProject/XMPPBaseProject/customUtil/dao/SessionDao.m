@@ -6,11 +6,15 @@
 //  Copyright (c) 2013年 ch. All rights reserved.
 //
 
-#import "SessionService.h"
+#import "SessionDao.h"
 #import "Session.h"
 #import "AppDelegate.h"
 
-@implementation SessionService
+@implementation SessionDao
+
+#pragma mark - singleton
+SYNTHESIZE_SINGLETON_FOR_CLASS(SessionDao)
+
 
 +(BOOL)insertOrUpdateSession:(Session *)aSession{
     //查询会话记录

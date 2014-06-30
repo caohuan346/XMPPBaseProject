@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 MONTNETS. All rights reserved.
 //
 
-#import "DBCenter.h"
+#import "DataBaseHandler.h"
 
 #import "AppDelegate.h"
 #import "Globals.h"
@@ -15,7 +15,7 @@
 #import "User.h"
 #import "Message.h"
 
-@implementation DBCenter
+@implementation DataBaseHandler
 @synthesize state;
 @synthesize database;
 @synthesize fmdbQueue;
@@ -31,7 +31,7 @@
         queue=[[NSOperationQueue alloc] init];
         queue.maxConcurrentOperationCount=1;
         
-        _baseDBManager = [[BaseDBManager alloc] initWithDBCenter:self];
+        _baseDBManager = [[BaseDao alloc] initWithDBCenter:self];
 	}
 	return self;
 }

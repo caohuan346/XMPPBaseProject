@@ -71,7 +71,10 @@
 
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%p",[GlobalHandler sharedInstance].buddyService);
+}
 
 - (void)didReceiveMemoryWarning
 {

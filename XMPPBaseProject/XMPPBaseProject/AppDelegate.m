@@ -32,6 +32,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    NSLog(@"%p",[GlobalHandler sharedInstance].buddyService);
     // 启动BaiduMapManager使用百度地图
 	_mapManager = [[BMKMapManager alloc]init];
 	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];
@@ -244,9 +245,9 @@
 	return _globals;
 }
 
-- (DBCenter *)databaseService {
+- (DataBaseHandler *)databaseService {
 	if (_databaseService == nil) {
-		_databaseService = [[DBCenter alloc] init];
+		_databaseService = [[DataBaseHandler alloc] init];
 	}
 	return _databaseService;
 }

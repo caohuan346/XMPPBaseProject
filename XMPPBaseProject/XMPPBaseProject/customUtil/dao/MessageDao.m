@@ -6,9 +6,13 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "ChatService.h"
+#import "MessageDao.h"
 
-@implementation ChatService
+@implementation MessageDao
+
+#pragma mark - singleton
+SYNTHESIZE_SINGLETON_FOR_CLASS(MessageDao)
+
 
 
 @end

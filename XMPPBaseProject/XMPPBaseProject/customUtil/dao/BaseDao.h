@@ -21,16 +21,16 @@
 #define CHOrderMarkDesc @"desc"       //降序
 #define CHOrderMarkAsc  @"asc"        //升序
 
-@class DBCenter;
-@interface BaseDBManager : NSObject{
-    DBCenter *dbCenter;
+@class DataBaseHandler;
+@interface BaseDao : NSObject{
+    DataBaseHandler *dbCenter;
 }
 
 //singleton
-SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDBManager)
+SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
 //创建
--(id)initWithDBCenter:(DBCenter *)param_dbCenter;
+-(id)initWithDBCenter:(DataBaseHandler *)param_dbCenter;
 
 #pragma mark create table—————————————————————————————
 //建表：无主键

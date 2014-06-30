@@ -12,10 +12,10 @@
 #import "FMDatabaseAdditions.h"
 #import "FMDatabaseQueue.h"
 #import "Globals.h"
-#import "BaseDBManager.h"
+#import "BaseDao.h"
 
-@class BaseDBManager;
-@interface DBCenter : NSObject
+@class BaseDao;
+@interface DataBaseHandler : NSObject
 {
     BOOL	state;
 	Globals	*globals;
@@ -30,7 +30,7 @@
 @property (nonatomic,assign)  BOOL state;
 @property (nonatomic,readonly) FMDatabase *database;
 @property (nonatomic,readonly) FMDatabaseQueue  *fmdbQueue;
-@property (nonatomic,readonly) BaseDBManager   *baseDBManager;
+@property (nonatomic,readonly) BaseDao   *baseDBManager;
 
 //开启数据服务，并返回成功信息
 - (BOOL)createDb;

@@ -11,6 +11,9 @@
 #import "User.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
+#import "BuddyService.h"
+#import "SessionService.h"
+#import "MessageService.h"
 
 static NSString *kSSToolkitTestsServiceName = @"SSToolkitTestService";
 static NSString *kSSToolkitTestsAccountName = @"SSToolkitTestAccount";
@@ -19,6 +22,9 @@ static NSString *kSSToolkitTestsPassword = @"SSToolkitTestPassword";
 static NSString *kTDIMServiceName = @"kTDIMServiceName";
 
 @implementation GlobalHandler
+
+#pragma mark - singleton
+SYNTHESIZE_SINGLETON_FOR_CLASS(GlobalHandler)
 
 - (void)testAll {
 	// Getting & Setings Passwords
@@ -47,6 +53,19 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 		}
 	}
 	return NO;
+}
+
+#pragma mark - getter
+-(BuddyService *)buddyService{
+    return [BuddyService sharedInstance];
+}
+
+-(MessageService *)messageService{
+    return [MessageService sharedInstance];
+}
+
+-(SessionService *)sessionService{
+    return [SessionService sharedInstance];
 }
 
 #pragma mark - login password persist etc.
@@ -88,7 +107,7 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 }
 
 //字符串到日期
-+ (NSDate *)handleDateToStr:(NSString *)year month:(NSString *)month day:(NSString *)day hour:(NSString *)hour minute:(NSString *)minute{
++ (NSDate *)handleStrToDate:(NSString *)year month:(NSString *)month day:(NSString *)day hour:(NSString *)hour minute:(NSString *)minute{
 	NSDateComponents *comps = [[NSDateComponents alloc] init];
 	[comps setYear:[year integerValue]];
 	[comps setMonth:[month integerValue]];
@@ -105,7 +124,7 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 
 
 //日期变成字符串
-+ (NSString *)dateToStr:(NSDate *)date{
++ (NSString *)handleDateToStr:(NSDate *)date{
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:@"MM-dd HH:mm"];
 	

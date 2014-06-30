@@ -6,8 +6,11 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "BaseDBManager.h"
+#import "BaseDao.h"
 
-@interface ChatService : BaseDBManager
+@interface MessageDao : BaseDao
+
+//singleton
+SYNTHESIZE_SINGLETON_FOR_HEADER(MessageDao)
 
 @end

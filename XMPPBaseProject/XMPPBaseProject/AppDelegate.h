@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BMapKit.h"
 #import "XMPPServer.h"
-#import "DBCenter.h"
+#import "DataBaseHandler.h"
 
 extern NSString *const AppDelegateConstant;
 
 @class LoginViewController;
 @class Globals;
-@class DBCenter;
+@class DataBaseHandler;
 @interface AppDelegate : UIResponder <UIApplicationDelegate,BMKGeneralDelegate,XMPPServerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -24,10 +24,10 @@ extern NSString *const AppDelegateConstant;
 
 @property (strong, nonatomic)  XMPPServer  *xmppServer;
 @property (strong, nonatomic)  Globals  *globals;
-@property (strong, nonatomic)  DBCenter	*databaseService;
+@property (strong, nonatomic)  DataBaseHandler	*databaseService;
 
 - (Globals *)globals;
-- (DBCenter *)databaseService;
+- (DataBaseHandler *)databaseService;
 
 //注销
 -(void)logout;

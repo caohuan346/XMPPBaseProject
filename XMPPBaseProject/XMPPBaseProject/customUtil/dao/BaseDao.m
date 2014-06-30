@@ -6,17 +6,17 @@
 //  Copyright (c) 2013年 MONTNETS. All rights reserved.
 //
 
-#import "BaseDBManager.h"
-#import "DBCenter.h"
+#import "BaseDao.h"
+#import "DataBaseHandler.h"
 
-@implementation BaseDBManager
+@implementation BaseDao
 
 #pragma mark - singleton
-SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDBManager)
+SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 
 #pragma mark - life circle
 
--(id)initWithDBCenter:(DBCenter *)param_dbCenter
+-(id)initWithDBCenter:(DataBaseHandler *)param_dbCenter
 {
     if ((self = [super init])) {
 		
