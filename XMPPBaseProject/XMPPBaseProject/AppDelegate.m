@@ -31,8 +31,6 @@
 #pragma life circle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    NSLog(@"%p",[GlobalHandler sharedInstance].buddyService);
     // 启动BaiduMapManager使用百度地图
 	_mapManager = [[BMKMapManager alloc]init];
 	BOOL ret = [_mapManager start:@"bGPHXDF6Nj6W2oGu7jeknQ73" generalDelegate:self];

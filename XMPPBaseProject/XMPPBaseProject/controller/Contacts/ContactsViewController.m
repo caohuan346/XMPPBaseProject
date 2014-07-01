@@ -14,8 +14,8 @@
 #import "EMSearchBar.h"
 #import "SRRefreshView.h"
 #import "EMSearchDisplayController.h"
-//#import "AddFriendViewController.h"
-//#import "ApplyViewController.h"
+#import "AddFriendViewController.h"
+#import "ApplyViewController.h"
 #import "GroupListViewController.h"
 #import "ChatViewController.h"
 #import "UIViewController+HUD.h"
@@ -40,6 +40,7 @@
 
 @implementation ContactsViewController
 
+#pragma mark - life circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,24 +87,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSLog(@"%p",[GlobalHandler sharedInstance].buddyService);
     [self reloadApplyView];
 }
 
 #pragma mark - getter
-/*
-- (UISearchBar *)searchBar
-{
-    if (_searchBar == nil) {
-        _searchBar = [[EMSearchBar alloc] init];
-        _searchBar.delegate = self;
-        _searchBar.placeholder = @"搜索";
-        _searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
-    }
-    
-    return _searchBar;
-}
-*/
+
 - (UILabel *)unapplyCountLabel
 {
     if (_unapplyCountLabel == nil) {
@@ -136,24 +124,6 @@
     
     return _slimeView;
 }
-
-/*
-- (UITableView *)tableView
-{
-    if (_tableView == nil)
-    {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.tableFooterView = [[UIView alloc] init];
-    }
-    
-    return _tableView;
-}
-*/
 
 - (EMSearchDisplayController *)searchController
 {
@@ -372,11 +342,14 @@
     
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            //[self.navigationController pushViewController:[ApplyViewController shareController] animated:YES];
+            [self.navigationController pushViewController:[ApplyViewController shareController] animated:YES];
         }
         else if (indexPath.row == 1){
+            /*
             GroupListViewController *groupListCtl = [[GroupListViewController alloc] initWithStyle:UITableViewStylePlain];
             [self.navigationController pushViewController:groupListCtl animated:YES];
+             */
+            [self performSegueWithIdentifier:@"toGroupList" sender:self];
         }
     }
     else{
@@ -455,7 +428,7 @@
 }
 
 #pragma mark - slimeRefresh delegate
-//刷新列表
+//refresh
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
     [self reloadDataSource];
@@ -574,15 +547,15 @@
 
 - (void)addFriendAction
 {
-    /*
+    
     AddFriendViewController *addController = [[AddFriendViewController alloc] initWithStyle:UITableViewStylePlain];
     [self.navigationController pushViewController:addController animated:YES];
-     */
+    
 }
 
 
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -591,6 +564,6 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
+
 
 @end
