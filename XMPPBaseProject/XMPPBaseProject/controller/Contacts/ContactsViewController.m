@@ -16,7 +16,7 @@
 #import "EMSearchDisplayController.h"
 //#import "AddFriendViewController.h"
 //#import "ApplyViewController.h"
-//#import "GroupListViewController.h"
+#import "GroupListViewController.h"
 #import "ChatViewController.h"
 #import "UIViewController+HUD.h"
 
@@ -374,17 +374,9 @@
         if (indexPath.row == 0) {
             //[self.navigationController pushViewController:[ApplyViewController shareController] animated:YES];
         }
-        else if (indexPath.row == 1)
-        {
-            /*
-            if (_groupController == nil) {
-                _groupController = [[GroupListViewController alloc] initWithStyle:UITableViewStylePlain];
-            }
-            else{
-                [_groupController reloadDataSource];
-            }
-            [self.navigationController pushViewController:_groupController animated:YES];
-             */
+        else if (indexPath.row == 1){
+            GroupListViewController *groupListCtl = [[GroupListViewController alloc] initWithStyle:UITableViewStylePlain];
+            [self.navigationController pushViewController:groupListCtl animated:YES];
         }
     }
     else{
