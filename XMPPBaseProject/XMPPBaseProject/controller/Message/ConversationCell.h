@@ -22,8 +22,6 @@
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic) NSInteger unreadCount;
 
-+(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 @property (nonatomic, strong) Conversation *conversation;
 
 @end

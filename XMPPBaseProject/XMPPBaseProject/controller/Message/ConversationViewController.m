@@ -159,7 +159,8 @@
         }];
         
         [_searchController setHeightForRowAtIndexPathCompletion:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
-            return [ConversationCell tableView:tableView heightForRowAtIndexPath:indexPath];
+            return 60;
+            //return [ConversationCell tableView:tableView heightForRowAtIndexPath:indexPath];
         }];
         
         [_searchController setDidSelectRowAtIndexPathCompletion:^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -203,7 +204,6 @@
 
 - (NSMutableArray *)loadDataSource
 {
-    NSMutableArray *ret = nil;
     
     NSArray *resultArray = [[GlobalHandler sharedInstance].conversationManager conversations];
     
@@ -225,7 +225,7 @@
     return ret;
     */
     
-    return [NSMutableArray array];
+    return resultArray;
 }
 
 // 得到最后消息时间
@@ -301,7 +301,7 @@
     static NSString *identify = @"ConversationCell";
     ConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:identify forIndexPath:indexPath];
     
-    //cell.conversation = [self.dataSource objectAtIndex:indexPath.row];
+    cell.conversation = [self.dataSource objectAtIndex:indexPath.row];
     
     /*
     EMConversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
@@ -335,7 +335,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  5;//self.dataSource.count;
+    return  self.dataSource.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

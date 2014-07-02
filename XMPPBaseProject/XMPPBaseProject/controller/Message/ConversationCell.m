@@ -12,8 +12,8 @@
 
 
 #import "ConversationCell.h"
-
-
+#import "Conversation.h"
+#import "NSDate+Category.h"
 
 @interface ConversationCell ()
 
@@ -92,6 +92,16 @@
 }
 
 -(void)layoutSubviews{
+    [super layoutSubviews];
+//    @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+//    @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+//    @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+//    @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+    self.nameLabel.text = self.conversation.senderId;
+    self.contentLabel.text = self.conversation.msgContent;
+    self.timeLabel.text = [NSDate formattedTimeFromTimeInterval:self.conversation.time];
+    
     /*
     [super layoutSubviews];
     CGRect frame = self.imageView.frame;
@@ -131,8 +141,4 @@
     self.textLabel.text = name;
 }
 
-+(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-}
 @end

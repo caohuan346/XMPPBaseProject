@@ -23,7 +23,7 @@
 /**
  *  消息内容
  */
-@property (nonatomic, copy) NSString *lastMsg;
+@property (nonatomic, copy) NSString *msgContent;
 
 /**
  *  未读消息个数
