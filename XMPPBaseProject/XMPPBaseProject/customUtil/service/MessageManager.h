@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "BaseService.h"
+#import "BaseManager.h"
 
 @class MessageDao;
-@interface MessageService : BaseService
+@interface MessageManager : BaseManager
 
 //singleton
-SYNTHESIZE_SINGLETON_FOR_HEADER(MessageService)
+SYNTHESIZE_SINGLETON_FOR_HEADER(MessageManager)
 
 
 @end

@@ -19,7 +19,7 @@ typedef enum : NSUInteger {
 } EMConnectionState;
 
 @class EMSearchBar;
-@interface ChatListViewController : BaseViewController
+@interface ConversationViewController : BaseViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet EMSearchBar *searchBar;

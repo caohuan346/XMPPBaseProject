@@ -6,14 +6,14 @@
 //  Copyright (c) 2013年 ch. All rights reserved.
 //
 
-#import "SessionDao.h"
+#import "ConversationDao.h"
 #import "Session.h"
 #import "AppDelegate.h"
 
-@implementation SessionDao
+@implementation ConversationDao
 
 #pragma mark - singleton
-SYNTHESIZE_SINGLETON_FOR_CLASS(SessionDao)
+SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
 
 
 +(BOOL)insertOrUpdateSession:(Session *)aSession{

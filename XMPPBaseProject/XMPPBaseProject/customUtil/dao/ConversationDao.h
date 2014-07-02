@@ -10,10 +10,10 @@
 
 //会话列表服务类
 @class Session;
-@interface SessionDao : BaseDao
+@interface ConversationDao : BaseDao
 
 //singleton
-SYNTHESIZE_SINGLETON_FOR_HEADER(SessionDao)
+SYNTHESIZE_SINGLETON_FOR_HEADER(ConversationDao)
 
 //新增或更新session，存在更新、不存在插入
 +(BOOL)insertOrUpdateSession:(Session *)aSession;

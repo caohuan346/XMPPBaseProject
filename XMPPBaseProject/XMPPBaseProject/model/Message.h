@@ -17,8 +17,6 @@
 @property(nonatomic,retain)NSDate *sendTime;
 @property(nonatomic,copy)NSString *isFrom;     //0表示自己发送，1表示接收到
 @property(nonatomic,copy)NSString *messageType;   //枚举MessageType
-@property(nonatomic,copy)NSString *messageType111;   //枚举MessageType
-@property(nonatomic,copy)NSString *messageType222;   //枚举MessageType
 
 @end
 

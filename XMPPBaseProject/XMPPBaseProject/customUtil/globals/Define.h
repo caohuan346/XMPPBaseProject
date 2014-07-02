@@ -12,12 +12,12 @@
 #endif
 
 //mini of
-//#define XMPPServerURL      @"192.168.8.62"
-//#define XMPPServerHostName @"hc-mini.local"
+#define XMPPServerURL      @"192.168.8.62"
+#define XMPPServerHostName @"hc-mini.local"
 
 //macbook of
-#define XMPPServerURL      @"192.168.1.53"
-#define XMPPServerHostName @"macbook-pro.lan"
+//#define XMPPServerURL      @"192.168.1.53"
+//#define XMPPServerHostName @"macbook-pro.lan"
 
 #define kUserID @"loginId"
 #define kPassword @"pwd"

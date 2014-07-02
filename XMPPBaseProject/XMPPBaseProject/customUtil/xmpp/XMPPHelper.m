@@ -12,7 +12,7 @@
 #include "Session.h"
 #import "Message.h"
 #import "User.h"
-#import "SessionDao.h"
+#import "ConversationDao.h"
 
 @implementation XMPPHelper
 //http://pan.baidu.com/s/1pJ0j67D   r8h6
@@ -82,7 +82,7 @@
         aSession.lastMsg = [NSString stringWithFormat:@"%@拒绝添加你为好友",userName];
     }
     
-    BOOL optFlag = [SessionDao insertOrUpdateSession:aSession];
+    BOOL optFlag = [ConversationDao insertOrUpdateSession:aSession];
     if (optFlag) {
         NSLog(@"插入session成功");
     }

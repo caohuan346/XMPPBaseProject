@@ -6,16 +6,16 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "BuddyService.h"
+#import "BuddyManager.h"
 #import "BuddyDao.h"
 
-@interface BuddyService ()
+@interface BuddyManager ()
 
 @property (nonatomic)BuddyDao *dao;
 
 @end
 
-@implementation BuddyService
+@implementation BuddyManager
 
 #pragma mark - init
 -(id)init{
@@ -26,7 +26,7 @@
 }
 
 //singleton
-SYNTHESIZE_SINGLETON_FOR_CLASS(BuddyService)
+SYNTHESIZE_SINGLETON_FOR_CLASS(BuddyManager)
 
 
 @end

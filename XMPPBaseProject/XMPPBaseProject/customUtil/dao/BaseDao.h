@@ -23,14 +23,14 @@
 
 @class DataBaseHandler;
 @interface BaseDao : NSObject{
-    DataBaseHandler *dbCenter;
+//    DataBaseHandler *dbCenter;
 }
 
 //singleton
 SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
 //创建
--(id)initWithDBCenter:(DataBaseHandler *)param_dbCenter;
+-(id)initWithDBCenter:(DataBaseHandler *)dataBaseHandler;
 
 #pragma mark create table—————————————————————————————
 //建表：无主键

@@ -11,9 +11,9 @@
 #import "User.h"
 #import <ifaddrs.h>
 #import <arpa/inet.h>
-#import "BuddyService.h"
-#import "SessionService.h"
-#import "MessageService.h"
+#import "BuddyManager.h"
+#import "ConversationManager.h"
+#import "MessageManager.h"
 
 static NSString *kSSToolkitTestsServiceName = @"SSToolkitTestService";
 static NSString *kSSToolkitTestsAccountName = @"SSToolkitTestAccount";
@@ -56,16 +56,16 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GlobalHandler)
 }
 
 #pragma mark - getter
--(BuddyService *)buddyService{
-    return [BuddyService sharedInstance];
+-(BuddyManager *)buddyManager{
+    return [BuddyManager sharedInstance];
 }
 
--(MessageService *)messageService{
-    return [MessageService sharedInstance];
+-(MessageManager *)messageManager{
+    return [MessageManager sharedInstance];
 }
 
--(SessionService *)sessionService{
-    return [SessionService sharedInstance];
+-(ConversationManager *)conversationManager{
+    return [ConversationManager sharedInstance];
 }
 
 #pragma mark - login password persist etc.

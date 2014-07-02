@@ -9,23 +9,23 @@
 #import <Foundation/Foundation.h>
 
 @class AppUser;
-@class BuddyService;
-@class MessageService;
-@class SessionService;
+@class BuddyManager;
+@class MessageManager;
+@class ConversationManager;
 
 @interface GlobalHandler : NSObject
 
 //singleton
 SYNTHESIZE_SINGLETON_FOR_HEADER(GlobalHandler)
 
-@property (nonatomic, readonly)BuddyService *buddyService;
-@property (nonatomic, readonly)MessageService *messageService;
-@property (nonatomic, readonly)SessionService *sessionService;
+@property (nonatomic, readonly)BuddyManager *buddyManager;
+@property (nonatomic, readonly)MessageManager *messageManager;
+@property (nonatomic, readonly)ConversationManager *conversationManager;
 
 #pragma mark - getter
--(BuddyService *)buddyService;
--(MessageService *)messageService;
--(SessionService *)sessionService;
+-(BuddyManager *)buddyManager;
+-(MessageManager *)messageManager;
+-(ConversationManager *)conversationManager;
 
 #pragma mark - login pwd handle
 //set password

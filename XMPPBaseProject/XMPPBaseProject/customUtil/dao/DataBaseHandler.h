@@ -17,20 +17,18 @@
 @class BaseDao;
 @interface DataBaseHandler : NSObject
 {
-    BOOL	state;
+//    BOOL	state;
 	Globals	*globals;
-    
-    FMDatabase *database;
-    FMDatabaseQueue  *fmdbQueue;
-    
-    NSOperationQueue  *queue;
-
 }
 
 @property (nonatomic,assign)  BOOL state;
-@property (nonatomic,readonly) FMDatabase *database;
-@property (nonatomic,readonly) FMDatabaseQueue  *fmdbQueue;
-@property (nonatomic,readonly) BaseDao   *baseDBManager;
+@property (nonatomic) FMDatabase *database;
+@property (nonatomic) FMDatabaseQueue  *fmdbQueue;
+@property (nonatomic) BaseDao  *baseDBManager;
+@property (nonatomic) NSOperationQueue  *queue;
+
+//singleton
+SYNTHESIZE_SINGLETON_FOR_HEADER(DataBaseHandler)
 
 //开启数据服务，并返回成功信息
 - (BOOL)createDb;

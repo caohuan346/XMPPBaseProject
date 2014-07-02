@@ -16,22 +16,25 @@
 #import "Message.h"
 
 @implementation DataBaseHandler
-@synthesize state;
-@synthesize database;
-@synthesize fmdbQueue;
+
+#pragma mark - singleton
+SYNTHESIZE_SINGLETON_FOR_CLASS(DataBaseHandler)
 
 - (id)init{
 	if ((self = [super init])) {
         
         globals = [SharedAppDelegate globals];
         
-		state = FALSE;
-        database = nil;
+		self.state = FALSE;
+        //database = nil;
         
-        queue=[[NSOperationQueue alloc] init];
-        queue.maxConcurrentOperationCount=1;
+        NSString *filePath = [PathService pathOfDataBaseFileForCurrentUser:globals.userId];
         
-        _baseDBManager = [[BaseDao alloc] initWithDBCenter:self];
+        self.fmdbQueue=[[FMDatabaseQueue alloc] initWithPath:filePath];
+        self.database = [[FMDatabase alloc]initWithPath:filePath];
+        
+        self.queue=[[NSOperationQueue alloc] init];
+        self.queue.maxConcurrentOperationCount=1;
 	}
 	return self;
 }
@@ -73,14 +76,17 @@
     [database close];
      
      */
-    
+    /*
     //create db
     NSString *filePath = [PathService pathOfDataBaseFileForCurrentUser:globals.userId];
     
-    fmdbQueue=[[FMDatabaseQueue alloc] initWithPath:filePath];
-    database = [[FMDatabase alloc]initWithPath:filePath];
-    if ([database open]) {
-        [database setShouldCacheStatements:YES];
+    self.fmdbQueue=[[FMDatabaseQueue alloc] initWithPath:filePath];
+    self.database = [[FMDatabase alloc]initWithPath:filePath];
+     
+     */
+    
+    if ([self.database open]) {
+        [self.database setShouldCacheStatements:YES];
         NSLog(@"Open success db !");
     }else {
         NSLog(@"Failed to open db!");

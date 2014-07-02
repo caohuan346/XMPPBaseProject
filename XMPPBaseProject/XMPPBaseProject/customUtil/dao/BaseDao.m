@@ -14,21 +14,6 @@
 #pragma mark - singleton
 SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 
-#pragma mark - life circle
-
--(id)initWithDBCenter:(DataBaseHandler *)param_dbCenter
-{
-    if ((self = [super init])) {
-		
-        if (dbCenter) {
-            dbCenter = nil;
-        }
-        dbCenter = param_dbCenter;
-	}
-	return self;
-}
-
-
 #pragma mark - private
 //根据FMDB的rs获取结果集列名数组
 -(NSArray *)fMSetColumnArray:(FMResultSet *)fmset{
@@ -263,8 +248,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
         NSString *sql = [NSString stringWithFormat:@"drop table %@",tableName];
         
         __block BOOL result;
-        
-        [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+        [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
             [db open];
             result = [db executeUpdate:sql];
             [db close];
@@ -324,7 +308,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     [sql appendString:@")"];
     
     __block BOOL result;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         result = [db executeUpdate:sql];
         [db close];
@@ -355,7 +339,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     NSString *sql = [obj createTableTableSql];//根据各属性类型创建
     
     __block BOOL result;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         result = [db executeUpdate:sql];
         [db close];
@@ -395,7 +379,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     */
     
     __block BOOL ret = NO;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         ret = [db tableExists:tablename];
         [db close];
@@ -404,7 +388,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 }
 
 -(void)executeByQueue:(NSString *)sql{
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         [db executeUpdate:sql];
         [db close];
@@ -418,7 +402,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     __block BOOL result;
     
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         
         NSArray *keys;
         int i, count;
@@ -457,7 +441,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 - (BOOL)updateWithTable:(NSString*) tableName withModifyValueDic:(NSDictionary*)modifyDic withConditionDic:(NSDictionary*) conditionDic
 {
     __block BOOL result;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         NSArray *keys;
         int i, count;
         id key, value;
@@ -510,7 +494,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 
 - (BOOL)insertWithTable:(NSString*) tableName withDictionary:(NSDictionary*) dictionary{
     __block BOOL result;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         
         NSMutableString *sqlStr = [NSMutableString stringWithFormat:@"insert into %@ (",tableName];
         
@@ -567,7 +551,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 
 - (BOOL)insertInBatchWithTable:(NSString*) tableName withDictionaryArray:(NSArray*) dataArray{
     
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         
         [db open];
         [db beginTransaction];
@@ -636,7 +620,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     }
     
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql];
         [db close];
@@ -693,7 +677,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     //执行
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql withArgumentsInArray:arrayValue];
         [db close];
@@ -739,7 +723,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 -(void)insert:(Class)clazz dict:(NSDictionary *)dict{
     NSString *sql = [self createInsertSqlByClass:clazz ];
     if (sql && sql.length>0) {
-        [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+        [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
             [db open];
             [db executeUpdate:sql withParameterDictionary:dict];
             [db close];
@@ -794,7 +778,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     NSLog(@"新增sql:%@",sql);
     
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql withArgumentsInArray:arrayValue];
         [db close];
@@ -803,7 +787,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 }
 
 -(void)insertObjectArray:(NSArray *)objectList{
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         [db open];
         [db beginTransaction];
         
@@ -843,7 +827,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     }
     
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql];
         [db close];
@@ -862,7 +846,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 #pragma mark - query 1
 -(NSArray *)queryDbToObjectArray:(Class )clazz sql:(NSString *)sql{
     __block NSMutableArray *array= [NSMutableArray array];
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         [db open];
         
         FMResultSet *rs = [db executeQuery:sql];
@@ -956,7 +940,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     __block NSMutableArray *array= [NSMutableArray array];
     
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    NSLog(@"%@",[DataBaseHandler sharedInstance]);
+    NSLog(@"%@",[DataBaseHandler sharedInstance].fmdbQueue);
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         [db open];
         
         FMResultSet *rs = [db executeQuery:sql];
@@ -1019,7 +1005,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 -(NSArray *)queryDbToDictionaryArray:(NSString *)tableName withConditionObject:(NSObject *)conditionObj{
     NSMutableString *sql = [NSMutableString stringWithFormat:@"select * from %@ where 1=1 ",tableName];
     if (conditionObj) {
-        //遍历所有字段
+        //loop all properties
         NSArray *columnArray = [conditionObj getPropertyList];
         for (NSString *field in columnArray) {
             SEL selector = NSSelectorFromString(field);
@@ -1054,7 +1040,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     __block NSMutableArray *array= [NSMutableArray array];
     
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db){
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db){
         [db open];
         
         FMResultSet *rs = [db executeQuery:sql];
@@ -1146,7 +1132,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     //执行
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql withArgumentsInArray:arrayValue];
         [db close];
@@ -1205,7 +1191,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     
     //执行
     __block BOOL executeResult;
-    [dbCenter.fmdbQueue inDatabase:^(FMDatabase *db) {
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
         executeResult = [db executeUpdate:sql withArgumentsInArray:arrayValue];
         [db close];

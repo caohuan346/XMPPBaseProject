@@ -6,16 +6,16 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "MessageService.h"
+#import "MessageManager.h"
 #import "MessageDao.h"
 
-@interface MessageService ()
+@interface MessageManager ()
 
 @property (nonatomic)MessageDao *dao;
 
 @end
 
-@implementation MessageService
+@implementation MessageManager
 
 #pragma mark - init
 -(id)init{
@@ -26,7 +26,7 @@
 }
 
 #pragma mark - singleton
-SYNTHESIZE_SINGLETON_FOR_CLASS(MessageService)
+SYNTHESIZE_SINGLETON_FOR_CLASS(MessageManager)
 
 
 @end

@@ -12,7 +12,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChatListCell : UITableViewCell
+@class Conversation;
+@interface ConversationCell : UITableViewCell
+
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) UIImage *placeholderImage;
 @property (nonatomic, strong) NSString *name;
@@ -20,6 +22,8 @@
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic) NSInteger unreadCount;
 
-+(CGFloat)tableView:(UITableView *)tableView
-heightForRowAtIndexPath:(NSIndexPath *)indexPath;
++(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+
+@property (nonatomic, strong) Conversation *conversation;
+
 @end

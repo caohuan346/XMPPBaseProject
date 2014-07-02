@@ -11,24 +11,27 @@
   */
 
 
-#import "ChatListCell.h"
+#import "ConversationCell.h"
 
-@interface ChatListCell (){
-    UILabel *_timeLabel;
-    UILabel *_unreadLabel;
-    UILabel *_detailLabel;
-    UIView *_lineView;
-}
+
+
+@interface ConversationCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @end
 
-@implementation ChatListCell
+@implementation ConversationCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style
     reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        /*
         // Initialization code
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(240, 7, 80, 16)];
         _timeLabel.font = [UIFont systemFontOfSize:13];
@@ -58,6 +61,8 @@
         //_lineView.backgroundColor = RGBACOLOR(207, 210, 213, 0.7);
         
         [self.contentView addSubview:_lineView];
+         
+         */
     }
     return self;
 }
@@ -70,19 +75,24 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
+    /*
     if (![_unreadLabel isHidden]) {
         _unreadLabel.backgroundColor = [UIColor redColor];
     }
+     */
 }
 
 -(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
     [super setHighlighted:highlighted animated:animated];
+    /*
     if (![_unreadLabel isHidden]) {
         _unreadLabel.backgroundColor = [UIColor redColor];
     }
+     */
 }
 
 -(void)layoutSubviews{
+    /*
     [super layoutSubviews];
     CGRect frame = self.imageView.frame;
     
@@ -112,6 +122,8 @@
     frame = _lineView.frame;
     frame.origin.y = self.contentView.frame.size.height - 1;
     _lineView.frame = frame;
+    
+    */
 }
 
 -(void)setName:(NSString *)name{

@@ -6,13 +6,13 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "BaseService.h"
+#import "BaseManager.h"
 
 @class BuddyDao;
-@interface BuddyService : BaseService
+@interface BuddyManager : BaseManager
 
 //singleton
-SYNTHESIZE_SINGLETON_FOR_HEADER(BuddyService)
+SYNTHESIZE_SINGLETON_FOR_HEADER(BuddyManager)
 
 
 @end

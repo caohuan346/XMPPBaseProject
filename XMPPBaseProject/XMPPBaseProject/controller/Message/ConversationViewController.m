@@ -10,16 +10,20 @@
   * from EaseMob Technologies.
   */
 
-#import "ChatListViewController.h"
+#import "ConversationViewController.h"
 #import "SRRefreshView.h"
-#import "ChatListCell.h"
+#import "ConversationCell.h"
+#import "Conversation.h"
 #import "EMSearchBar.h"
 #import "NSDate+Category.h"
 #import "RealtimeSearchUtil.h"
 #import "ChatViewController.h"
 #import "EMSearchDisplayController.h"
+#import "ConversationManager.h"
+#import "AppDelegate.h"
+#import "Session.h"
 
-@interface ChatListViewController ()<UITableViewDelegate,UITableViewDataSource, UISearchDisplayDelegate,SRRefreshDelegate, UISearchBarDelegate>
+@interface ConversationViewController ()<UITableViewDelegate,UITableViewDataSource, UISearchDisplayDelegate,SRRefreshDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) NSMutableArray        *dataSource;
 
@@ -32,7 +36,7 @@
 
 @end
 
-@implementation ChatListViewController
+@implementation ConversationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -47,12 +51,23 @@
 {
     [super viewDidLoad];
     
-    [self.view addSubview:self.searchBar];
-    [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.slimeView];
+    
     [self networkStateView];
     
     [self searchController];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    //to delete sepraterLine while no records
+    self.tableView.tableFooterView = [[UIView alloc] init];
+    
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = @"搜索";
+    self.searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
+    
+    [self refreshDataSource];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +79,6 @@
 {
     [super viewWillAppear:animated];
     
-    [self refreshDataSource];
     [self registerNotifications];
 }
 
@@ -94,34 +108,6 @@
     return _slimeView;
 }
 
-- (UISearchBar *)searchBar
-{
-    if (!_searchBar) {
-        _searchBar = [[EMSearchBar alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, 44)];
-        _searchBar.delegate = self;
-        _searchBar.placeholder = @"搜索";
-        _searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
-    }
-    
-    return _searchBar;
-}
-
-- (UITableView *)tableView
-{
-    if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.searchBar.frame.size.height) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.tableFooterView = [[UIView alloc] init];
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerClass:[ChatListCell class] forCellReuseIdentifier:@"chatListCell"];
-    }
-    
-    return _tableView;
-}
-
 - (EMSearchDisplayController *)searchController
 {
     if (_searchController == nil) {
@@ -129,14 +115,14 @@
         _searchController.delegate = self;
         _searchController.searchResultsTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
-        __weak ChatListViewController *weakSelf = self;
+        __weak ConversationViewController *weakSelf = self;
         [_searchController setCellForRowAtIndexPathCompletion:^UITableViewCell *(UITableView *tableView, NSIndexPath *indexPath) {
             static NSString *CellIdentifier = @"ChatListCell";
-            ChatListCell *cell = (ChatListCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+            ConversationCell *cell = (ConversationCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
             
             // Configure the cell...
             if (cell == nil) {
-                cell = [[ChatListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell = [[ConversationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
             }
             
             /*
@@ -168,11 +154,12 @@
             }else{
                 cell.contentView.backgroundColor = [UIColor whiteColor];
             }
+            
             return cell;
         }];
         
         [_searchController setHeightForRowAtIndexPathCompletion:^CGFloat(UITableView *tableView, NSIndexPath *indexPath) {
-            return [ChatListCell tableView:tableView heightForRowAtIndexPath:indexPath];
+            return [ConversationCell tableView:tableView heightForRowAtIndexPath:indexPath];
         }];
         
         [_searchController setDidSelectRowAtIndexPathCompletion:^(UITableView *tableView, NSIndexPath *indexPath) {
@@ -217,6 +204,10 @@
 - (NSMutableArray *)loadDataSource
 {
     NSMutableArray *ret = nil;
+    
+    NSArray *resultArray = [[GlobalHandler sharedInstance].conversationManager conversations];
+    
+    NSLog(@"resultArray:%@",resultArray);
     /*
     NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
     NSArray* sorte = [conversations sortedArrayUsingComparator:
@@ -307,12 +298,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView
         cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    static NSString *identify = @"chatListCell";
-    ChatListCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    static NSString *identify = @"ConversationCell";
+    ConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:identify forIndexPath:indexPath];
     
-    if (!cell) {
-        cell = [[ChatListCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identify];
-    }
+    //cell.conversation = [self.dataSource objectAtIndex:indexPath.row];
     
     /*
     EMConversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
@@ -346,11 +335,11 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return  self.dataSource.count;
+    return  5;//self.dataSource.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [ChatListCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return 60;//[ConversationCell tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

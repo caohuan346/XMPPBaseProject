@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BaseService : NSObject
+@interface BaseManager : NSObject
 
 //singleton
 //SYNTHESIZE_SINGLETON_FOR_HEADER(BaseService)

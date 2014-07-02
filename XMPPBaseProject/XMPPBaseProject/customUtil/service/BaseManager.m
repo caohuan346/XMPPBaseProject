@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 hc. All rights reserved.
 //
 
-#import "BaseService.h"
+#import "BaseManager.h"
 
-@implementation BaseService
+@implementation BaseManager
 
 #pragma mark - singleton
 //SYNTHESIZE_SINGLETON_FOR_CLASS(BaseService)
