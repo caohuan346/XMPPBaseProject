@@ -19,8 +19,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
 +(BOOL)insertOrUpdateSession:(Session *)aSession{
     //查询会话记录
     Session *queryBean = [[Session alloc] init];
-    queryBean.sessionType = aSession.sessionType;
-    NSArray *sessionArray = [SharedAppDelegate.databaseService.baseDBManager queryDbToObjectArray:[Session class] withConditionObject: queryBean];
+    queryBean.conversationType = aSession.conversationType;
+    NSArray *sessionArray = [[BaseDao sharedInstance] queryDbToObjectArray:[Session class] withConditionObject: queryBean];
     
     BOOL optFlag;
     
@@ -28,9 +28,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
     if (sessionArray) {
         Session *oldSession = (Session *)[sessionArray objectAtIndex:0];
         aSession.unreadNum = [NSNumber numberWithInt:[oldSession.unreadNum intValue] +1];
-        optFlag = [SharedAppDelegate.databaseService.baseDBManager updateRecordWithClazz:[Session class] withModifiedBean:aSession withConditionObject:queryBean];
+        optFlag = [[BaseDao sharedInstance] updateRecordWithClazz:[Session class] withModifiedBean:aSession withConditionObject:queryBean];
     }else{//不存在则添加
-        optFlag = [SharedAppDelegate.databaseService.baseDBManager insertObject:aSession];
+        optFlag = [[BaseDao sharedInstance] insertObject:aSession];
     }
     return optFlag;
 }

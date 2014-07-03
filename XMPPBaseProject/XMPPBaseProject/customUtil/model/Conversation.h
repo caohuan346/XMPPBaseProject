@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBModelProtocol.h"
 
-@interface Conversation : NSObject
+@interface Conversation : NSObject<DBModelProtocol>
 
 /**
  *  发送者ID
@@ -33,11 +34,11 @@
 /**
  *  消息类型 用户、群、讨论组、系统..
  */
-@property (nonatomic, copy) NSString *sessionType;
+@property (nonatomic, assign) ConversationType type;
 
 /**
  *  详细消息类型：如会话的文字、图片、语音消息
  */
-@property (nonatomic, copy) NSString *detailType;
+@property (nonatomic, assign) MessageContentType detailType;
 
 @end

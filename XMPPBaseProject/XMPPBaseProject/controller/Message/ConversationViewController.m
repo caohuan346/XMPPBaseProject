@@ -295,8 +295,7 @@
 
 #pragma mark - TableViewDelegate & TableViewDatasource
 
--(UITableViewCell *)tableView:(UITableView *)tableView
-        cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *identify = @"ConversationCell";
     ConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:identify forIndexPath:indexPath];
@@ -339,15 +338,15 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;//[ConversationCell tableView:tableView heightForRowAtIndexPath:indexPath];
+    return 60;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    /*
-    EMConversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
+   Conversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
     
+    /*
     ChatViewController *chatController;
     NSString *title = conversation.chatter;
     if (conversation.isGroup) {

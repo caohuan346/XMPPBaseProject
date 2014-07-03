@@ -84,7 +84,7 @@
 #pragma mark - custom private
 //init data
 -(void)initData{
-    self.sessionList = [SharedAppDelegate.databaseService.baseDBManager queryDbToObjectArray:[Session class] withConditionObject:nil];
+    self.sessionList = [[BaseDao sharedInstance] queryDbToObjectArray:[Session class] withConditionObject:nil];
 }
 
 //refresh Data
@@ -208,11 +208,11 @@
     cell.contentLabel.text = aSession.lastMsg;
     cell.timeLabel.text = [NSString stringWithFormat:@"%@",aSession.lastestMsgTime];
     cell.icon.alpha = 1.0f;
-    NSInteger sessionType = [aSession.sessionType intValue];
+    NSInteger conversationType = [aSession.conversationType intValue];
     
     UIImage *iconImage;
     //个人
-    if (sessionType == SessionTypePersonalChat) {
+    if (conversationType == ConversationTypePersonalChat) {
         XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",aSession.senderId,SharedAppDelegate.globals.xmppServerDomain]];
         
         cell.nameLabel.text = jid.user;
@@ -226,16 +226,16 @@
         cell.icon.image = iconImage;
     }
     //群组
-    else if (sessionType == SessionTypeGroupChat){
+    else if (conversationType == ConversationTypeGroupChat){
         
     }
     //添加好友等等处理信息
-    else if (sessionType == SessionTypeSubscription){
+    else if (conversationType == ConversationTypeSubscription){
         cell.nameLabel.text = @"系统消息";
     }
     
     //系统消息
-    else if (sessionType == SessionTypeSystem){
+    else if (conversationType == ConversationTypeSystem){
         
     }
     
@@ -249,25 +249,25 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     Session *aSession = [self.sessionList objectAtIndex:[indexPath row]];
-    NSInteger sessionType = [aSession.sessionType intValue];
+    NSInteger conversationType = [aSession.conversationType intValue];
     
     //个人
-    if (sessionType == SessionTypePersonalChat) {
+    if (conversationType == ConversationTypePersonalChat) {
         [self performSegueWithIdentifier:@"chat" sender:self];
     }
     
     //群组
-    else if (sessionType == SessionTypeGroupChat){
+    else if (conversationType == ConversationTypeGroupChat){
         
     }
     
     //添加好友等等处理信息
-    else if (sessionType == SessionTypeSubscription){
+    else if (conversationType == ConversationTypeSubscription){
         
     }
     
     //系统消息
-    else if (sessionType == SessionTypeSystem){
+    else if (conversationType == ConversationTypeSystem){
         
     }
 }
@@ -279,10 +279,10 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
         Session *aSession = [self.sessionList objectAtIndex:[indexPath row]];
-        NSInteger sessionType = [aSession.sessionType intValue];
+        NSInteger conversationType = [aSession.conversationType intValue];
         
         //个人
-        if (sessionType == SessionTypePersonalChat) {
+        if (conversationType == ConversationTypePersonalChat) {
             ChatViewController *chatViewCtl = segue.destinationViewController;
             User *targetUser = [[User alloc] init];
             XMPPJID *targetJID = [XMPPJID jidWithString:aSession.senderId];
@@ -291,17 +291,17 @@
         }
         
         //群组
-        else if (sessionType == SessionTypeGroupChat){
+        else if (conversationType == ConversationTypeGroupChat){
             
         }
         
         //添加好友等等处理信息
-        else if (sessionType == SessionTypeSubscription){
+        else if (conversationType == ConversationTypeSubscription){
             
         }
         
         //系统消息
-        else if (sessionType == SessionTypeSystem){
+        else if (conversationType == ConversationTypeSystem){
             
         }
     }

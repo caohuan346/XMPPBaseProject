@@ -26,5 +26,5 @@
 //根据信息集合初始化
 - (id)initWithFrame:(CGRect)frame accessoryArray:(NSMutableArray *)accessoryArray;
 //根据会话类型初始化
-- (id)initWithFrame:(CGRect)frame sessionType:(NSInteger)sessionType;
+- (id)initWithFrame:(CGRect)frame conversationType:(NSInteger)conversationType;
 @end

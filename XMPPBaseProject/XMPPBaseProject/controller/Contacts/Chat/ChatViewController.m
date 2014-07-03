@@ -98,7 +98,7 @@
     
     NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
     
-    NSArray *tempMsgArray = [SharedAppDelegate.databaseService.baseDBManager queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    NSArray *tempMsgArray = [[BaseDao sharedInstance] queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
     
     //reverse the msgs
     NSArray* reversedArray = [[tempMsgArray reverseObjectEnumerator] allObjects];
@@ -117,7 +117,7 @@
     
     NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
     
-    NSArray *tempMsgArray = [SharedAppDelegate.databaseService.baseDBManager queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    NSArray *tempMsgArray = [[BaseDao sharedInstance] queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
     
     if (tempMsgArray.count > 0) {
         //reverse the msgs
@@ -139,7 +139,7 @@
 
 -(void)initaccessoryView{
     CGRect accessoryRect = CGRectMake(0, (isInch4 ? self.view.frame.size.height+88:self.view.frame.size.height), self.view.frame.size.width, keyboardHeight);
-    accessoryView = [[AccessoryView alloc] initWithFrame:accessoryRect sessionType:1];
+    accessoryView = [[AccessoryView alloc] initWithFrame:accessoryRect conversationType:1];
     accessoryView.accessoryDelegate = self;
     [self.view addSubview:accessoryView];
 }
@@ -192,13 +192,13 @@
  [self.messageTextField resignFirstResponder];
  
  Message *myMsg = [[Message alloc] init];
- myMsg.messageType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
+ myMsg.messageType = [NSString stringWithFormat:@"%d",ConversationTypePersonalChat];
  myMsg.content = message;
  myMsg.sendTime = [NSDate date];
  myMsg.chatUserId = _chatTargetUser.userId;
  myMsg.chatUserJID = [NSString stringWithFormat:@"%@@%@",_chatTargetUser.userId,SharedAppDelegate.globals.xmppServerDomain];
  myMsg.isFrom = @"0";
- BOOL insertFlag = [SharedAppDelegate.databaseService.baseDBManager insertObject:myMsg];
+ BOOL insertFlag = [[BaseDao sharedInstance] insertObject:myMsg];
  if (!insertFlag) {
  NSLog(@"保存失败");
  }
@@ -469,7 +469,7 @@
     size.height = size.height+kChatPadding*4;
 
     CGFloat height = size.height < 60 ? 60 : size.height;
-    
+
     return height;
 }
 
@@ -485,13 +485,13 @@
         [XMPPHelper xmppSendMessage:aXmppMsg];
         
         Message *myMsg = [[Message alloc] init];
-        myMsg.messageType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
+        myMsg.messageType = [NSString stringWithFormat:@"%d",ConversationTypePersonalChat];
         myMsg.content = inputText;
         myMsg.sendTime = [NSDate date];
         myMsg.chatUserId = _chatTargetUser.userId;
         myMsg.chatUserJID = [NSString stringWithFormat:@"%@@%@",_chatTargetUser.userId,SharedAppDelegate.globals.xmppServerDomain];
         myMsg.isFrom = @"0";
-        BOOL insertFlag = [SharedAppDelegate.databaseService.baseDBManager insertObject:myMsg];
+        BOOL insertFlag = [[BaseDao sharedInstance] insertObject:myMsg];
         if (!insertFlag) {
             NSLog(@"保存失败");
         }

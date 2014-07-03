@@ -17,15 +17,13 @@
 @class BaseDao;
 @interface DataBaseHandler : NSObject
 {
-//    BOOL	state;
 	Globals	*globals;
 }
 
-@property (nonatomic,assign)  BOOL state;
-@property (nonatomic) FMDatabase *database;
-@property (nonatomic) FMDatabaseQueue  *fmdbQueue;
-@property (nonatomic) BaseDao  *baseDBManager;
-@property (nonatomic) NSOperationQueue  *queue;
+@property (nonatomic, assign) BOOL state;
+@property (nonatomic, strong) FMDatabase *database;
+@property (nonatomic, strong) FMDatabaseQueue  *fmdbQueue;
+@property (nonatomic, strong) NSOperationQueue  *queue;
 
 //singleton
 SYNTHESIZE_SINGLETON_FOR_HEADER(DataBaseHandler)

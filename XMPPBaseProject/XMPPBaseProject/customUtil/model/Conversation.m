@@ -10,4 +10,13 @@
 
 @implementation Conversation
 
+#pragma mark - db model protocol
++(NSString *)tableName {
+    return @"t_conversation";
+}
+
++(NSString *)tableCreateSQL {
+    return  @"";
+}
+
 @end

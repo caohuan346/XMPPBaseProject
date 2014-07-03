@@ -243,7 +243,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 }
 
 #pragma mark - drop or create table
--(BOOL)DropExistsTable:(NSString*)tableName{
+-(BOOL)dropExistsTable:(NSString*)tableName{
     if ([self isExistsTable:tableName]) {
         NSString *sql = [NSString stringWithFormat:@"drop table %@",tableName];
         
@@ -264,8 +264,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     if ([self isExistsTable:classname]) {
         return YES;
     }
-    
-    
     
     id obj = [[NSClassFromString(classname) alloc] init];
     if (obj==nil) {
@@ -1200,8 +1198,25 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
     return executeResult;
 }
 
-@end
 
+#pragma mark 更科学的数据库实体操作方法—————————————2014-07-03 11:35:35————————————————
+//建表：无主键
+-(BOOL)createTableWithDBModelClass:(Class)clazz{
+    
+    NSString *classname = [NSString  stringWithUTF8String:class_getName(clazz)];
+    if ([self isExistsTable:classname]) {
+        return YES;
+    }
+    
+    id obj = [[NSClassFromString(classname) alloc] init];
+    if (obj==nil) {
+        return NO;
+    }
+    
+    return NO;
+}
+
+@end
 
 #pragma mark ——————————————@implementation ConditionBean——————————————
 

@@ -15,7 +15,7 @@
     if (self =  [self init]) {
         self.sessionId = [msgDic objectForKey:@"sessionId"];
         self.lastestMsgTime = [msgDic objectForKey:@"lastestMsgTime"];
-        self.sessionType = [msgDic objectForKey:@"sessionType"];
+        self.conversationType = [msgDic objectForKey:@"conversationType"];
         self.lastMsg = [msgDic objectForKey:@"lastMsg"];
         self.unreadNum = [msgDic objectForKey:@"unreadNum"];
         self.detailType = [msgDic objectForKey:@"msgType"];

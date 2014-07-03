@@ -33,14 +33,14 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame sessionType:(NSInteger)sessionType{
+- (id)initWithFrame:(CGRect)frame conversationType:(NSInteger)conversationType{
     self = [super initWithFrame:frame];
     if (self) {
         //[self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"facesBack"]]];
         [self setBackgroundColor:UIColorFromRGB(0Xf1efeb)];
         self.accessoryArray = [NSMutableArray array];
     
-        [self initDataWithSessionType:sessionType];
+        [self initDataWithConversationType:conversationType];
         
         [self initItemViews];
     }
@@ -48,7 +48,7 @@
 }
 
 //根据会话类型初始化附件view需要的数据
--(void)initDataWithSessionType:(NSInteger)sessionType{
+-(void)initDataWithConversationType:(NSInteger)conversationType{
     NSDictionary *accessoryDict=[NSDictionary dictionaryWithContentsOfFile:
                                 [[NSBundle mainBundle] pathForResource:@"accessoryInfo"
                                                                 ofType:@"plist"]];

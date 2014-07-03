@@ -56,7 +56,7 @@
 +(void)xmppDidReceiveSubscribeRequest:(NSString *)userName type:(XMPPType)type{
     Session *aSession = [[Session alloc] init];
     aSession.lastestMsgTime = [NSDate date];
-    aSession.sessionType = [NSString stringWithFormat:@"%d",SessionTypeSubscription];
+    aSession.conversationType = [NSString stringWithFormat:@"%d",ConversationTypeSubscription];
     aSession.detailType = [NSString stringWithFormat:@"%d",type];
     
     //对方请求添加
@@ -67,7 +67,7 @@
         User *aUser = [[User alloc] init];
         aUser.userId = userName;
         aUser.subscribe = @"from";
-        [SharedAppDelegate.databaseService.baseDBManager insertObject:aUser];
+        [[BaseDao sharedInstance] insertObject:aUser];
     }
     //对方同意
     else if (type == XMPPTypePresenceSubscribed){
@@ -96,17 +96,17 @@
     User *queryBean = [[User alloc] init];
     queryBean.userId = userName;
     
-    NSArray *userArray = [SharedAppDelegate.databaseService.baseDBManager queryDbToObjectArray:[User class] withConditionObject:queryBean];
+    NSArray *userArray = [[BaseDao sharedInstance] queryDbToObjectArray:[User class] withConditionObject:queryBean];
     User *user1 = [userArray objectAtIndex:0];
     
     if (!user1) {
         User *aUser = [[User alloc] init];
         aUser.userId = userName;
         aUser.subscribe = @"to";
-        [SharedAppDelegate.databaseService.baseDBManager insertObject:aUser];
+        [[BaseDao sharedInstance] insertObject:aUser];
         
         //删除
-        //[SharedAppDelegate.databaseService.baseDBManager deleteRecordWithClazz:[User class] withConditionObject:queryBean];
+        //[[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:queryBean];
     }
     
     //发送xmpp

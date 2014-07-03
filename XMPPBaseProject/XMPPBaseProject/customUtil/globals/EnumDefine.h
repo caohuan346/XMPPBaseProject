@@ -21,6 +21,27 @@ typedef enum {
     ContentType_System = 3,
 } ContentType;
 
+/*!
+ @enum
+ @brief 聊天类型
+ @constant MessageType_Text 文本类型
+ @constant MessageType_Image 图片类型
+ @constant MessageType_Video 视频类型
+ @constant MessageType_Location 位置类型
+ @constant MessageType_Voice 语音类型
+ @constant MessageType_File 文件类型
+ @constant MessageType_Command 命令类型
+ */
+typedef NS_ENUM(NSUInteger, MessageContentType){
+    MessageContentType_Text = 1,
+    MessageContentType_Image,
+    MessageContentType_Video,
+    MessageContentType_Location,
+    MessageContentType_Voice,
+    MessageContentType_File,
+    MessageContentType_Command
+};
+
 //发送方向
 typedef enum {
 	SendType_Received = 0,
@@ -33,11 +54,11 @@ typedef enum {
 	MessageType_Group = 1,
 } MessageType;
 
-typedef NS_ENUM(NSUInteger, SessionType) {
-    SessionTypePersonalChat = 1,    //个人会话
-    SessionTypeGroupChat = 2,       //群组会话
-    SessionTypeSystem = 3,          //系统消息
-    SessionTypeSubscription=4       //订阅相关消息，如加为好友,删除好友等
+typedef NS_ENUM(NSUInteger, ConversationType) {
+    ConversationTypePersonalChat = 1,    //个人会话
+    ConversationTypeGroupChat = 2,       //群组会话
+    ConversationTypeSystem = 3,          //系统消息
+    ConversationTypeSubscription=4       //订阅相关消息，如加为好友,删除好友等
 };
 
 typedef NS_ENUM(NSUInteger, SubscriptionType) {

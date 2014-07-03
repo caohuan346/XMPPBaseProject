@@ -29,8 +29,9 @@
 //singleton
 SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
-//创建
--(id)initWithDBCenter:(DataBaseHandler *)dataBaseHandler;
+#pragma mark create table—————————————2014-07-03 11:35:35————————————————
+//建表：无主键
+-(BOOL)createTableWithDBModelClass:(Class)clazz;
 
 #pragma mark create table—————————————————————————————
 //建表：无主键

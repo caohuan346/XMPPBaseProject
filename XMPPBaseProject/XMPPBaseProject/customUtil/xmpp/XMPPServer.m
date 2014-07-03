@@ -349,9 +349,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
         //消息体
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         NSMutableDictionary *bodyDict = [[NSMutableDictionary alloc] init];
-        if (message.contentType == ContentType_Image) {
+        if (message.contentType == MessageContentType_Image) {
             [bodyDict setObject:message.fileUrl forKey:@"Cnt"];
-        } else if(message.contentType == ContentType_Audio){
+        } else if(message.contentType == MessageContentType_Audio){
             [bodyDict setObject:[NSString stringWithFormat:@"%@.%d",message.fileUrl,message.timeSpan] forKey:@"Cnt"];
         } else {
             [bodyDict setObject:message.content forKey:@"Cnt"];
@@ -381,9 +381,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
         //消息体
         NSXMLElement *body = [NSXMLElement elementWithName:@"body"];
         NSMutableDictionary *bodyDict = [NSMutableDictionary dictionary];
-        if (message.contentType == ContentType_Image) {
+        if (message.contentType == MessageContentType_Image) {
             [bodyDict setObject:message.fileUrl forKey:@"Cnt"];
-        } else if(message.contentType == ContentType_Audio){
+        } else if(message.contentType == MessageContentType_Audio){
             [bodyDict setObject:[NSString stringWithFormat:@"%@.%d",message.fileUrl,message.timeSpan] forKey:@"Cnt"];
         } else {
             [bodyDict setObject:message.content forKey:@"Cnt"];
@@ -568,9 +568,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
                 [users addObject:aUser];
             }
             
-            BOOL delFlag = [SharedAppDelegate.databaseService.baseDBManager deleteRecordWithClazz:[User class] withConditionObject:nil];
+            BOOL delFlag = [[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:nil];
             if (delFlag) {
-                [SharedAppDelegate.databaseService.baseDBManager insertObjectArray:users];
+                [[BaseDao sharedInstance] insertObjectArray:users];
             }
         }
     }
@@ -616,21 +616,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
 
         //信息入库
         Message *aMsg = [[Message alloc] init];
-        aMsg.messageType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
+        aMsg.messageType = [NSString stringWithFormat:@"%d",ConversationTypePersonalChat];
         aMsg.chatUserId = fromJID.user;
         aMsg.chatUserJID = from;
         aMsg.isFrom = @"1";//1表示接收到得，0表示发送的
         aMsg.sendTime = [NSDate date];
         aMsg.content = msgContent;
-        [SharedAppDelegate.databaseService.baseDBManager insertObject:aMsg];
+        [[BaseDao sharedInstance] insertObject:aMsg];
         
         //会话入库
         Session *aSession = [[Session alloc] init];
         aSession.senderId = from;
         aSession.lastMsg = msgContent;
         aSession.lastestMsgTime = [NSDate date];
-        aSession.sessionType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
-        aSession.detailType = [NSString stringWithFormat:@"%d",SessionTypePersonalChat];
+        aSession.conversationType = [NSString stringWithFormat:@"%d",ConversationTypePersonalChat];
+        aSession.detailType = [NSString stringWithFormat:@"%d",ConversationTypePersonalChat];
         BOOL optFlag = [ConversationDao insertOrUpdateSession:aSession];
         if (optFlag) {
             NSLog(@"插入聊天信息session成功");
