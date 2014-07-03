@@ -14,6 +14,7 @@
 #import "Session.h"
 #import "User.h"
 #import "Message.h"
+#import "Conversation.h"
 
 @implementation DataBaseHandler
 
@@ -98,6 +99,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataBaseHandler)
     BOOL tSessionFlag = [[BaseDao sharedInstance] createTableWithPKByClass:[Session class]];
     //Message
     BOOL tMsgFlag = [[BaseDao sharedInstance] createTableWithPKByClass:[Message class]];
+    
+    BOOL tMsgFlag1 = [[BaseDao sharedInstance] createTableWithPKByClass:[Conversation class]];
     
 	return tUserFlag && tSessionFlag && tMsgFlag;
 }

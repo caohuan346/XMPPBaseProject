@@ -157,7 +157,8 @@
 }
 
 - (NSDictionary *)getPropertyDictionay{
-    return [self getPropertyDictionayByClazz:[self class]];
+    //return [self getPropertyDictionayByClazz:[self class]];
+    return [self propertyInfoDictionaryWithClazz:[self class]];
 }
 
 //反射获取对象属性类型字典
@@ -178,6 +179,7 @@
         //T@"NSNumber",C,N,V_parentSerial
         //T@"NSString",C,N,V_senderId
         NSString *attrStr = [[NSString alloc] initWithUTF8String:property_getAttributes(properties[i])];
+        NSLog(@"attrStr:%@",attrStr);
         //NSArray *attrArray = [attrStr componentsSeparatedByString:@","];
         NSRange nsDateRange = [attrStr rangeOfString:@"NSDate"];
         NSRange nsNumberRange = [attrStr rangeOfString:@"NSNumber"];
@@ -203,4 +205,128 @@
     
     return propertyDictionary;
 }
+
+//反射获取对象属性类型字典
+- (NSDictionary *)propertyInfoDictionaryWithClazz: (Class)clazz
+{
+    u_int count;
+    objc_property_t *properties  = class_copyPropertyList(clazz, &count);
+    
+    NSMutableDictionary *propertyDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
+    
+    for (int i = 0; i < count ; i++)
+    {
+        const char* propertyName = property_getName(properties[i]);
+ 
+        /*
+        T@"NSString",C,N,V_nsstringField
+        T@"NSDate",&,N,V_nsdateField
+        T@"NSData",&,N,V_nsdataField
+        T@"NSNumber",&,N,V_unreadCount
+        TI,N,V_type
+        TI,N,V_detailType
+        Ti,N,V_intField
+        Ti,N,V_NSIntegerField
+        Tl,N,V_longField
+        Tq,N,V_longlongField
+        TL,N,V_unsignedLongField
+        Tc,N,V_boolField
+        Td,N,V_doubleField
+         */
+
+        NSString *attrStr = [[NSString alloc] initWithUTF8String:property_getAttributes(properties[i])];
+        
+        NSRange nsDateRange = [attrStr rangeOfString:@"NSDate"];
+        NSRange nsNumberRange = [attrStr rangeOfString:@"NSNumber"];
+        NSRange nsStringRange = [attrStr rangeOfString:@"NSString"];
+        NSRange nsDataRange = [attrStr rangeOfString:@"NSData"];
+        
+        NSRange uIntRange = [attrStr rangeOfString:@"TI,"];
+        NSRange intRange = [attrStr rangeOfString:@"Ti,"];
+        NSRange longRange = [attrStr rangeOfString:@"Tl,"];
+        NSRange longlongRange = [attrStr rangeOfString:@"Tq,"];
+        NSRange uLongRange = [attrStr rangeOfString:@"TL,"];
+        NSRange boolRange = [attrStr rangeOfString:@"Tc,"];
+        NSRange doubleRange = [attrStr rangeOfString:@"Td,"];
+        
+        if ([attrStr hasPrefix:@"T@"]) {
+            [protypes addObject:[attrStr substringWithRange:NSMakeRange(3, [attrStr rangeOfString:@","].location-4)]];
+        }
+        else if ([attrStr hasPrefix:@"Ti"])
+        {
+            [protypes addObject:@"int"];
+        }
+        else if ([attrStr hasPrefix:@"Tf"])
+        {
+            [protypes addObject:@"float"];
+        }
+        else if([attrStr hasPrefix:@"Td"]) {
+            [protypes addObject:@"double"];
+        }
+        else if([attrStr hasPrefix:@"Tl"])
+        {
+            [protypes addObject:@"long"];
+        }
+        else if ([attrStr hasPrefix:@"Tc"]) {
+            [protypes addObject:@"char"];
+        }
+        else if([attrStr hasPrefix:@"Ts"])
+        {
+            [protypes addObject:@"short"];
+        }
+        
+        NSString *propertyStr = [NSString stringWithUTF8String: propertyName];
+        //NSDate
+        if (nsDateRange.location != NSNotFound) {
+            [propertyDictionary setObject:kPropertyType_NSDate forKey:propertyStr];
+        }
+        //NSNumber
+        else if (nsNumberRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_NSNumber forKey:propertyStr];
+        }
+        //NSString
+        else if (nsStringRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_NSString forKey:propertyStr];
+        }
+        //NSData
+        else if (nsDataRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_NSData forKey:propertyStr];
+        }
+        
+        //unsigned int
+        else if (uIntRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_unsigned_int forKey:propertyStr];
+        }
+        //int
+        else if (intRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_int forKey:propertyStr];
+        }
+        //long
+        else if (longRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_long forKey:propertyStr];
+        }
+        //long long
+        else if (longlongRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_long_long forKey:propertyStr];
+        }
+        //unsigned long
+        else if (uLongRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_unsigned_long forKey:propertyStr];
+        }
+        //bool
+        else if (boolRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_bool forKey:propertyStr];
+        }
+        //double
+        else if (doubleRange.location != NSNotFound){
+            [propertyDictionary setObject:kPropertyType_double forKey:propertyStr];
+        }
+    }
+    
+    free(properties);
+    
+    return propertyDictionary;
+}
+
+
 @end

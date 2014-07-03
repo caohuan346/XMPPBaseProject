@@ -98,9 +98,9 @@
 //    @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 //    @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
-    self.nameLabel.text = self.conversation.senderId;
-    self.contentLabel.text = self.conversation.msgContent;
-    self.timeLabel.text = [NSDate formattedTimeFromTimeInterval:self.conversation.time];
+    //self.nameLabel.text = self.conversation.senderId;
+    //self.contentLabel.text = self.conversation.msgContent;
+    //self.timeLabel.text = [NSDate formattedTimeFromTimeInterval:self.conversation.time];
     
     /*
     [super layoutSubviews];

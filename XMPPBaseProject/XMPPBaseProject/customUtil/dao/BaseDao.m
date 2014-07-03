@@ -8,6 +8,7 @@
 
 #import "BaseDao.h"
 #import "DataBaseHandler.h"
+#import "DBModelProtocol.h"
 
 @implementation BaseDao
 
@@ -284,14 +285,30 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
         //设置类型
         NSString *fieldType = [fieldDic objectForKey:field];
         NSString *columnType;
-        if ([@"NSDate" isEqualToString:fieldType]) {
-            columnType = @"date ";
-        }else if ([@"NSNumber" isEqualToString:fieldType]) {
-            columnType = @"integer ";
+        if ([kPropertyType_NSNumber isEqualToString:fieldType]) {
+            columnType = @"INTEGER ";
+        }else if ([kPropertyType_NSDate isEqualToString:fieldType]) {
+            columnType = @"Date ";
+        }else if ([kPropertyType_NSData isEqualToString:fieldType]) {
+            columnType = @"TEXT ";
         }else if ([@"NSString" isEqualToString:fieldType]) {
-            columnType = @"text ";
+            columnType = @"TEXT ";
+        }else if ([kPropertyType_unsigned_int isEqualToString:fieldType]) {
+            columnType = @"INTEGER ";
+        }else if ([kPropertyType_int isEqualToString:fieldType]) {
+            columnType = @"INTEGER ";
+        }else if ([kPropertyType_long isEqualToString:fieldType]) {
+            columnType = @"Double ";
+        }else if ([kPropertyType_long_long isEqualToString:fieldType]) {
+            columnType = @"Double ";
+        }else if ([kPropertyType_unsigned_long isEqualToString:fieldType]) {
+            columnType = @"Double ";
+        }else if ([kPropertyType_bool isEqualToString:fieldType]) {
+            columnType = @"Boolean ";
+        }else if ([kPropertyType_double isEqualToString:fieldType]) {
+            columnType = @"Double ";
         }else{
-            columnType = @"text ";
+            columnType = @"TEXT ";
         }
         
         [sql appendString:columnType];
@@ -854,30 +871,17 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
             return ;
         }
         
-        //NSArray *columnArray = [self fMSetColumnArray:rs];
         NSObject *obj = [[clazz alloc] init];
-        //NSArray *columnArray = [obj getPropertyList];
+
         NSDictionary *columnDic = [obj getPropertyDictionay];
         
-        //NSString *columnName = nil;
         while ([rs next]) {
             NSObject *obj = [[clazz alloc] init];
             
             if (obj==nil) {
                 continue;
             }
-            /*
-             for(int i =0;i<columnArray.count;i++)
-             {
-             columnName = [columnArray objectAtIndex:i];
-             NSString *columnValue = [rs stringForColumn: columnName];
-             SEL selector = NSSelectorFromString(columnName);
-             
-             if ([obj respondsToSelector:selector]) {
-             [obj setValue:columnValue forKeyPath:columnName ];
-             }
-             }
-             */
+
             for(NSString *columnName in columnDic.allKeys)
             {
                 NSString *columnType = [columnDic objectForKey:columnName];
@@ -893,6 +897,34 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
                     columnValue = @"";
                 }
                 
+                /*
+                if ([kPropertyType_NSNumber isEqualToString:columnType]) {
+                    columnType = @"INTEGER ";
+                    columnValue = [rs stringForColumn: columnName];
+                }else if ([kPropertyType_NSDate isEqualToString:columnType]) {
+                    columnType = @"Date ";
+                }else if ([kPropertyType_NSData isEqualToString:columnType]) {
+                    columnType = @"TEXT ";
+                }else if ([@"NSString" isEqualToString:columnType]) {
+                    columnType = @"TEXT ";
+                }else if ([kPropertyType_unsigned_int isEqualToString:columnType]) {
+                    columnType = @"INTEGER ";
+                }else if ([kPropertyType_int isEqualToString:columnType]) {
+                    columnType = @"INTEGER ";
+                }else if ([kPropertyType_long isEqualToString:columnType]) {
+                    columnType = @"Double ";
+                }else if ([kPropertyType_long_long isEqualToString:columnType]) {
+                    columnType = @"Double ";
+                }else if ([kPropertyType_unsigned_long isEqualToString:columnType]) {
+                    columnType = @"Double ";
+                }else if ([kPropertyType_bool isEqualToString:columnType]) {
+                    columnType = @"Boolean ";
+                }else if ([kPropertyType_double isEqualToString:columnType]) {
+                    columnType = @"Double ";
+                }else{
+                    columnType = @"TEXT ";
+                }
+                */
                 SEL selector = NSSelectorFromString(columnName);
                 
                 if ([obj respondsToSelector:selector]) {
@@ -950,26 +982,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
             return ;
         }
         
-        //NSArray *columnArray = [self fMSetColumnArray:rs];
         NSObject *obj = [[[NSClassFromString(tablename) class] alloc] init];
         
-        //NSArray *columnArray = [obj getPropertyList];
         NSDictionary *columnDic = [obj getPropertyDictionay];
-        
-        //NSString *columnName = nil;
         
         while ([rs next]) {
             NSMutableDictionary *syncData = [[NSMutableDictionary alloc] init];
-            /*
-             for(int i =0;i<columnArray.count;i++)
-             {
-             columnName = [columnArray objectAtIndex:i];
-             NSString *columnValue = [rs stringForColumn: columnName];
-             if (columnValue==nil) {
-             columnValue=@"";
-             }
-             [syncData setObject:columnValue forKey:columnName];
-             }*/
             
             for(NSString *columnName in columnDic.allKeys)
             {
@@ -1059,6 +1077,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
             {
                 columnName = [columnArray objectAtIndex:i];
                 NSString *columnValue = [rs stringForColumn: columnName];
+
                 if (columnValue==nil) {
                     columnValue=@"";
                 }
@@ -1201,17 +1220,42 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(BaseDao)
 
 #pragma mark 更科学的数据库实体操作方法—————————————2014-07-03 11:35:35————————————————
 //建表：无主键
--(BOOL)createTableWithDBModelClass:(Class)clazz{
+-(BOOL)createTableWithDBModel:(id <DBModelProtocol>) model {
     
+    /*
     NSString *classname = [NSString  stringWithUTF8String:class_getName(clazz)];
     if ([self isExistsTable:classname]) {
         return YES;
     }
     
-    id obj = [[NSClassFromString(classname) alloc] init];
+    id<DBModelProtocol> obj = [[NSClassFromString(classname) alloc] init];
     if (obj==nil) {
         return NO;
     }
+     */
+    
+    NSString *tableName;
+    if ([model respondsToSelector:@selector(tableName)]) {
+        NSString *tableName = [model performSelector:@selector(tableName)];
+        if ([self isExistsTable:tableName]) {
+            return YES;
+        }
+    }
+    
+    NSString *sql = [model performSelector:@selector(createTableTableSql)];
+    
+    __block BOOL result;
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
+        [db open];
+        result = [db executeUpdate:sql];
+        [db close];
+    }];
+    
+    if (result) {
+        NSLog(@"创建表 %@ 成功",tableName);
+    }
+    
+    return result;
     
     return NO;
 }

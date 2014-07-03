@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "NSObject+Property.h"
+#import "DBModelProtocol.h"
 
 #define CHComparisonMarkEQ @"="     //Equal
 #define CHComparisonMarkGT @">"     //Greater Than
@@ -31,7 +32,7 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
 #pragma mark create table—————————————2014-07-03 11:35:35————————————————
 //建表：无主键
--(BOOL)createTableWithDBModelClass:(Class)clazz;
+-(BOOL)createTableWithDBModel:(id <DBModelProtocol>) model;
 
 #pragma mark create table—————————————————————————————
 //建表：无主键
