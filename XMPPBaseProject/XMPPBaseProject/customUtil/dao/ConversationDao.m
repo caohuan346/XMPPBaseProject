@@ -30,7 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
         aSession.unreadNum = [NSNumber numberWithInt:[oldSession.unreadNum intValue] +1];
         optFlag = [[BaseDao sharedInstance] updateRecordWithClazz:[Session class] withModifiedBean:aSession withConditionObject:queryBean];
     }else{//不存在则添加
-        optFlag = [[BaseDao sharedInstance] insertObject:aSession];
+        optFlag = [[BaseDao sharedInstance] insertDBModel:aSession];
     }
     return optFlag;
 }

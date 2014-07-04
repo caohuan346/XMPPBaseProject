@@ -67,7 +67,7 @@
         User *aUser = [[User alloc] init];
         aUser.userId = userName;
         aUser.subscribe = @"from";
-        [[BaseDao sharedInstance] insertObject:aUser];
+        [[BaseDao sharedInstance] insertDBModel:aUser];
     }
     //对方同意
     else if (type == XMPPTypePresenceSubscribed){
@@ -103,7 +103,7 @@
         User *aUser = [[User alloc] init];
         aUser.userId = userName;
         aUser.subscribe = @"to";
-        [[BaseDao sharedInstance] insertObject:aUser];
+        [[BaseDao sharedInstance] insertDBModel:aUser];
         
         //删除
         //[[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:queryBean];

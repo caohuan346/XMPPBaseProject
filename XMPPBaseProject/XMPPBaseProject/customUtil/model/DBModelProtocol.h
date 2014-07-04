@@ -17,13 +17,20 @@
  *
  *	@return	table name
  */
-+(NSString *)tableName;
+-(NSString *)tableName;
 
 /**
  *	建表sql
  *
  *	@return	create table sql
  */
-+(NSString *)tableCreateSQL;
+-(NSString *)tableCreateSQL;
+
+/**
+ *	表主键
+ *
+ *	@return	primaryKey
+ */
+-(NSString *)primaryKey;
 
 @end

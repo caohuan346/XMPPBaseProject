@@ -30,8 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationManager)
 
 
 -(NSArray *) conversations{
-//    return [_dao queryDbToDictionaryArray:@"Session" withConditionObject:nil];
-    return [_dao queryToDictionaryArrayWithTable:@"Session" withConditionBeanArray:nil];
+    return [_dao queryToDictionaryArray:@"Session" withConditionBeanArray:nil];
 }
 
 @end

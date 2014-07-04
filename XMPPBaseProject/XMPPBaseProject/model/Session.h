@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBModelProtocol.h"
 
-@interface Session : NSObject
+@interface Session : NSObject<DBModelProtocol>
 
 @property (nonatomic,retain)    NSNumber *oid;
 @property (nonatomic,copy)      NSString *sessionId;        //id：如聊天对象的id，系统消息的id（各自主键）

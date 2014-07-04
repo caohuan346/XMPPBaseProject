@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBModelProtocol.h"
 
-@interface User : NSObject
+@interface User : NSObject<DBModelProtocol>
 
 @property(nonatomic,copy)NSString *userId;
 @property(nonatomic,copy)NSString *subscribe;

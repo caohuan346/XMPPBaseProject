@@ -570,7 +570,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
             
             BOOL delFlag = [[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:nil];
             if (delFlag) {
-                [[BaseDao sharedInstance] insertObjectArray:users];
+                [[BaseDao sharedInstance] insertDBModelArray:users];
             }
         }
     }
@@ -622,7 +622,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
         aMsg.isFrom = @"1";//1表示接收到得，0表示发送的
         aMsg.sendTime = [NSDate date];
         aMsg.content = msgContent;
-        [[BaseDao sharedInstance] insertObject:aMsg];
+        [[BaseDao sharedInstance] insertDBModel:aMsg];
         
         //会话入库
         Session *aSession = [[Session alloc] init];

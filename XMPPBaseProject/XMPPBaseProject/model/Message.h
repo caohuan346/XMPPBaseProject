@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 //chat msg
-@interface Message : NSObject
+@protocol DBModelProtocol;
+@interface Message : NSObject<DBModelProtocol>
 
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *chatUserId;    //发送者id，对应JID中得用户名

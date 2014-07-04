@@ -12,6 +12,11 @@
 @interface Conversation : NSObject<DBModelProtocol>
 
 /**
+ *  oid
+ */
+@property (nonatomic, copy) NSString *oid;
+
+/**
  *  发送者ID
  */
 @property (nonatomic, copy) NSString *senderId;
@@ -41,31 +46,5 @@
  */
 @property (nonatomic, assign) MessageContentType detailType;
 
-@property (nonatomic, assign) int intField;
-@property (nonatomic, assign) NSInteger NSIntegerField;
-@property (nonatomic, assign) long longField;
-@property (nonatomic, assign) long long longlongField;
-@property (nonatomic, assign) unsigned long unsignedLongField;
-@property (nonatomic, assign) BOOL boolField;
-@property (nonatomic, assign) double doubleField;
-@property (nonatomic, copy) NSString *nsstringField;
-@property (nonatomic, strong) NSDate *nsdateField;
-@property (nonatomic, strong) NSData *nsdataField;
-
-/*
-T@"NSString",C,N,V_nsstringField
-T@"NSDate",&,N,V_nsdateField
-T@"NSData",&,N,V_nsdataField
-T@"NSNumber",&,N,V_unreadCount
-TI,N,V_type
-TI,N,V_detailType
-Ti,N,V_intField
-Ti,N,V_NSIntegerField
-Tl,N,V_longField
-Tq,N,V_longlongField
-TL,N,V_unsignedLongField
-Tc,N,V_boolField
-Td,N,V_doubleField
- */
 
 @end

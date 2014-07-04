@@ -491,7 +491,7 @@
         myMsg.chatUserId = _chatTargetUser.userId;
         myMsg.chatUserJID = [NSString stringWithFormat:@"%@@%@",_chatTargetUser.userId,SharedAppDelegate.globals.xmppServerDomain];
         myMsg.isFrom = @"0";
-        BOOL insertFlag = [[BaseDao sharedInstance] insertObject:myMsg];
+        BOOL insertFlag = [[BaseDao sharedInstance] insertDBModel:myMsg];
         if (!insertFlag) {
             NSLog(@"保存失败");
         }

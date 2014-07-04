@@ -10,15 +10,10 @@
 
 @implementation NSObject (Property)
 
- 
-- (NSArray *)getPropertyList{
-    return [self getPropertyList:[self class]];
-}
-
-- (NSArray *)getPropertyList: (Class)clazz
+- (NSArray *)propertyArray
 {
     u_int count;
-    objc_property_t *properties  = class_copyPropertyList(clazz, &count);
+    objc_property_t *properties  = class_copyPropertyList([self class], &count);
     NSMutableArray *propertyArray = [NSMutableArray arrayWithCapacity:count];
     
     for (int i = 0; i < count ; i++)
@@ -34,7 +29,7 @@
 
 - (NSString *)tableSql:(NSString *)tablename{
     NSMutableString *sql = [[NSMutableString alloc] init];
-    NSArray *array = [self getPropertyList];
+    NSArray *array = [self propertyArray];
     [sql appendFormat:@"create table %@ (",tablename] ;
     NSInteger i = 0;
     for (NSString *key in array) {
@@ -55,7 +50,7 @@
 
 - (NSDictionary *)convertDictionary{
     NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
-    NSArray *propertyList = [self getPropertyList];
+    NSArray *propertyList = [self propertyArray];
     for (NSString *key in propertyList) {
         SEL selector = NSSelectorFromString(key);
         
@@ -120,213 +115,151 @@
 
 #pragma mark - extra
 
-- (NSString *)createTableTableSql{
-    return [self createTableSqlExtend:[self className]];
+//对象属性类型字典
+- (NSDictionary *)propertyInfoDictionary
+{
+    u_int count;
+    objc_property_t *properties  = class_copyPropertyList([self class], &count);
+    
+    NSMutableArray* propertyNameArray = [NSMutableArray arrayWithCapacity:count];
+    NSMutableArray* propertyTypeArray = [NSMutableArray arrayWithCapacity:count];
+    
+    for (int i = 0; i < count ; i++)
+    {
+        const char* propertyName = property_getName(properties[i]);
+
+        NSString *attrStr = [[NSString alloc] initWithUTF8String:property_getAttributes(properties[i])];
+        NSString *propertyStr = [NSString stringWithUTF8String: propertyName];
+        [propertyNameArray addObject:propertyStr];
+
+        /*
+         T@"NSString",C,N,V_nsstringField
+         T@"NSDate",&,N,V_nsdateField
+         T@"NSData",&,N,V_nsdataField
+         T@"NSNumber",&,N,V_unreadCount
+         TI,N,V_type
+         TI,N,V_detailType
+         Ti,N,V_intField
+         Ti,N,V_NSIntegerField
+         Tl,N,V_longField
+         Tq,N,V_longlongField
+         TL,N,V_unsignedLongField
+         Tc,N,V_boolField
+         Td,N,V_doubleField
+         */
+        
+        //NSDate, NSData, NSString, NSNumber
+        if ([attrStr hasPrefix:@"T@"]) {
+            [propertyTypeArray addObject:[attrStr substringWithRange:NSMakeRange(3, [attrStr rangeOfString:@","].location-4)]];
+        }
+        //int , NSInteger
+        else if ([attrStr hasPrefix:@"Ti"])
+        {
+            [propertyTypeArray addObject:@"int"];
+        }
+        //NSUInteger
+        else if ([attrStr hasPrefix:@"TI"])
+        {
+            [propertyTypeArray addObject:@"int"];
+        }
+        //float
+        else if ([attrStr hasPrefix:@"Tf"])
+        {
+            [propertyTypeArray addObject:@"float"];
+        }
+        //double
+        else if([attrStr hasPrefix:@"Td"])
+        {
+            [propertyTypeArray addObject:@"double"];
+        }
+        //long
+        else if([attrStr hasPrefix:@"Tl"])
+        {
+            [propertyTypeArray addObject:@"long"];
+        }
+        //long long
+        else if ([attrStr hasPrefix:@"Tq"])
+        {
+            [propertyTypeArray addObject:@"long"];
+        }
+        //unsigned Long
+        else if ([attrStr hasPrefix:@"TL"])
+        {
+            [propertyTypeArray addObject:@"long"];
+        }
+        //char
+        else if ([attrStr hasPrefix:@"Tc"])
+        {
+            [propertyTypeArray addObject:@"char"];
+        }
+        //short
+        else if([attrStr hasPrefix:@"Ts"])
+        {
+            [propertyTypeArray addObject:@"short"];
+        }
+    }
+    
+    free(properties);
+    
+    NSDictionary *propertyDictionary = @{@"name": propertyNameArray, @"type": propertyTypeArray};
+    
+    return propertyDictionary;
 }
 
-//采用获取属性类型字典的方式进行sql语句创建
-- (NSString *)createTableSqlExtend:(NSString *)tablename{
-    
+- (NSString *)createTableSQL:(NSString *) tableName {
     NSMutableString *sql = [[NSMutableString alloc] init];
     
-    NSDictionary *dic = [self getPropertyDictionay];
+    if (!tableName) {
+        tableName = [NSString  stringWithUTF8String:class_getName(self.class)];
+    }
+    [sql appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (",tableName] ;
     
-    [sql appendFormat:@"create table %@ (",tablename] ;
+    NSDictionary *propertyInfoDic = [self propertyInfoDictionary];
+    NSMutableArray* propertyNameArray = [propertyInfoDic objectForKey:@"name"];
+    NSMutableArray* propertyTypeArray = [propertyInfoDic objectForKey:@"type"];
     
-    NSInteger i = 0;
-    for (NSString *key in dic.allKeys) {
+    NSInteger count = propertyNameArray.count;
+    for (int i=0; i < count; i++) {
         if (i>0) {
             [sql appendString:@","];
         }
         
-        NSString *fieldType = [dic objectForKey:key];
+        NSString *propertyName = propertyNameArray[i];
+        NSString *propertyType = propertyTypeArray[i];
         
-        if ([@"NSDate" isEqualToString:fieldType]) {
-            [sql appendFormat:@"%@ date",key];
-        }else if ([@"NSNumber" isEqualToString:fieldType]) {
-            [sql appendFormat:@"%@ integer",key];
-        }else if ([@"NSString" isEqualToString:fieldType]) {
-            [sql appendFormat:@"%@ text",key];
-        }
-       
+        [sql appendFormat:@"%@ %@",propertyName, [NSObject sqlliteTypeWithPropertyType:propertyType]];
+        
         i++;
     }
     [sql appendString:@")"];
+    
     NSLog(@"建表sql:%@",sql);
+    
     return sql;
 }
 
-- (NSDictionary *)getPropertyDictionay{
-    //return [self getPropertyDictionayByClazz:[self class]];
-    return [self propertyInfoDictionaryWithClazz:[self class]];
-}
+#pragma mark- static method
 
-//反射获取对象属性类型字典
-- (NSDictionary *)getPropertyDictionayByClazz: (Class)clazz
+const static NSString* normalTypesString = @"floatdoublelong";
+const static NSString* intTypesString = @"intcharshort";
+const static NSString* dateTypeString = @"NSDate";
+const static NSString* blobTypeString = @"NSDataUIImage";
+
++(NSString *)sqlliteTypeWithPropertyType:(NSString *)type
 {
-    u_int count;
-    objc_property_t *properties  = class_copyPropertyList(clazz, &count);
-    
-    NSMutableDictionary *propertyDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
-    
-    for (int i = 0; i < count ; i++)
-    {
-        const char* propertyName = property_getName(properties[i]);
-        //[propertyArray addObject: [NSString  stringWithUTF8String: propertyName]];
-        
-        //————————————————————————————————————————————————
-        //T@"NSDate",C,N,V_msgId
-        //T@"NSNumber",C,N,V_parentSerial
-        //T@"NSString",C,N,V_senderId
-        NSString *attrStr = [[NSString alloc] initWithUTF8String:property_getAttributes(properties[i])];
-        NSLog(@"attrStr:%@",attrStr);
-        //NSArray *attrArray = [attrStr componentsSeparatedByString:@","];
-        NSRange nsDateRange = [attrStr rangeOfString:@"NSDate"];
-        NSRange nsNumberRange = [attrStr rangeOfString:@"NSNumber"];
-        NSRange nsStringRange = [attrStr rangeOfString:@"NSString"];
-        
-        NSString *propertyStr = [NSString stringWithUTF8String: propertyName];
-        //NSDate
-        if (nsDateRange.location != NSNotFound) {
-            [propertyDictionary setObject:@"NSDate" forKey:propertyStr];
-        }
-        //NSNumber
-        else if (nsNumberRange.location != NSNotFound){
-            [propertyDictionary setObject:@"NSNumber" forKey:propertyStr];
-        }
-        //NSString
-        else if (nsStringRange.location != NSNotFound){
-            [propertyDictionary setObject:@"NSString" forKey:propertyStr];
-        }
-        //————————————————————————————————————————————————
+    if([intTypesString rangeOfString:type].location != NSNotFound){
+        return K_SQLTYPE_Int;
     }
-    
-    free(properties);
-    
-    return propertyDictionary;
-}
-
-//反射获取对象属性类型字典
-- (NSDictionary *)propertyInfoDictionaryWithClazz: (Class)clazz
-{
-    u_int count;
-    objc_property_t *properties  = class_copyPropertyList(clazz, &count);
-    
-    NSMutableDictionary *propertyDictionary = [NSMutableDictionary dictionaryWithCapacity:count];
-    
-    for (int i = 0; i < count ; i++)
-    {
-        const char* propertyName = property_getName(properties[i]);
- 
-        /*
-        T@"NSString",C,N,V_nsstringField
-        T@"NSDate",&,N,V_nsdateField
-        T@"NSData",&,N,V_nsdataField
-        T@"NSNumber",&,N,V_unreadCount
-        TI,N,V_type
-        TI,N,V_detailType
-        Ti,N,V_intField
-        Ti,N,V_NSIntegerField
-        Tl,N,V_longField
-        Tq,N,V_longlongField
-        TL,N,V_unsignedLongField
-        Tc,N,V_boolField
-        Td,N,V_doubleField
-         */
-
-        NSString *attrStr = [[NSString alloc] initWithUTF8String:property_getAttributes(properties[i])];
-        
-        NSRange nsDateRange = [attrStr rangeOfString:@"NSDate"];
-        NSRange nsNumberRange = [attrStr rangeOfString:@"NSNumber"];
-        NSRange nsStringRange = [attrStr rangeOfString:@"NSString"];
-        NSRange nsDataRange = [attrStr rangeOfString:@"NSData"];
-        
-        NSRange uIntRange = [attrStr rangeOfString:@"TI,"];
-        NSRange intRange = [attrStr rangeOfString:@"Ti,"];
-        NSRange longRange = [attrStr rangeOfString:@"Tl,"];
-        NSRange longlongRange = [attrStr rangeOfString:@"Tq,"];
-        NSRange uLongRange = [attrStr rangeOfString:@"TL,"];
-        NSRange boolRange = [attrStr rangeOfString:@"Tc,"];
-        NSRange doubleRange = [attrStr rangeOfString:@"Td,"];
-        
-        if ([attrStr hasPrefix:@"T@"]) {
-            [protypes addObject:[attrStr substringWithRange:NSMakeRange(3, [attrStr rangeOfString:@","].location-4)]];
-        }
-        else if ([attrStr hasPrefix:@"Ti"])
-        {
-            [protypes addObject:@"int"];
-        }
-        else if ([attrStr hasPrefix:@"Tf"])
-        {
-            [protypes addObject:@"float"];
-        }
-        else if([attrStr hasPrefix:@"Td"]) {
-            [protypes addObject:@"double"];
-        }
-        else if([attrStr hasPrefix:@"Tl"])
-        {
-            [protypes addObject:@"long"];
-        }
-        else if ([attrStr hasPrefix:@"Tc"]) {
-            [protypes addObject:@"char"];
-        }
-        else if([attrStr hasPrefix:@"Ts"])
-        {
-            [protypes addObject:@"short"];
-        }
-        
-        NSString *propertyStr = [NSString stringWithUTF8String: propertyName];
-        //NSDate
-        if (nsDateRange.location != NSNotFound) {
-            [propertyDictionary setObject:kPropertyType_NSDate forKey:propertyStr];
-        }
-        //NSNumber
-        else if (nsNumberRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_NSNumber forKey:propertyStr];
-        }
-        //NSString
-        else if (nsStringRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_NSString forKey:propertyStr];
-        }
-        //NSData
-        else if (nsDataRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_NSData forKey:propertyStr];
-        }
-        
-        //unsigned int
-        else if (uIntRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_unsigned_int forKey:propertyStr];
-        }
-        //int
-        else if (intRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_int forKey:propertyStr];
-        }
-        //long
-        else if (longRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_long forKey:propertyStr];
-        }
-        //long long
-        else if (longlongRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_long_long forKey:propertyStr];
-        }
-        //unsigned long
-        else if (uLongRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_unsigned_long forKey:propertyStr];
-        }
-        //bool
-        else if (boolRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_bool forKey:propertyStr];
-        }
-        //double
-        else if (doubleRange.location != NSNotFound){
-            [propertyDictionary setObject:kPropertyType_double forKey:propertyStr];
-        }
+    if ([normalTypesString rangeOfString:type].location != NSNotFound) {
+        return K_SQLTYPE_Double;
     }
-    
-    free(properties);
-    
-    return propertyDictionary;
+    if ([blobTypeString rangeOfString:type].location != NSNotFound) {
+        return K_SQLTYPE_Blob;
+    }
+    if ([dateTypeString rangeOfString:type].location != NSNotFound) {
+        return K_SQLTYPE_Date;
+    }
+    return K_SQLTYPE_Text;
 }
-
 
 @end

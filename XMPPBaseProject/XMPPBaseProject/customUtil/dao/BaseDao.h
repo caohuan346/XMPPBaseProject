@@ -40,29 +40,40 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 //创建带主键的表,约定主键名为oid
 -(BOOL)createTableWithPKByClass:(Class)clazz;
 
+#pragma mark - drop table
+-(void)dropAllTable;
+
 #pragma mark - CRUD1——————————————————————————————————————————
 //如下的删除和更新的条件都是等值条件：即where子句中都是 “字段名=值” 的形式
 
 //根据表名、条件字典删除记录(等值，删除)
-- (BOOL)deleteWithTable:(NSString*) tableName withConditionDic:(NSDictionary*) conditionDic;
+- (BOOL)deleteRecord:(NSString*) tableName withConditionDic:(NSDictionary*) conditionDic;
 //根据表名、条件字典、需要修改字段-值字典进行更新
-- (BOOL)updateWithTable:(NSString*) tableName withModifyValueDic:(NSDictionary*)modifyDic withConditionDic:(NSDictionary*) conditionDic;
+- (BOOL)updateTable:(NSString*) tableName withModifyValueDic:(NSDictionary*)modifyDic withConditionDic:(NSDictionary*) conditionDic;
 
 #pragma mark - 根据表名、条件字典进行的CRUD
 #pragma mark - CRUD2——————————————————————————————————————————
 /*下面的四个方法为数据库通用方法，所有表都能用使用
  其中查询、更新、删除可以是任意条件：如where子句中可能有的 >=,<,+,<>,like等，针对查询还提供排序*/
 //根据表名、值字典插入记录
-- (BOOL)insertWithTable:(NSString*) tableName withDictionary:(NSDictionary*) dictionary;
+- (BOOL)insertTable:(NSString*) tableName withDictionary:(NSDictionary*) dictionary;
 //根据表名、记录（字典型）数组插入记录
-- (BOOL)insertInBatchWithTable:(NSString*) tableName withDictionaryArray:(NSArray*) dataArray;
+- (BOOL)insertTableInBatchMode:(NSString*) tableName withDictionaryArray:(NSArray*) dataArray;
 
 //根据类反射和条件字典删除
--(BOOL)deleteRecordWithTableName:(NSString *)tableName withConditionBeanArray:(NSArray *)conditionBeanArray;
+-(BOOL)deleteRecord:(NSString *)tableName withConditionBeanArray:(NSArray *)conditionBeanArray;
 //根据表名、条件字典查询记录(字典数组),提供各种条件过滤，如like,<>,并提供排序
--(NSArray *)queryToDictionaryArrayWithTable:(NSString*) tableName withConditionBeanArray:(NSArray *)conditionBeanArray;
-//根据sql进行查询，返回结果记录字典数组
--(NSArray *)queryToDictionaryWithSql:(NSString *)sql;
+-(NSArray *)queryToDictionaryArray:(NSString*) tableName withConditionBeanArray:(NSArray *)conditionBeanArray;
+
+/**
+ *	根据sql获得字典记录
+ *
+ *	@param	sql	<#sql description#>
+ *
+ *	@return	<#return value description#>
+ */
+
+-(NSArray *)query2DictionaryWithSql:(NSString *)sql;
 //根据表名、值字典、条件字典更新:提供各种条件
 -(BOOL)updateRecordWithTableName:(NSString *)tableName withModifiedDic:(NSDictionary *)modifiedDic withConditionBeanArray:(NSArray *)conditionBeanArray;
 
@@ -89,11 +100,11 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
 #pragma mark - insert
 //根据字典进行插入
--(void)insert:(Class)clazz dict:(NSDictionary *)dict;
+-(void)insertDBModel:(NSObject<DBModelProtocol> *) model dict:(NSDictionary *)dict;
 // 插入单个实体
--(BOOL)insertObject:(id)object;
+-(BOOL)insertDBModel:(NSObject<DBModelProtocol> *) model;
 //批量插入多个实体
--(void)insertObjectArray:(NSArray *)objectList;
+-(void)insertDBModelArray:(NSArray *)modelArray;
 
 #pragma mark - delete
 //根据类反射和条件对象删除(等值删除)
@@ -101,11 +112,11 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 
 #pragma mark - query
 //查询数据到字典数组，字典的Key对应列名（等值过滤）
--(NSArray *)queryDbToDictionaryArray:(NSString *)tableName withConditionObject:(NSObject *)conditionObj;
+-(NSArray *)query2DictionaryWithConditionObject:(NSObject<DBModelProtocol> *)conditionObj;
 //根据条件对象进行条件查询(等值过滤)
--(NSArray *)queryDbToObjectArray:(Class )clazz withConditionObject:(NSObject *)conditionObj;
+-(NSArray *)query2ObjectArrayWithConditionObject:(NSObject<DBModelProtocol> *)conditionObj;
 //根据条件对象进行条件查询，条件不一定是等值过滤，如like,<>,并提供排序
--(NSArray *)queryToObjectArray:(Class )clazz withConditionBeanArray:(NSArray *)conditionBeanArray;
+-(NSArray *)query2ObjectArrayWithDBModel:(NSObject<DBModelProtocol> *)model WithConditionBeanArray:(NSArray *)conditionBeanArray;
 
 #pragma mark - update
 //根据值对象和条件对象更新对应记录:等值条件

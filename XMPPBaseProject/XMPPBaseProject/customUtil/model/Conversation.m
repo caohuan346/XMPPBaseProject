@@ -11,12 +11,16 @@
 @implementation Conversation
 
 #pragma mark - db model protocol
-+(NSString *)tableName {
+-(NSString *)tableName {
     return @"t_conversation";
 }
 
-+(NSString *)tableCreateSQL {
+-(NSString *)tableCreateSQL {
     return  @"";
+}
+
+-(NSString *)primaryKey{
+    return @"oid";
 }
 
 @end
