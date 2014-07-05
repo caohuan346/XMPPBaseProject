@@ -14,7 +14,7 @@
 /**
  *  oid
  */
-@property (nonatomic, copy) NSString *oid;
+@property (nonatomic, assign) NSInteger oid;
 
 /**
  *  发送者ID
@@ -34,7 +34,7 @@
 /**
  *  未读消息个数
  */
-@property (nonatomic, strong) NSNumber *unreadCount;
+@property (nonatomic, assign) NSInteger unreadCount;
 
 /**
  *  消息类型 用户、群、讨论组、系统..

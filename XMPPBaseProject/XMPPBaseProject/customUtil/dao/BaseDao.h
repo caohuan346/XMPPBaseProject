@@ -244,6 +244,17 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
  */
 - (BOOL)updateDBModel:(NSObject<DBModelProtocol> *)model withConditionBeanArray:(NSArray *)conditionBeanArray;
 
+/**
+ *	更新记录，以主键作为查询条件
+ *
+ *	@param	model	目标信息实体对象
+ *
+ *	@return	success flag
+ */
+- (BOOL)updateDBModel:(NSObject<DBModelProtocol> *)model;
+
+- (void)updateDBModel:(NSObject<DBModelProtocol> *)model withConditionBeanArray:(NSArray *)conditionBeanArray callBack:(void(^)(BOOL))block;
+
 @end
 
 

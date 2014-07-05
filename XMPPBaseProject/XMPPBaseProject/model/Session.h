@@ -11,7 +11,7 @@
 
 @interface Session : NSObject<DBModelProtocol>
 
-@property (nonatomic,retain)    NSNumber *oid;
+@property (nonatomic,assign)    NSInteger oid;
 @property (nonatomic,copy)      NSString *sessionId;        //id：如聊天对象的id，系统消息的id（各自主键）
 @property (nonatomic,retain)    NSDate   *lastestMsgTime;   //最近一条消息的时间
 @property (nonatomic,retain)    NSString *conversationType;      //会话类型 用户、群、讨论组、系统..

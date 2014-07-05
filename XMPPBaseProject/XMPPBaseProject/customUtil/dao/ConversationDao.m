@@ -20,7 +20,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
     //查询会话记录
     Session *queryBean = [[Session alloc] init];
     queryBean.conversationType = aSession.conversationType;
-    NSArray *sessionArray = [[BaseDao sharedInstance] queryDbToObjectArray:[Session class] withConditionObject: queryBean];
+    NSArray *sessionArray = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:queryBean];
     
     BOOL optFlag;
     
@@ -28,7 +28,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
     if (sessionArray) {
         Session *oldSession = (Session *)[sessionArray objectAtIndex:0];
         aSession.unreadNum = [NSNumber numberWithInt:[oldSession.unreadNum intValue] +1];
-        optFlag = [[BaseDao sharedInstance] updateRecordWithClazz:[Session class] withModifiedBean:aSession withConditionObject:queryBean];
+        
+        optFlag = [[BaseDao sharedInstance] updateDBModel:aSession];
     }else{//不存在则添加
         optFlag = [[BaseDao sharedInstance] insertDBModel:aSession];
     }

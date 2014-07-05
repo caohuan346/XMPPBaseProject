@@ -188,18 +188,9 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 }
 
 #pragma mark - private (generate SQL)
-- (NSString *)createTableSQLWithDBModel:(NSObject<DBModelProtocol> *) model {
+- (NSString *)generatCreateTableSQLWithDBModel:(NSObject<DBModelProtocol> *) model {
     
-    NSString *tableName;
-    
-    if ([model respondsToSelector:@selector(tableName)]) {
-        tableName = [model tableName];
-        if (!tableName) {
-            tableName = [NSString stringWithUTF8String:class_getName([model class])];
-        }
-    }else {
-        tableName = [NSString stringWithUTF8String:class_getName([model class])];
-    }
+    NSString *tableName = [self tableName4DBModel:model];
     
     NSMutableString *sql = [[NSMutableString alloc] init];
     
@@ -214,15 +205,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     NSMutableArray* propertyTypeArray = [propertyInfoDic objectForKey:@"type"];
     
     //primaryKey
-    NSString *primaryKey;
-    if ([model respondsToSelector:@selector(primaryKey)]) {
-        primaryKey = [model primaryKey];
-        if (![propertyNameArray containsObject:primaryKey]) {
-            primaryKey = nil;
-        }
-    }else{
-        primaryKey = nil;
-    }
+    NSString *primaryKey = [self primaryKey4DBModel:model];
     
     NSInteger count = propertyNameArray.count;
     for (int i=0; i < count; i++) {
@@ -233,10 +216,10 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         NSString *propertyName = propertyNameArray[i];
         NSString *propertyType = propertyTypeArray[i];
         
-        [sql appendFormat:@"%@ %@",propertyName, [self sqliteTypeWithPropertyType:propertyType]];
+        [sql appendFormat:@"%@ %@ ",propertyName, [self sqliteTypeWithPropertyType:propertyType]];
         
-        if (primaryKey) {
-            [sql appendString:@"PRIMARY KEY ASC AUTOINCREMENT DEFAULT 1 "];
+        if ([propertyName isEqualToString:primaryKey]) {
+            [sql appendString:@" PRIMARY KEY ASC AUTOINCREMENT DEFAULT 1 "];
         }
     }
     [sql appendString:@")"];
@@ -247,7 +230,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 }
 
 //根据条件bean创建where条件sql段
--(NSString *)createWhereSqlByConditionDic:(NSDictionary *)conditionDic{
+-(NSString *)generateWhereSQLByConditionDic:(NSDictionary *)conditionDic{
     //组装条件
     NSMutableString *conditionSql = [NSMutableString stringWithFormat:@" where 1=1 "];
     
@@ -276,7 +259,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 }
 
 //根据对象获取插入该对象的sql语句
--(NSString *)createInsertSQL4DBModel:(NSObject<DBModelProtocol> *) model valueArray:(NSMutableArray *)valueArray{
+-(NSString *)generateInsertSQL4DBModel:(NSObject<DBModelProtocol> *) model valueArray:(NSMutableArray *)valueArray{
     NSMutableString *sql = [[NSMutableString alloc] init];
     NSArray *propertyArray = [model propertyArray];
     [sql appendFormat:@"insert into %@ (",[self tableName4DBModel:model]] ;
@@ -297,24 +280,16 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         i++;
     }
     [sql appendString:@") values ("];
-    //NSMutableArray *arrayValue = [NSMutableArray array];
+ 
     i=0;
     for (NSString *property in propertyArray) {
-        //如果是主键oid，跳过
-        if ([property isEqualToString:@"oid"]) {
+
+        if ([property isEqualToString:primaryKey]) {
             continue;
         }
-        
-        SEL selector = NSSelectorFromString(property);
-        
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        id value = [model performSelector:selector];
-#pragma clang diagnostic pop
-        
-        if (value==nil) {
-            value = @"";
-        }
+
+        //id value = [model dangerousValueForKey:property];
+        id value = [model safetyValueForKey:property];
         
         [valueArray addObject:value];
         
@@ -338,12 +313,15 @@ const static NSString* blobTypeString = @"NSDataUIImage";
  *
  *	@return	insert sql
  */
--(NSString *)createInsertSQL4DBModel:(NSObject<DBModelProtocol> *) model{
+-(NSString *)generateInsertSQL4DBModel:(NSObject<DBModelProtocol> *) model{
     
     NSString *tableName = [self tableName4DBModel:model];
+    NSString *primaryKey = [self primaryKey4DBModel:model];
     
     NSMutableString *sql = [[NSMutableString alloc] init];
+    
     NSDictionary *propertyInfoDic = [model propertyInfoDictionary];
+    
     NSArray *propertyNameArray = [propertyInfoDic objectForKey:@"name"];
     
     [sql appendFormat:@"insert into %@ (",tableName] ;
@@ -351,6 +329,9 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     NSInteger count = propertyNameArray.count;
     
     for (int i=0; i< count; i++) {
+        if ([propertyNameArray[i] isEqualToString:primaryKey]) {
+            continue;
+        }
         if (i>0) {
             [sql appendString:@","];
         }
@@ -360,11 +341,13 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     [sql appendString:@") values ("];
     
     for (int i = 0; i< count; i++) {
+        if ([propertyNameArray[i] isEqualToString:primaryKey]) {
+            continue;
+        }
         if (i>0) {
             [sql appendString:@","];
         }
         [sql appendFormat:@":%@",propertyNameArray[i]];
-        i++;
     }
     [sql appendString:@")"];
     
@@ -374,11 +357,11 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 /**
  *	根据条件bean创建where条件sql段
  *
- *	@param	beanArray	<#beanArray description#>
+ *	@param	beanArray	ConditionBean数组
  *
- *	@return	<#return value description#>
+ *	@return	where sql段
  */
--(NSString *)createWhereSqlByConditionBeanArray:(NSArray *)beanArray{
+-(NSString *)generateWhereSQLByConditionBeanArray:(NSArray *)beanArray{
     //组装条件
     NSMutableString *conditionSql = [NSMutableString stringWithFormat:@" where 1=1 "];
     
@@ -408,18 +391,18 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 /**
  *	根据表名和条件字典生成查询sql
  *
- *	@param	tableName	<#tableName description#>
- *	@param	beanArray	<#beanArray description#>
+ *	@param	tableName	表名
+ *	@param	beanArray	ConditionBean数组
  *
- *	@return	<#return value description#>
+ *	@return	查询sql
  */
--(NSString *)createQuerySqlByTableName:(NSString *)tableName conditionBeanArray:(NSArray *)beanArray{
+-(NSString *)generateQuerySQLByTableName:(NSString *)tableName conditionBeanArray:(NSArray *)beanArray{
     NSMutableString *sql = [NSMutableString stringWithFormat:@"select * from %@ ",tableName];//where 1=1
     NSMutableString *orderSql = [NSMutableString stringWithFormat:@" order by "];//排序部分sql
     if (beanArray) {
         
         //组装条件段
-        NSString *whereSql = [self createWhereSqlByConditionBeanArray:beanArray];
+        NSString *whereSql = [self generateWhereSQLByConditionBeanArray:beanArray];
         [sql appendString:whereSql];
         
         //组装排序段
@@ -451,6 +434,50 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     }
     
     NSLog(@"ConditionBean方式条件查询sql:%@",sql);
+    return sql;
+}
+
+/**
+ *	根据实体对象信息和条件bean数组，生成更新sql
+ *
+ *	@param	model	实体对象信息（目标信息）
+ *	@param	valueArray	执行参数
+ *	@param	conditionBeanArray	conditionBean数组
+ *
+ *	@return	更新sql
+ */
+- (NSString *)generateUpdateSQLWithDBModel:(NSObject<DBModelProtocol> *)model andValueArray:(NSMutableArray *)valueArray conditionBeanArray:(NSArray *)conditionBeanArray{
+    
+    NSString *tableName = [self tableName4DBModel:model];
+    
+    NSMutableString  *sql = [NSMutableString stringWithFormat:@"UPDATE %@  SET ",tableName];
+    
+    //set value
+    if (model) {
+        NSArray *columnArray = [model propertyArray];
+        
+        NSInteger i = 0;
+        for (NSString *field in columnArray) {
+            
+            id value = [model safetyValueForKey:field];
+            
+            if (value!=nil) {
+                if (i>0) {
+                    [sql appendString:@","];
+                }
+                [valueArray addObject:value];
+                [sql appendFormat:@" %@ = ? ",field];
+                i++;
+            }
+        }
+    }
+    
+    //where sql:
+    if (conditionBeanArray) {
+        NSString *whereSql = [self generateWhereSQLByConditionBeanArray:conditionBeanArray];
+        [sql appendString:whereSql];
+    }
+    
     return sql;
 }
 
@@ -672,7 +699,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     
     NSMutableString *sql = [NSMutableString stringWithFormat:@"delete from %@ ",tableName];
     //where
-    NSString *whereSql = [self createWhereSqlByConditionBeanArray:conditionBeanArray];
+    NSString *whereSql = [self generateWhereSQLByConditionBeanArray:conditionBeanArray];
     if (whereSql && whereSql.length>0) {
         [sql appendString:whereSql];
     }
@@ -691,7 +718,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 
 -(NSArray *)query2DictionaryArray:(NSString*) tableName withConditionBeanArray:(NSArray *)conditionBeanArray{
     
-    NSString *sql = [self createQuerySqlByTableName:tableName conditionBeanArray:conditionBeanArray];
+    NSString *sql = [self generateQuerySQLByTableName:tableName conditionBeanArray:conditionBeanArray];
     
     return [self query2DictionaryArrayWithSql:sql];
 }
@@ -768,7 +795,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     }
     
     //条件语句
-    NSString *whereSql = [self createWhereSqlByConditionBeanArray:conditionBeanArray];
+    NSString *whereSql = [self generateWhereSQLByConditionBeanArray:conditionBeanArray];
     if (whereSql) {
         [sql appendString:whereSql];
     }
@@ -793,7 +820,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 #pragma mark - create table
 -(BOOL)createTableWithDBModel:(NSObject<DBModelProtocol> *) model {
     
-    NSString *sql = [self createTableSQLWithDBModel:model];
+    NSString *sql = [self generatCreateTableSQLWithDBModel:model];
     
     __block BOOL result;
     
@@ -812,7 +839,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 
 #pragma mark - insert
 -(BOOL)insertDBModel:(NSObject<DBModelProtocol> *) model dict:(NSDictionary *)dict{
-    NSString *sql = [self createInsertSQL4DBModel:model];
+    NSString *sql = [self generateInsertSQL4DBModel:model];
     
     __block BOOL executeResult;
     if (sql && sql.length>0) {
@@ -827,7 +854,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 
 -(BOOL)insertDBModel:(NSObject<DBModelProtocol> *) model{
     NSMutableArray *valueArray = [NSMutableArray array];
-    NSString *sql = [self createInsertSQL4DBModel:model ];
+    NSString *sql = [self generateInsertSQL4DBModel:model valueArray:valueArray];
     
     __block BOOL executeResult;
     [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
@@ -846,7 +873,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         
         for (NSObject<DBModelProtocol> *model in modelArray) {
             NSMutableArray *valueArray = [[NSMutableArray alloc] init];
-            NSString *insertSql = [self createInsertSQL4DBModel:model valueArray:valueArray];
+            NSString *insertSql = [self generateInsertSQL4DBModel:model valueArray:valueArray];
             BOOL insertResult = [db executeUpdate:insertSql withArgumentsInArray:valueArray];
             if (!insertResult) {
                 NSLog(@"插入数据失败");
@@ -869,11 +896,8 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         //遍历所有字段
         NSArray *columnArray = [model propertyArray];
         for (NSString *field in columnArray) {
-            SEL selector = NSSelectorFromString(field);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            id value = [model performSelector:selector];
-#pragma clang diagnostic pop
+            
+            id value = [model safetyValueForKey:field];
             
             if (value!=nil) {
                 [sql appendFormat:@" and %@ = '%@' ",field,value];
@@ -898,7 +922,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
     
     NSString *tableName = [self tableName4DBModel:model];
     
-    NSString *sql = [self createQuerySqlByTableName:tableName conditionBeanArray:conditionBeanArray];
+    NSString *sql = [self generateQuerySQLByTableName:tableName conditionBeanArray:conditionBeanArray];
     
     return [self query2ObjectArray:model sql:sql];
 }
@@ -934,12 +958,7 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         //遍历所有字段
         NSArray *columnArray = [conditionModel propertyArray];
         for (NSString *field in columnArray) {
-            SEL selector = NSSelectorFromString(field);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            id value = [conditionModel performSelector:selector];
-#pragma clang diagnostic pop
-            
+            id value = [conditionModel safetyValueForKey:field];
             if (value!=nil) {
                 [sql appendFormat:@" and %@ = '%@' ",field,value];
             }
@@ -1008,11 +1027,9 @@ const static NSString* blobTypeString = @"NSDataUIImage";
         //loop all properties
         NSArray *columnArray = [conditionModel propertyArray];
         for (NSString *field in columnArray) {
-            SEL selector = NSSelectorFromString(field);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            id value = [conditionModel performSelector:selector];
-#pragma clang diagnostic pop
+
+            id value = [conditionModel safetyValueForKey:field];
+
             if (value!=nil) {
                 [sql appendFormat:@" and %@ = '%@' ",field,value];
             }
@@ -1025,53 +1042,75 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 }
 
 #pragma mark - update
-
 //根据值对象和条件字典更新对应记录:各字段的各种条件，如大于、不等于，like...
 -(BOOL)updateDBModel:(NSObject<DBModelProtocol> *)model withConditionBeanArray:(NSArray *)conditionBeanArray{
-    NSString *tableName = [self tableName4DBModel:model];
-    NSMutableString  *sql = [NSMutableString stringWithFormat:@"UPDATE %@  SET ",tableName];
     
-    NSMutableArray *arrayValue = [NSMutableArray array];
+    NSMutableArray *valueArray = [NSMutableArray array];
     
-    //set value
-    if (model) {
-        NSArray *columnArray = [model propertyArray];
-        
-        NSInteger i = 0;
-        for (NSString *field in columnArray) {
-            SEL selector = NSSelectorFromString(field);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            id value = [model performSelector:selector];
-#pragma clang diagnostic pop
-            
-            if (value!=nil) {
-                if (i>0) {
-                    [sql appendString:@","];
-                }
-                [arrayValue addObject:value];
-                [sql appendFormat:@" %@ = ? ",field];
-                i++;
-            }
-        }
-    }
-    
-    //where sql:
-    if (conditionBeanArray) {
-        NSString *whereSql = [self createWhereSqlByConditionBeanArray:conditionBeanArray];
-        [sql appendString:whereSql];
-    }
-    
-    NSLog(@"条件更新sql:%@",sql);
+    NSString *updateSql = [self generateUpdateSQLWithDBModel:model andValueArray:valueArray conditionBeanArray:conditionBeanArray];
     
     __block BOOL executeResult;
     [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
         [db open];
-        executeResult = [db executeUpdate:sql withArgumentsInArray:arrayValue];
+        executeResult = [db executeUpdate:updateSql withArgumentsInArray:valueArray];
         [db close];
     }];
     
     return executeResult;
+}
+
+- (BOOL)updateDBModel:(NSObject<DBModelProtocol> *)model{
+    NSString *tableName = [self tableName4DBModel:model];
+    
+    NSMutableString  *sql = [NSMutableString stringWithFormat:@"UPDATE %@  SET ",tableName];
+    
+    NSArray *columnArray = [model propertyArray];
+    NSMutableArray *valueArray = [NSMutableArray array];
+    
+    //where
+    NSString *primaryKey = [model primaryKey];
+    
+    NSInteger i = 0;
+    for (NSString *field in columnArray) {
+        if ([field isEqualToString:primaryKey]) {
+            continue;
+        }
+        
+        id value = [model safetyValueForKey:field];
+        
+        if (value!=nil) {
+            if (i>0) {
+                [sql appendString:@","];
+            }
+            [valueArray addObject:value];
+            [sql appendFormat:@" %@ = ? ",field];
+            i++;
+        }
+    }
+    
+    id primaryKeyValue = [model safetyValueForKey:primaryKey];
+    
+    [sql appendFormat:@" where %@ = ? ",primaryKey];
+    [valueArray addObject:primaryKeyValue];
+    
+    __block BOOL executeResult;
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
+        [db open];
+        executeResult = [db executeUpdate:sql withArgumentsInArray:valueArray];
+        [db close];
+    }];
+    
+    return executeResult;
+}
+
+- (void)updateDBModel:(NSObject<DBModelProtocol> *)model withConditionBeanArray:(NSArray *)conditionBeanArray callBack:(void(^)(BOOL))block{
+    NSMutableArray *valueArray = [NSMutableArray array];
+    NSString *updateSql = [self generateUpdateSQLWithDBModel:model andValueArray:valueArray conditionBeanArray:conditionBeanArray];
+    [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
+        [db open];
+        block([db executeUpdate:updateSql withArgumentsInArray:valueArray]);
+        [db close];
+    }];
 }
 
 @end

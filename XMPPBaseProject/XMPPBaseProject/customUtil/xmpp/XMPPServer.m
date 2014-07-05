@@ -568,7 +568,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
                 [users addObject:aUser];
             }
             
-            BOOL delFlag = [[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:nil];
+            BOOL delFlag = [[BaseDao sharedInstance] deleteDbModel:[[User alloc] init]];
             if (delFlag) {
                 [[BaseDao sharedInstance] insertDBModelArray:users];
             }

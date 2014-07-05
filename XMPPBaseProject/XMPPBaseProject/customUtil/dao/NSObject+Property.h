@@ -18,13 +18,6 @@
 
 @interface NSObject (Property)
 
-/**
- *	获取对象的属性列表
- *
- *	@return	属性列表
- */
-- (NSArray *)propertyArray;
-
 - (NSString *)tableSql:(NSString *)tablename;
 - (NSString *)tableSql;
 
@@ -33,6 +26,12 @@
 - (NSString *)className;
 
 #pragma mark - extend
+/**
+ *	获取对象的属性列表
+ *
+ *	@return	属性列表
+ */
+- (NSArray *)propertyArray;
 
 /**
  *	根据类反射获取对象属性类型字典
@@ -42,10 +41,23 @@
 - (NSDictionary *)propertyInfoDictionary;
 
 /**
- *	建表SQL
+ *  安全的获取属性值
  *
- *	@return	create table sql
+ *	@param	valueKey	property name
+ *
+ *	@return	value
  */
-- (NSString *)createTableSQL:(NSString *) tableName;
+- (id)safetyValueForKey:(NSString*)key;
+
+/**
+ @Deprecated
+ 
+ *	不安全的获取属性值，仅当属性为对象的时候是安全的
+ *
+ *	@param	valueKey	property name
+ *
+ *	@return	value
+ */
+- (id)dangerousValueForKey:(NSString*)key;
 
 @end

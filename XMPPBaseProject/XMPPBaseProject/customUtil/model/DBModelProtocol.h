@@ -20,13 +20,6 @@
 -(NSString *)tableName;
 
 /**
- *	建表sql
- *
- *	@return	create table sql
- */
--(NSString *)tableCreateSQL;
-
-/**
  *	表主键
  *
  *	@return	primaryKey

@@ -111,15 +111,15 @@
     
     User *queryBean = [[User alloc] init];
     queryBean.subscribe = @"both";
-    NSArray *bothUsers = [[BaseDao sharedInstance] queryDbToObjectArray:[User class] withConditionObject:queryBean];
+    NSArray *bothUsers = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:queryBean];
     self.subscribeBothUsers = [NSMutableArray arrayWithArray:bothUsers];
     
     queryBean.subscribe = @"from";
-    NSArray *fromUsers = [[BaseDao sharedInstance] queryDbToObjectArray:[User class] withConditionObject:queryBean];
+    NSArray *fromUsers = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:queryBean];
     self.subscribeFromUsers = [NSMutableArray arrayWithArray:fromUsers];;
     
     queryBean.subscribe = @"to";
-    NSArray *toUsers = [[BaseDao sharedInstance] queryDbToObjectArray:[User class] withConditionObject:queryBean];
+    NSArray *toUsers = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:queryBean];
     self.subscribeToUsers = [NSMutableArray arrayWithArray:toUsers];
 }
 
@@ -278,12 +278,12 @@
         //删除数据库中用户表信息
         User *queryBean = [[User alloc] init];
         queryBean.userId = user.userId;
-        [[BaseDao sharedInstance] deleteRecordWithClazz:[User class] withConditionObject:queryBean];
+        [[BaseDao sharedInstance] deleteDbModel:queryBean];
         
         //删除数据库中聊天信息
         Message *msgQueryBean = [[Message alloc] init];
         msgQueryBean.chatUserId = user.userId;
-        [[BaseDao sharedInstance] deleteRecordWithClazz:[Message class] withConditionObject:msgQueryBean];
+        [[BaseDao sharedInstance] deleteDbModel:msgQueryBean];
         
         if (indexPath.section == 0) {
             [self.subscribeBothUsers removeObjectAtIndex:indexPath.row];

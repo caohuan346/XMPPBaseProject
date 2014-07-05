@@ -24,4 +24,13 @@
     return  self;
 }
 
+#pragma mark - db model protocol
+-(NSString *)tableName {
+    return @"t_Session";
+}
+
+-(NSString *)primaryKey{
+    return @"oid";
+}
+
 @end

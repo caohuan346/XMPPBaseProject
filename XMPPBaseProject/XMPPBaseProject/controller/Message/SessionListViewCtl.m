@@ -84,7 +84,8 @@
 #pragma mark - custom private
 //init data
 -(void)initData{
-    self.sessionList = [[BaseDao sharedInstance] queryDbToObjectArray:[Session class] withConditionObject:nil];
+
+    self.sessionList = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:[[Session alloc] init]];
 }
 
 //refresh Data
@@ -124,7 +125,6 @@
         // 模拟延迟加载数据，因此2秒后才调用）
         // 这里的refreshView其实就是footer
         [vc performSelector:@selector(doneWithView:) withObject:refreshView afterDelay:2.0];
-        
         NSLog(@"%@----开始进入刷新状态", refreshView.class);
     };
     _footer = footer;

@@ -11,6 +11,7 @@
 
 @interface User : NSObject<DBModelProtocol>
 
+@property(nonatomic,assign)NSInteger oid;
 @property(nonatomic,copy)NSString *userId;
 @property(nonatomic,copy)NSString *subscribe;
 @property(nonatomic,copy)NSString *groupId;

@@ -94,15 +94,15 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(DataBaseHandler)
     }
     
     //User
-    BOOL tUserFlag = [[BaseDao sharedInstance] createTableWithPKByClass:[User class]];
+    BOOL tUserFlag = [[BaseDao sharedInstance] createTableWithDBModel:[[User alloc] init]];
     //session
-    BOOL tSessionFlag = [[BaseDao sharedInstance] createTableWithPKByClass:[Session class]];
+    BOOL tSessionFlag = [[BaseDao sharedInstance] createTableWithDBModel:[[Session alloc] init]];
     //Message
-    BOOL tMsgFlag = [[BaseDao sharedInstance] createTableWithPKByClass:[Message class]];
+    BOOL tMsgFlag = [[BaseDao sharedInstance] createTableWithDBModel:[[Message alloc] init]];
     
-    BOOL tMsgFlag1 = [[BaseDao sharedInstance] createTableWithPKByClass:[Conversation class]];
-    
-	return tUserFlag && tSessionFlag && tMsgFlag;
+    BOOL tConversationFlag = [[BaseDao sharedInstance] createTableWithDBModel:[[Conversation alloc] init]];
+
+	return tUserFlag && tSessionFlag && tMsgFlag && tConversationFlag;
 }
 
 #pragma mark Customized:General

@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DBModelProtocol.h"
 
 //chat msg
-@protocol DBModelProtocol;
 @interface Message : NSObject<DBModelProtocol>
 
+@property(nonatomic,assign)NSInteger oid;
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *chatUserId;    //发送者id，对应JID中得用户名
 @property(nonatomic,copy)NSString *chatUserJID;   //发送者的JID

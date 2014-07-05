@@ -50,6 +50,7 @@
 		4797699E1952E07F00CA5FBA /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 479769981952E07F00CA5FBA /* WebViewController.m */; };
 		479769BC1952E1E500CA5FBA /* SessionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 479769B91952E1E500CA5FBA /* SessionCell.m */; };
 		479769BD1952E1E500CA5FBA /* SessionListViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 479769BB1952E1E500CA5FBA /* SessionListViewCtl.m */; };
+		479CCBF81967DFF200AC7022 /* BaseDaoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 479CCBF71967DFF200AC7022 /* BaseDaoTests.m */; };
 		47B389DB1961AC5000469B76 /* BaseDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B389D01961AC5000469B76 /* BaseDao.m */; };
 		47B389DC1961AC5000469B76 /* BuddyDao.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B389D21961AC5000469B76 /* BuddyDao.m */; };
 		47B389DD1961AC5000469B76 /* DataBaseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 47B389D41961AC5000469B76 /* DataBaseHandler.m */; };
@@ -473,6 +474,7 @@
 		479769B91952E1E500CA5FBA /* SessionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionCell.m; sourceTree = "<group>"; };
 		479769BA1952E1E500CA5FBA /* SessionListViewCtl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionListViewCtl.h; sourceTree = "<group>"; };
 		479769BB1952E1E500CA5FBA /* SessionListViewCtl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionListViewCtl.m; sourceTree = "<group>"; };
+		479CCBF71967DFF200AC7022 /* BaseDaoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDaoTests.m; sourceTree = "<group>"; };
 		47B389CF1961AC5000469B76 /* BaseDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDao.h; sourceTree = "<group>"; };
 		47B389D01961AC5000469B76 /* BaseDao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDao.m; sourceTree = "<group>"; };
 		47B389D11961AC5000469B76 /* BuddyDao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuddyDao.h; sourceTree = "<group>"; };
@@ -2435,6 +2437,7 @@
 			children = (
 				BBDCFCD518F52342008A4DA7 /* XMPPBaseProjectTests.m */,
 				BBDCFCD018F52342008A4DA7 /* Supporting Files */,
+				479CCBF71967DFF200AC7022 /* BaseDaoTests.m */,
 			);
 			path = XMPPBaseProjectTests;
 			sourceTree = "<group>";
@@ -3195,6 +3198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBDCFCD618F52342008A4DA7 /* XMPPBaseProjectTests.m in Sources */,
+				479CCBF81967DFF200AC7022 /* BaseDaoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

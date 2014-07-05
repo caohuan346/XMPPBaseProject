@@ -11,6 +11,14 @@
 #pragma mark - implementation chat Message
 @implementation Message
 
+#pragma mark - db model protocol
+-(NSString *)tableName {
+    return @"t_message";
+}
+
+-(NSString *)primaryKey{
+    return @"oid";
+}
 
 @end
 

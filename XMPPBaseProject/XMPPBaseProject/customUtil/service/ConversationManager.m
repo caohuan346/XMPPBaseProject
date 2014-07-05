@@ -8,7 +8,7 @@
 
 #import "ConversationManager.h"
 #import "ConversationDao.h"
-
+#import "Conversation.h"
 @interface ConversationManager ()
 
 @property (nonatomic)ConversationDao *dao;
@@ -30,7 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationManager)
 
 
 -(NSArray *) conversations{
-    return [_dao queryToDictionaryArray:@"Session" withConditionBeanArray:nil];
+    return [_dao query2ObjectArrayWithConditionObject:[[Conversation alloc] init]];
 }
 
 @end

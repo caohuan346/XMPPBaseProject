@@ -98,7 +98,7 @@
     
     NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
     
-    NSArray *tempMsgArray = [[BaseDao sharedInstance] queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    NSArray *tempMsgArray = [[BaseDao sharedInstance] query2ObjectArrayWithDBModel:[[Message alloc] init] WithConditionBeanArray:condiBeanArray];
     
     //reverse the msgs
     NSArray* reversedArray = [[tempMsgArray reverseObjectEnumerator] allObjects];
@@ -117,7 +117,7 @@
     
     NSArray *condiBeanArray = [NSArray arrayWithObjects:bean1,bean2,bean3,nil];
     
-    NSArray *tempMsgArray = [[BaseDao sharedInstance] queryToObjectArray:[Message class] withConditionBeanArray:condiBeanArray];
+    NSArray *tempMsgArray = [[BaseDao sharedInstance] query2ObjectArrayWithDBModel:[[Message alloc] init] WithConditionBeanArray:condiBeanArray];
     
     if (tempMsgArray.count > 0) {
         //reverse the msgs

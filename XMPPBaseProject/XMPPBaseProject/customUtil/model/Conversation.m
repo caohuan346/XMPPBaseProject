@@ -15,10 +15,6 @@
     return @"t_conversation";
 }
 
--(NSString *)tableCreateSQL {
-    return  @"";
-}
-
 -(NSString *)primaryKey{
     return @"oid";
 }

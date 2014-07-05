@@ -206,36 +206,30 @@
     return propertyDictionary;
 }
 
-- (NSString *)createTableSQL:(NSString *) tableName {
-    NSMutableString *sql = [[NSMutableString alloc] init];
-    
-    if (!tableName) {
-        tableName = [NSString  stringWithUTF8String:class_getName(self.class)];
+- (id)safetyValueForKey:(NSString*)key{
+    id value = [self valueForKey:key];
+//    if(value == nil)
+//    {
+//        return @"";
+//    }
+    if([value intValue] == 0){
+        value = nil;
     }
-    [sql appendFormat:@"CREATE TABLE IF NOT EXISTS %@ (",tableName] ;
+    return value;
+}
+
+- (id)dangerousValueForKey:(NSString*)key{
+    SEL selector = NSSelectorFromString(key);
     
-    NSDictionary *propertyInfoDic = [self propertyInfoDictionary];
-    NSMutableArray* propertyNameArray = [propertyInfoDic objectForKey:@"name"];
-    NSMutableArray* propertyTypeArray = [propertyInfoDic objectForKey:@"type"];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    id value = [self performSelector:selector];
+#pragma clang diagnostic pop
     
-    NSInteger count = propertyNameArray.count;
-    for (int i=0; i < count; i++) {
-        if (i>0) {
-            [sql appendString:@","];
-        }
-        
-        NSString *propertyName = propertyNameArray[i];
-        NSString *propertyType = propertyTypeArray[i];
-        
-        [sql appendFormat:@"%@ %@",propertyName, [NSObject sqlliteTypeWithPropertyType:propertyType]];
-        
-        i++;
+    if (value==nil) {
+        value = @"";
     }
-    [sql appendString:@")"];
-    
-    NSLog(@"建表sql:%@",sql);
-    
-    return sql;
+    return value;
 }
 
 #pragma mark- static method

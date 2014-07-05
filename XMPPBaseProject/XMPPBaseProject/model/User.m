@@ -10,6 +10,14 @@
 
 @implementation User
 
+#pragma mark - db model protocol
+-(NSString *)tableName {
+    return @"t_user";
+}
+
+-(NSString *)primaryKey{
+    return @"oid";
+}
 
 @end
 
