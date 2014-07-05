@@ -1,5 +1,5 @@
 //  PathService.h
-//  KuaiKuai
+//  XMPPBaseProject
 //
 //  Created by hxc on 13-4-21.
 //  Copyright (c) 2013年 Andy. All rights reserved.

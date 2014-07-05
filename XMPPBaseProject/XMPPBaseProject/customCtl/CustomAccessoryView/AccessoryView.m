@@ -1,9 +1,9 @@
 //
 //  AccessoryView.m
-//  KuaiKuai
+//  XMPPBaseProject
 //
 //  Created by caohuan on 13-9-6.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Copyright (c) 2013年 hc. All rights reserved.
 //
 
 #import "AccessoryView.h"

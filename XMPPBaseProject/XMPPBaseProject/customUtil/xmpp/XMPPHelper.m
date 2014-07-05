@@ -97,6 +97,7 @@
     queryBean.userId = userName;
     
     NSArray *userArray = [[BaseDao sharedInstance] queryDbToObjectArray:[User class] withConditionObject:queryBean];
+
     User *user1 = [userArray objectAtIndex:0];
     
     if (!user1) {

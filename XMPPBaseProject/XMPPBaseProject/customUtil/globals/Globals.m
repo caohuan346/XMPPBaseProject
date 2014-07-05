@@ -2,7 +2,7 @@
 //  EduSun
 //
 //  Created by yisi on 13-4-21.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Copyright (c) 2013年 hc. All rights reserved.
 //
 //
 

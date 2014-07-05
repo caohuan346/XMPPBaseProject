@@ -1,9 +1,9 @@
 //
 //  NSObject+Property.h
-//  KuaiKuai
+//  XMPPBaseProject
 //
 //  Created by caohuan on 13-11-18.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Copyright (c) 2013年 hc. All rights reserved.
 //
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>

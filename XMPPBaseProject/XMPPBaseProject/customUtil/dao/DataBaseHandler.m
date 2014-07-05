@@ -1,9 +1,9 @@
 //
 //  DBCenter.m
-//  KuaiKuai
+//  XMPPBaseProject
 //
-//  Created by Andy on 13-9-11.
-//  Copyright (c) 2013年 MONTNETS. All rights reserved.
+//  Created by hc on 13-9-11.
+//  Copyright (c) 2013年 hc. All rights reserved.
 //
 
 #import "DataBaseHandler.h"
