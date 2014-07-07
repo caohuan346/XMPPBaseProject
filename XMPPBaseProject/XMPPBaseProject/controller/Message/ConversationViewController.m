@@ -1,14 +1,14 @@
 /************************************************************
-  *  * EaseMob CONFIDENTIAL 
-  * __________________ 
-  * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved. 
-  *  
-  * NOTICE: All information contained herein is, and remains 
-  * the property of EaseMob Technologies.
-  * Dissemination of this information or reproduction of this material 
-  * is strictly forbidden unless prior written permission is obtained
-  * from EaseMob Technologies.
-  */
+ *  * EaseMob CONFIDENTIAL
+ * __________________
+ * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved.
+ *
+ * NOTICE: All information contained herein is, and remains
+ * the property of EaseMob Technologies.
+ * Dissemination of this information or reproduction of this material
+ * is strictly forbidden unless prior written permission is obtained
+ * from EaseMob Technologies.
+ */
 
 #import "ConversationViewController.h"
 #import "SRRefreshView.h"
@@ -26,9 +26,6 @@
 @interface ConversationViewController ()<UITableViewDelegate,UITableViewDataSource, UISearchDisplayDelegate,SRRefreshDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) NSMutableArray        *dataSource;
-
-//@property (strong, nonatomic) UITableView           *tableView;
-//@property (nonatomic, strong) EMSearchBar           *searchBar;
 @property (nonatomic, strong) SRRefreshView         *slimeView;
 @property (nonatomic, strong) UIView                *networkStateView;
 
@@ -38,6 +35,7 @@
 
 @implementation ConversationViewController
 
+#pragma mark - life circle
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,6 +65,7 @@
     self.searchBar.placeholder = @"搜索";
     self.searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
     
+    self.dataSource = [NSMutableArray array];
     [self refreshDataSource];
 }
 
@@ -126,28 +125,28 @@
             }
             
             /*
-            
-            EMConversation *conversation = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
-            cell.name = conversation.chatter;
-            if (!conversation.isGroup) {
-                cell.placeholderImage = [UIImage imageNamed:@"chatListCellHead.png"];
-            }
-            else{
-                NSString *imageName = @"groupPublicHeader";
-                NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
-                for (EMGroup *group in groupArray) {
-                    if ([group.groupId isEqualToString:conversation.chatter]) {
-                        cell.name = group.groupSubject;
-                        imageName = group.isPublic ? @"groupPublicHeader" : @"groupPrivateHeader";
-                        break;
-                    }
-                }
-                cell.placeholderImage = [UIImage imageNamed:imageName];
-            }
-            cell.detailMsg = [weakSelf subTitleMessageByConversation:conversation];
-            cell.time = [weakSelf lastMessageTimeByConversation:conversation];
-            cell.unreadCount = [weakSelf unreadMessageCountByConversation:conversation];
-            */
+             
+             EMConversation *conversation = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
+             cell.name = conversation.chatter;
+             if (!conversation.isGroup) {
+             cell.placeholderImage = [UIImage imageNamed:@"chatListCellHead.png"];
+             }
+             else{
+             NSString *imageName = @"groupPublicHeader";
+             NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
+             for (EMGroup *group in groupArray) {
+             if ([group.groupId isEqualToString:conversation.chatter]) {
+             cell.name = group.groupSubject;
+             imageName = group.isPublic ? @"groupPublicHeader" : @"groupPrivateHeader";
+             break;
+             }
+             }
+             cell.placeholderImage = [UIImage imageNamed:imageName];
+             }
+             cell.detailMsg = [weakSelf subTitleMessageByConversation:conversation];
+             cell.time = [weakSelf lastMessageTimeByConversation:conversation];
+             cell.unreadCount = [weakSelf unreadMessageCountByConversation:conversation];
+             */
             
             if (indexPath.row % 2 == 1) {
                 cell.contentView.backgroundColor = [UIColor grayColor];//RGBACOLOR(246, 246, 246, 1);
@@ -168,10 +167,10 @@
             [weakSelf.searchController.searchBar endEditing:YES];
             
             /*
-            EMConversation *conversation = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
-            ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:conversation.chatter];
-            chatVC.title = conversation.chatter;
-            [weakSelf.navigationController pushViewController:chatVC animated:YES];
+             EMConversation *conversation = [weakSelf.searchController.resultsSource objectAtIndex:indexPath.row];
+             ChatViewController *chatVC = [[ChatViewController alloc] initWithChatter:conversation.chatter];
+             chatVC.title = conversation.chatter;
+             [weakSelf.navigationController pushViewController:chatVC animated:YES];
              */
         }];
     }
@@ -202,174 +201,101 @@
 
 #pragma mark - private
 
-- (NSMutableArray *)loadDataSource
+- (NSArray *)loadDataSource
 {
     
     NSArray *resultArray = [[GlobalHandler sharedInstance].conversationManager conversations];
     
-    NSLog(@"resultArray:%@",resultArray);
     /*
-    NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
-    NSArray* sorte = [conversations sortedArrayUsingComparator:
-           ^(EMConversation *obj1, EMConversation* obj2){
-               EMMessage *message1 = [obj1 latestMessage];
-               EMMessage *message2 = [obj1 latestMessage];
-               if(message1.timestamp > message2.timestamp) {
-                   return(NSComparisonResult)NSOrderedAscending;
-               }else {
-                   return(NSComparisonResult)NSOrderedDescending;
-               }
-           }];
-    
-    ret = [[NSMutableArray alloc] initWithArray:sorte];
-    return ret;
-    */
+     NSArray *conversations = [[EaseMob sharedInstance].chatManager conversations];
+     NSArray* sorte = [conversations sortedArrayUsingComparator:
+     ^(EMConversation *obj1, EMConversation* obj2){
+     EMMessage *message1 = [obj1 latestMessage];
+     EMMessage *message2 = [obj1 latestMessage];
+     if(message1.timestamp > message2.timestamp) {
+     return(NSComparisonResult)NSOrderedAscending;
+     }else {
+     return(NSComparisonResult)NSOrderedDescending;
+     }
+     }];
+     
+     ret = [[NSMutableArray alloc] initWithArray:sorte];
+     return ret;
+     */
     
     return resultArray;
 }
 
 // 得到最后消息时间
 /*
--(NSString *)lastMessageTimeByConversation:(EMConversation *)conversation
-{
-    NSString *ret = @"";
-    
-    
-    EMMessage *lastMessage = [conversation latestMessage];;
-    if (lastMessage) {
-        ret = [NSDate formattedTimeFromTimeInterval:lastMessage.timestamp];
-    }
-    return ret;
-}
-*/
+ -(NSString *)lastMessageTimeByConversation:(EMConversation *)conversation
+ {
+ NSString *ret = @"";
+ 
+ 
+ EMMessage *lastMessage = [conversation latestMessage];;
+ if (lastMessage) {
+ ret = [NSDate formattedTimeFromTimeInterval:lastMessage.timestamp];
+ }
+ return ret;
+ }
+ */
 
 
 // 得到未读消息条数
 
 /*
-- (NSInteger)unreadMessageCountByConversation:(EMConversation *)conversation
-{
-    NSInteger ret = 0;
-    ret = conversation.unreadMessagesCount;
-    
-    return  ret;
-}
+ - (NSInteger)unreadMessageCountByConversation:(EMConversation *)conversation
+ {
+ NSInteger ret = 0;
+ ret = conversation.unreadMessagesCount;
+ 
+ return  ret;
+ }
  */
 
 // 得到最后消息文字或者类型
 /*
--(NSString *)subTitleMessageByConversation:(EMConversation *)conversation
-{
-    NSString *ret = @"";
-    
-    
-    EMMessage *lastMessage = [conversation latestMessage];
-    if (lastMessage) {
-        id<IEMMessageBody> messageBody = lastMessage.messageBodies.lastObject;
-        switch (messageBody.messageBodyType) {
-            case eMessageBodyType_Image:{
-                ret = @"[图片]";
-            }
-                break;
-            case eMessageBodyType_Text:{
-                ret = ((EMTextMessageBody *)messageBody).text;
-            }
-                break;
-            case eMessageBodyType_Voice:{
-                ret = @"[声音]";
-            }
-                break;
-            case eMessageBodyType_Location:
-                ret = @"[位置]";
-            case eMessageBodyType_Video:
-                ret = @"[视频]";
-            default:
-                break;
-        }
-    }
-
-    return ret;
-}
+ -(NSString *)subTitleMessageByConversation:(EMConversation *)conversation
+ {
+ NSString *ret = @"";
+ 
+ 
+ EMMessage *lastMessage = [conversation latestMessage];
+ if (lastMessage) {
+ id<IEMMessageBody> messageBody = lastMessage.messageBodies.lastObject;
+ switch (messageBody.messageBodyType) {
+ case eMessageBodyType_Image:{
+ ret = @"[图片]";
+ }
+ break;
+ case eMessageBodyType_Text:{
+ ret = ((EMTextMessageBody *)messageBody).text;
+ }
+ break;
+ case eMessageBodyType_Voice:{
+ ret = @"[声音]";
+ }
+ break;
+ case eMessageBodyType_Location:
+ ret = @"[位置]";
+ case eMessageBodyType_Video:
+ ret = @"[视频]";
+ default:
+ break;
+ }
+ }
+ 
+ return ret;
+ }
  */
 
 
 #pragma mark - TableViewDelegate & TableViewDatasource
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    static NSString *identify = @"ConversationCell";
-    ConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:identify forIndexPath:indexPath];
-    
-    cell.conversation = [self.dataSource objectAtIndex:indexPath.row];
-    
-    /*
-    EMConversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
-    cell.name = conversation.chatter;
-    if (!conversation.isGroup) {
-        cell.placeholderImage = [UIImage imageNamed:@"chatListCellHead.png"];
-    }
-    else{
-        NSString *imageName = @"groupPublicHeader";
-        NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
-        for (EMGroup *group in groupArray) {
-            if ([group.groupId isEqualToString:conversation.chatter]) {
-                cell.name = group.groupSubject;
-                imageName = group.isPublic ? @"groupPublicHeader" : @"groupPrivateHeader";
-                break;
-            }
-        }
-        cell.placeholderImage = [UIImage imageNamed:imageName];
-    }
-    cell.detailMsg = [self subTitleMessageByConversation:conversation];
-    cell.time = [self lastMessageTimeByConversation:conversation];
-    cell.unreadCount = [self unreadMessageCountByConversation:conversation];
-    if (indexPath.row % 2 == 1) {
-        cell.contentView.backgroundColor = RGBACOLOR(246, 246, 246, 1);
-    }else{
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-    }
-     */
-    
-    return cell;
-}
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return  self.dataSource.count;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-   Conversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
-    
-    /*
-    ChatViewController *chatController;
-    NSString *title = conversation.chatter;
-    if (conversation.isGroup) {
-        NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
-        for (EMGroup *group in groupArray) {
-            if ([group.groupId isEqualToString:conversation.chatter]) {
-                chatController = [[ChatViewController alloc] initWithGroup:group];
-                title = group.groupSubject;
-                break;
-            }
-        }
-        
-        if (chatController == nil) {
-            chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
-        }
-    }
-    else{
-        chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
-    }
-    chatController.title = title;
-    [conversation markMessagesAsRead:YES];
-    [self.navigationController pushViewController:chatController animated:YES];
-     */
 }
 
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -380,14 +306,87 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         /*
-        EMConversation *converation = [self.dataSource objectAtIndex:indexPath.row];
-        [[EaseMob sharedInstance].chatManager removeConversationByChatter:converation.chatter deleteMessages:NO];
-        [self.dataSource removeObjectAtIndex:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         EMConversation *converation = [self.dataSource objectAtIndex:indexPath.row];
+         [[EaseMob sharedInstance].chatManager removeConversationByChatter:converation.chatter deleteMessages:NO];
+         [self.dataSource removeObjectAtIndex:indexPath.row];
+         [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
          */
     }
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    static NSString *identify = @"ConversationCell";
+    ConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:identify forIndexPath:indexPath];
+    
+    cell.conversation = [self.dataSource objectAtIndex:indexPath.row];
+    
+    /*
+     EMConversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
+     cell.name = conversation.chatter;
+     if (!conversation.isGroup) {
+     cell.placeholderImage = [UIImage imageNamed:@"chatListCellHead.png"];
+     }
+     else{
+     NSString *imageName = @"groupPublicHeader";
+     NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
+     for (EMGroup *group in groupArray) {
+     if ([group.groupId isEqualToString:conversation.chatter]) {
+     cell.name = group.groupSubject;
+     imageName = group.isPublic ? @"groupPublicHeader" : @"groupPrivateHeader";
+     break;
+     }
+     }
+     cell.placeholderImage = [UIImage imageNamed:imageName];
+     }
+     cell.detailMsg = [self subTitleMessageByConversation:conversation];
+     cell.time = [self lastMessageTimeByConversation:conversation];
+     cell.unreadCount = [self unreadMessageCountByConversation:conversation];
+     if (indexPath.row % 2 == 1) {
+     cell.contentView.backgroundColor = RGBACOLOR(246, 246, 246, 1);
+     }else{
+     cell.contentView.backgroundColor = [UIColor whiteColor];
+     }
+     */
+    
+    return cell;
+}
+
+#pragma mark - tableView delegate
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    Conversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
+    
+    /*
+     ChatViewController *chatController;
+     NSString *title = conversation.chatter;
+     if (conversation.isGroup) {
+     NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
+     for (EMGroup *group in groupArray) {
+     if ([group.groupId isEqualToString:conversation.chatter]) {
+     chatController = [[ChatViewController alloc] initWithGroup:group];
+     title = group.groupSubject;
+     break;
+     }
+     }
+     
+     if (chatController == nil) {
+     chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
+     }
+     }
+     else{
+     chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
+     }
+     chatController.title = title;
+     [conversation markMessagesAsRead:YES];
+     [self.navigationController pushViewController:chatController animated:YES];
+     */
+}
 
 #pragma mark - UISearchBarDelegate
 
@@ -450,15 +449,15 @@
 
 #pragma mark - IChatMangerDelegate
 /*
--(void)didUnreadMessagesCountChanged
-{
-    [self refreshDataSource];
-}
-
-- (void)didUpdateGroupList:(NSArray *)allGroups error:(EMError *)error
-{
-    [self refreshDataSource];
-}
+ -(void)didUnreadMessagesCountChanged
+ {
+ [self refreshDataSource];
+ }
+ 
+ - (void)didUpdateGroupList:(NSArray *)allGroups error:(EMError *)error
+ {
+ [self refreshDataSource];
+ }
  */
 
 #pragma mark - registerNotifications
@@ -479,7 +478,7 @@
 
 -(void)refreshDataSource
 {
-    self.dataSource = [self loadDataSource];
+    [self.dataSource setArray:[self loadDataSource]];
     [_tableView reloadData];
     //[self hideHud];
 }

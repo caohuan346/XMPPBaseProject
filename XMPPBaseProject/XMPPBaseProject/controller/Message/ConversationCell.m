@@ -93,47 +93,10 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-//    @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
-//    @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-//    @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-//    @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-
-    //self.nameLabel.text = self.conversation.senderId;
-    //self.contentLabel.text = self.conversation.msgContent;
-    //self.timeLabel.text = [NSDate formattedTimeFromTimeInterval:self.conversation.time];
     
-    /*
-    [super layoutSubviews];
-    CGRect frame = self.imageView.frame;
-    
-    [self.imageView setImage:_placeholderImage];
-    self.imageView.frame = CGRectMake(10, 7, 45, 45);
-    
-    self.textLabel.text = _name;
-    self.textLabel.frame = CGRectMake(65, 7, 175, 20);
-    
-    _detailLabel.text = _detailMsg;
-    _timeLabel.text = _time;
-    if (_unreadCount > 0) {
-        if (_unreadCount < 9) {
-            _unreadLabel.font = [UIFont systemFontOfSize:13];
-        }else if(_unreadCount > 9 && _unreadCount < 99){
-            _unreadLabel.font = [UIFont systemFontOfSize:12];
-        }else{
-            _unreadLabel.font = [UIFont systemFontOfSize:10];
-        }
-        [_unreadLabel setHidden:NO];
-        [self.contentView bringSubviewToFront:_unreadLabel];
-        _unreadLabel.text = [NSString stringWithFormat:@"%d",_unreadCount];
-    }else{
-        [_unreadLabel setHidden:YES];
-    }
-    
-    frame = _lineView.frame;
-    frame.origin.y = self.contentView.frame.size.height - 1;
-    _lineView.frame = frame;
-    
-    */
+    self.nameLabel.text = self.conversation.senderId;
+    self.timeLabel.text = [self.conversation.time minuteDescription];
+    self.contentLabel.text = self.conversation.msgContent;
 }
 
 -(void)setName:(NSString *)name{

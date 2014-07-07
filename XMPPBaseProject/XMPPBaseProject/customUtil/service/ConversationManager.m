@@ -30,7 +30,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationManager)
 
 
 -(NSArray *) conversations{
-    return [_dao query2ObjectArrayWithConditionObject:[[Conversation alloc] init]];
+    return [_dao query2ObjectArrayWithDBModel:[[Conversation alloc] init] withConditionBeanArray:nil];
 }
 
 @end
