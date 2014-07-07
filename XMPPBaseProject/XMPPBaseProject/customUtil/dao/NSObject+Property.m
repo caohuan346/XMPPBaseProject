@@ -208,13 +208,13 @@
 
 - (id)safetyValueForKey:(NSString*)key{
     id value = [self valueForKey:key];
-//    if(value == nil)
-//    {
-//        return @"";
-//    }
-    if([value intValue] == 0){
-        value = nil;
+    if(value == nil)
+    {
+        return @"";
     }
+//    if([value intValue] == 0){
+//        value = nil;
+//    }
     return value;
 }
 

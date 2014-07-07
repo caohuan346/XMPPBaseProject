@@ -84,7 +84,6 @@
 #pragma mark - custom private
 //init data
 -(void)initData{
-
     self.sessionList = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:[[Session alloc] init]];
 }
 

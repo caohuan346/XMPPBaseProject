@@ -32,7 +32,7 @@
     Conversation *model = [[Conversation alloc] init];
     model.senderId = @"10002";
     model.time = [NSDate date];
-    model.msgContent = @"testMsg";
+    model.msgContent = nil;
     model.unreadCount = 10;
     model.type = ConversationTypePersonalChat;
     model.detailType = MessageContentType_Text;
@@ -45,9 +45,27 @@
 
 - (void)testDelete{
     Conversation *model = [[Conversation alloc] init];
-    model.oid = 1;
-    BOOL flag = [[BaseDao sharedInstance] deleteDbModel:model];
+    ConditionBean *bean = [ConditionBean conditionWhereBeanWithField:@"oid" compare:CHComparisonMarkEQ withValue:@"4"];
+    ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"msgContent" compare:CHComparisonMarkEQ withValue:@""];
+    BOOL flag = [[BaseDao sharedInstance] deleteDbModel:model withConditionBeanArray:@[bean,bean1]];
     XCTAssertEqual(flag, YES, @"删除成功");
 }
 
+- (void)testQueryWithConditionBeanArray{
+    Conversation *model = [[Conversation alloc] init];
+    ConditionBean *bean = [ConditionBean conditionWhereBeanWithField:@"oid" compare:CHComparisonMarkEQ withValue:@"2"];
+    NSArray *array = [[BaseDao sharedInstance] query2ObjectArrayWithDBModel:model withConditionBeanArray:@[bean]];
+    XCTAssertEqual(array.count, 1, @"查询成功");
+}
+
+- (void)testUpdate {
+    Conversation *model = [[Conversation alloc] init];
+    ConditionBean *bean = [ConditionBean conditionWhereBeanWithField:@"oid" compare:CHComparisonMarkEQ withValue:@"2"];
+    NSArray *array = [[BaseDao sharedInstance] query2ObjectArrayWithDBModel:model withConditionBeanArray:@[bean]];
+    model = array[0];
+    
+    model.msgContent = @"content after modified";
+    BOOL flag = [[BaseDao sharedInstance] updateDBModel:model];
+     XCTAssertEqual(flag, YES, @"修改成功");
+}
 @end

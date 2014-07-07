@@ -278,12 +278,15 @@
         //删除数据库中用户表信息
         User *queryBean = [[User alloc] init];
         queryBean.userId = user.userId;
-        [[BaseDao sharedInstance] deleteDbModel:queryBean];
+        
+        ConditionBean *bean = [ConditionBean conditionWhereBeanWithField:@"userId" compare:CHComparisonMarkEQ withValue:user.userId];
+        [[BaseDao sharedInstance] deleteDbModel:queryBean withConditionBeanArray:@[bean]];
         
         //删除数据库中聊天信息
         Message *msgQueryBean = [[Message alloc] init];
         msgQueryBean.chatUserId = user.userId;
-        [[BaseDao sharedInstance] deleteDbModel:msgQueryBean];
+        //[[BaseDao sharedInstance] deleteDbModel:msgQueryBean];
+        [[BaseDao sharedInstance] deleteDbModel:msgQueryBean withConditionBeanArray:@[bean]];
         
         if (indexPath.section == 0) {
             [self.subscribeBothUsers removeObjectAtIndex:indexPath.row];

@@ -22,7 +22,7 @@
 #define CHOrderMarkDesc @"desc"       //降序
 #define CHOrderMarkAsc  @"asc"        //升序
 
-@class DataBaseHandler;
+@class DataBaseHandler,ConditionBean;
 @interface BaseDao : NSObject
 
 //singleton
@@ -196,11 +196,21 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
 /**
  *	删除记录
  *
+ *	@param	model	对应表中的一条记录
+ *	@param	conditonBean	单一条件bean
+ *
+ *	@return	delete flag
+ */
+- (BOOL)deleteDbModel:(NSObject<DBModelProtocol> *) model withConditionBean:(ConditionBean *)conditonBean;
+
+/**
+ *	删除记录
+ *
  *	@param	model 对应表中的一条记录
  *
  *	@return	success flag
  */
-- (BOOL)deleteDbModel:(NSObject<DBModelProtocol> *) model;
+- (BOOL)deleteDbModel:(NSObject<DBModelProtocol> *) model withConditionBeanArray:(NSArray *)conditionBeanArray;
 
 #pragma mark - query: for object which is implement DBModelProtocol
 
@@ -212,7 +222,7 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
  *
  *	@return	结果对象数组
  */
-- (NSArray *)query2ObjectArrayWithDBModel:(NSObject<DBModelProtocol> *)model WithConditionBeanArray:(NSArray *)conditionBeanArray;
+- (NSArray *)query2ObjectArrayWithDBModel:(NSObject<DBModelProtocol> *)model withConditionBeanArray:(NSArray *)conditionBeanArray;
 
 /**
  *	根据条件对象信息查询对应对象数组
@@ -221,7 +231,7 @@ SYNTHESIZE_SINGLETON_FOR_HEADER(BaseDao)
  *
  *	@return	结果集
  */
-- (NSArray *)query2ObjectArrayWithConditionObject:(NSObject<DBModelProtocol> *)conditionModel;
+- (NSArray *)query2ObjectArrayWithConditionObject:(NSObject<DBModelProtocol> *)conditionModel DEPRECATED(2_01);
 
 /**
  *	根据条件对象信息查询对应字典信息数组
