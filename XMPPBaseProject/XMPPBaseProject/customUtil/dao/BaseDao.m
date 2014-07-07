@@ -844,15 +844,17 @@ const static NSString* blobTypeString = @"NSDataUIImage";
 -(BOOL)insertDBModel:(NSObject<DBModelProtocol> *) model dict:(NSDictionary *)dict{
     NSString *sql = [self generateInsertSQL4DBModel:model];
     
-    __block BOOL executeResult;
+    
     if (sql && sql.length>0) {
+        __block BOOL executeResult;
         [[DataBaseHandler sharedInstance].fmdbQueue inDatabase:^(FMDatabase *db) {
             [db open];
             executeResult = [db executeUpdate:sql withParameterDictionary:dict];
             [db close];
         }];
+        return executeResult;
     }
-    return executeResult;
+    return NO;
 }
 
 -(BOOL)insertDBModel:(NSObject<DBModelProtocol> *) model{

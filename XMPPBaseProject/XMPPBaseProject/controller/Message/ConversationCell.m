@@ -14,6 +14,8 @@
 #import "ConversationCell.h"
 #import "Conversation.h"
 #import "NSDate+Category.h"
+#import "XMPPHelper.h"
+#import "AppDelegate.h"
 
 @interface ConversationCell ()
 
@@ -97,6 +99,39 @@
     self.nameLabel.text = self.conversation.senderId;
     self.timeLabel.text = [self.conversation.time minuteDescription];
     self.contentLabel.text = self.conversation.msgContent;
+    
+    self.iconImageView.alpha = 1.0f;
+    ConversationType conversationType = self.conversation.type;
+    
+    UIImage *iconImage;
+    //个人
+    if (conversationType == ConversationTypePersonalChat) {
+        XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@",self.conversation.senderId,SharedAppDelegate.globals.xmppServerDomain]];
+        
+        self.nameLabel.text = jid.user;
+        
+        iconImage = [XMPPHelper xmppUserPhotoForJID:jid];
+        
+        NSMutableDictionary *onlineUsersDic = SharedAppDelegate.xmppServer.onlineDict;
+        if (![onlineUsersDic objectForKey:jid.user]) {
+            self.iconImageView.alpha = 0.5f;
+        }
+        self.iconImageView.image = iconImage;
+    }
+    //群组
+    else if (conversationType == ConversationTypeGroupChat){
+        
+    }
+    //添加好友等等处理信息
+    else if (conversationType == ConversationTypeSubscription){
+        self.nameLabel.text = @"系统消息";
+    }
+    
+    //系统消息
+    else if (conversationType == ConversationTypeSystem){
+        
+    }
+
 }
 
 -(void)setName:(NSString *)name{

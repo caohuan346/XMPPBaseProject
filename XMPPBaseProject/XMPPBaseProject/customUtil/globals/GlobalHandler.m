@@ -27,6 +27,7 @@ static NSString *kTDIMServiceName = @"kTDIMServiceName";
 SYNTHESIZE_SINGLETON_FOR_CLASS(GlobalHandler)
 
 - (void)testAll {
+    /*
 	// Getting & Setings Passwords
 	[SSKeychain setPassword:kSSToolkitTestsPassword forService:kSSToolkitTestsServiceName account:kSSToolkitTestsAccountName];
 	NSString *password = [SSKeychain passwordForService:kSSToolkitTestsServiceName account:kSSToolkitTestsAccountName];
@@ -43,6 +44,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GlobalHandler)
 	[SSKeychain deletePasswordForService:kSSToolkitTestsServiceName account:kSSToolkitTestsAccountName];
 	password = [SSKeychain passwordForService:kSSToolkitTestsServiceName account:kSSToolkitTestsAccountName];
 	//STAssertNil(password, @"Password deletes");
+     */
 }
 
 

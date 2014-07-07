@@ -45,10 +45,8 @@
     self.tView.delegate = self;
     self.tView.dataSource = self;
     self.tView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    NSLog(@"%@",NSStringFromCGRect(self.view.frame));
-    NSLog(@"%@",NSStringFromCGRect(self.tView.frame));
     
-    [self addHeader];
+    //[self addHeader];
     
     self.messages = [NSMutableArray array];
     
@@ -57,12 +55,13 @@
     [self initData];
     
     [self initaccessoryView];
-
+    
     //init chat tool bar
     [self.chatToolBar initSubviewsWithFrame:self.chatToolBar.frame superView:self.view];
     self.chatToolBar.chatDelegate=self;
-    
+    /*
     [self performSelectorOnMainThread:@selector(refreshDataToButtom) withObject:nil waitUntilDone:NO];
+     */
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -84,12 +83,13 @@
     // Release any retained subviews of the main view.
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)dealloc {
+    self.messages = nil;
+    self.tView = nil;
+    self.chatTargetUser = nil;
+    self.chatToolBar = nil;
+    accessoryView = nil;
 }
-
-
 #pragma mark - private
 -(void)initData{
     ConditionBean *bean1 = [ConditionBean conditionWhereBeanWithField:@"chatUserId" compare:CHComparisonMarkEQ withValue:_chatTargetUser.userId];

@@ -21,7 +21,8 @@
 #import "EMSearchDisplayController.h"
 #import "ConversationManager.h"
 #import "AppDelegate.h"
-#import "Session.h"
+#import "Message.h"
+#import "User.h"
 
 @interface ConversationViewController ()<UITableViewDelegate,UITableViewDataSource, UISearchDisplayDelegate,SRRefreshDelegate, UISearchBarDelegate>
 
@@ -65,6 +66,8 @@
     self.searchBar.placeholder = @"搜索";
     self.searchBar.backgroundColor = [UIColor colorWithRed:0.747 green:0.756 blue:0.751 alpha:1.000];
     
+    [self registerNotifications];
+    
     self.dataSource = [NSMutableArray array];
     [self refreshDataSource];
 }
@@ -77,13 +80,15 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    [self registerNotifications];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self unregisterNotifications];
+}
+
+- (void)dealloc{
     [self unregisterNotifications];
 }
 
@@ -226,6 +231,21 @@
     return resultArray;
 }
 
+//收到xmpp消息
+- (void)didReceiveXMPPMsg:(NSNotification*)aNotification{
+    XMPPMsg *aMsg = (XMPPMsg *)aNotification.object;
+    XMPPType type = aMsg.msgType;
+    if (type == XMPPTypeMessagePersonalNormal) {
+        NSLog(@"收到来自 %@ 的消息",aMsg.senderId);
+    }else if (type == XMPPTypeMessageIsComposing){
+        NSLog(@"%@正在输入",aMsg.senderId);
+    }else if (type == XMPPTypeMessageHasPaused){
+        NSLog(@"%@停止输入",aMsg.senderId);
+    }
+    
+    [self refreshDataSource];
+}
+
 // 得到最后消息时间
 /*
  -(NSString *)lastMessageTimeByConversation:(EMConversation *)conversation
@@ -361,31 +381,29 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     Conversation *conversation = [self.dataSource objectAtIndex:indexPath.row];
+
+    ConversationType conversationType = conversation.type;
     
-    /*
-     ChatViewController *chatController;
-     NSString *title = conversation.chatter;
-     if (conversation.isGroup) {
-     NSArray *groupArray = [[EaseMob sharedInstance].chatManager groupList];
-     for (EMGroup *group in groupArray) {
-     if ([group.groupId isEqualToString:conversation.chatter]) {
-     chatController = [[ChatViewController alloc] initWithGroup:group];
-     title = group.groupSubject;
-     break;
-     }
-     }
-     
-     if (chatController == nil) {
-     chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
-     }
-     }
-     else{
-     chatController = [[ChatViewController alloc] initWithChatter:conversation.chatter];
-     }
-     chatController.title = title;
-     [conversation markMessagesAsRead:YES];
-     [self.navigationController pushViewController:chatController animated:YES];
-     */
+    //个人
+    if (conversationType == ConversationTypePersonalChat) {
+        [self performSegueWithIdentifier:@"chat" sender:self];
+    }
+    
+    //群组
+    else if (conversationType == ConversationTypeGroupChat){
+        
+    }
+    
+    //添加好友等等处理信息
+    else if (conversationType == ConversationTypeSubscription){
+        
+    }
+    
+    //系统消息
+    else if (conversationType == ConversationTypeSystem){
+        
+    }
+
 }
 
 #pragma mark - UISearchBarDelegate
@@ -463,15 +481,11 @@
 #pragma mark - registerNotifications
 -(void)registerNotifications{
     [self unregisterNotifications];
-    //[[EaseMob sharedInstance].chatManager addDelegate:self delegateQueue:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveXMPPMsg:) name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
 }
 
 -(void)unregisterNotifications{
-    //[[EaseMob sharedInstance].chatManager removeDelegate:self];
-}
-
-- (void)dealloc{
-    [self unregisterNotifications];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kNoti_XMPP_didReceiveXMPPMsg object:nil];
 }
 
 #pragma mark - public
@@ -492,5 +506,44 @@
         _tableView.tableHeaderView = nil;
     }
 }
+
+#pragma mark - segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"chat"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        Conversation *conversation = [self.dataSource objectAtIndex:[indexPath row]];
+
+        switch (conversation.type) {
+            case ConversationTypePersonalChat:{
+                ChatViewController *chatViewCtl = segue.destinationViewController;
+                User *targetUser = [[User alloc] init];
+                XMPPJID *targetJID = [XMPPJID jidWithString:conversation.senderId];
+                targetUser.userId = targetJID.user;
+                chatViewCtl.chatTargetUser = targetUser;
+            }
+                break;
+            case ConversationTypeGroupChat:{
+                
+            }
+                break;
+            case ConversationTypeSubscription:{
+                
+            }
+                
+                break;
+            case ConversationTypeSystem:{
+                
+            }
+                
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
 
 @end

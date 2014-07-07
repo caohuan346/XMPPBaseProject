@@ -42,24 +42,23 @@
 {
     UIScrollView *scrollView;//表情滚动视图
     UIPageControl *pageControl;
-    UIView *theSuperView;
     
     BOOL keyboardIsShow;//键盘是否显示
 }
 
-@property(nonatomic,strong) UIView *theSuperView;
+@property(nonatomic, weak) UIView *theSuperView;
 
-@property(nonatomic,strong) UIView *toolBar;//工具栏
-@property(nonatomic,strong) UIExpandingTextView *textView;//文本输入框
-@property (nonatomic,strong) UIButton *faceButton;//表情按钮
-@property (nonatomic,strong) UIButton *voiceButton;//语音
-@property(nonatomic,strong) UIButton *recordButton;//录音长按按钮
-@property (nonatomic,strong) UIButton *moreButton;//更多
+@property(nonatomic, strong) UIView *toolBar;//工具栏
+@property(nonatomic, strong) UIExpandingTextView *textView;//文本输入框
+@property(nonatomic, strong) UIButton *faceButton;//表情按钮
+@property(nonatomic, strong) UIButton *voiceButton;//语音
+@property(nonatomic, strong) UIButton *recordButton;//录音长按按钮
+@property(nonatomic, strong) UIButton *moreButton;//更多
 
-@property (nonatomic,assign) NSObject<FaceToolBarDelegate> *chatDelegate;
+@property(nonatomic, assign) NSObject<FaceToolBarDelegate> *chatDelegate;
 
--(void)dismissKeyBoard;
--(void)dismissFaceScrollView;
--(id)initWithFrame:(CGRect)frame superView:(UIView *)superView;
--(void)initSubviewsWithFrame:(CGRect)frame superView:(UIView *)superView;
+- (void)dismissKeyBoard;
+- (void)dismissFaceScrollView;
+- (id)initWithFrame:(CGRect)frame superView:(UIView *)superView;
+- (void)initSubviewsWithFrame:(CGRect)frame superView:(UIView *)superView;
 @end

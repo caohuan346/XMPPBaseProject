@@ -113,7 +113,7 @@ static NSString *const FTUtilsVersionString = @"1.1.0";
  For example, `UIColorFromRGB(0xFF0000)` creates a `UIColor` object representing
  the color red.
 */
-#define UIColorFromRGB(rgbValue) \
+#define UIColorFromRGBXXXX(rgbValue) \
 [UIColor \
   colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
          green:((float)((rgbValue & 0x00FF00) >> 8))/255.0 \
