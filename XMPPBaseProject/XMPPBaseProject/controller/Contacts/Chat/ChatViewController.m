@@ -57,11 +57,11 @@
     [self initaccessoryView];
     
     //init chat tool bar
-    //[self.chatToolBar initSubviewsWithFrame:self.chatToolBar.frame superView:self.view];
-    //self.chatToolBar.chatDelegate=self;
-    /*
+    [self.chatToolBar initSubviewsWithFrame:self.chatToolBar.frame superView:self.view];
+    
+    self.chatToolBar.chatDelegate=self;
+    
     [self performSelectorOnMainThread:@selector(refreshDataToButtom) withObject:nil waitUntilDone:NO];
-     */
 }
 
 -(void)viewWillAppear:(BOOL)animated{
