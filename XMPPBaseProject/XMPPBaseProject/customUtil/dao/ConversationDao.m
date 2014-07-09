@@ -20,6 +20,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ConversationDao)
     //查询会话记录
     Session *queryBean = [[Session alloc] init];
     queryBean.conversationType = aSession.conversationType;
+    ConditionBean *bean = [ConditionBean conditionWhereBeanWithField:@"" compare:CHComparisonMarkEQ withValue:[NSString stringWithFormat:@"%@",aSession.conversationType]];
+    
     NSArray *sessionArray = [[BaseDao sharedInstance] query2ObjectArrayWithConditionObject:queryBean];
     
     BOOL optFlag;

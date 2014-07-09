@@ -16,6 +16,7 @@
 #import "NSDate+Category.h"
 #import "XMPPHelper.h"
 #import "AppDelegate.h"
+#import "JSBadgeView.h"
 
 @interface ConversationCell ()
 
@@ -99,6 +100,9 @@
     self.nameLabel.text = self.conversation.senderId;
     self.timeLabel.text = [self.conversation.time minuteDescription];
     self.contentLabel.text = self.conversation.msgContent;
+    
+    JSBadgeView *badgeView = [[JSBadgeView alloc] initWithParentView:self.iconImageView alignment:JSBadgeViewAlignmentTopRight];
+    badgeView.badgeText = [NSString stringWithFormat:@"%d", self.conversation.unreadCount];
     
     self.iconImageView.alpha = 1.0f;
     ConversationType conversationType = self.conversation.type;

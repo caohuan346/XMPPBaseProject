@@ -9,6 +9,8 @@
 #import "XMPPServer.h"
 #import "XMPPPresence.h"
 #import "XMPPJID.h"
+#import "XMPPMessage+XEP_0085.h"
+#import "XMPPMessage+XEP_0184.h"
 #import "XMPPHelper.h"
 #import "Message.h"
 #import "Globals.h"
@@ -595,6 +597,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
  
  */
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message{
+    /*
     NSString *type = [[message attributeForName:@"type"] stringValue];
     NSString *from = [[message attributeForName:@"from"] stringValue];  //发送者
     NSString *to = [[message attributeForName:@"to"] stringValue];      //接收者
@@ -656,6 +659,56 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
     
     //xmpp消息通知
     [[NSNotificationCenter defaultCenter] postNotificationName:kNoti_XMPP_didReceiveXMPPMsg object:aXmppMsg userInfo:nil];
+    */
+    
+    // A simple example of inbound message handling.
+    if([message hasChatState] && ![message isErrorMessage])
+    {
+        //OTRManagedBuddy * messageBuddy = [self buddyWithMessage:message inContext:context];
+        if([message isComposingChatState]){
+            //[messageBuddy receiveChatStateMessage:kOTRChatStateComposing];
+        }
+        
+        else if([message isPausedChatState]){
+           //[messageBuddy receiveChatStateMessage:kOTRChatStatePaused];
+        }
+        
+        else if([message isActiveChatState]){
+             //[messageBuddy receiveChatStateMessage:kOTRChatStateActive];
+        }
+        
+        else if([message isInactiveChatState]){
+            //[messageBuddy receiveChatStateMessage:kOTRChatStateInactive];
+        }
+            
+        else if([message isGoneChatState]){
+             //[messageBuddy receiveChatStateMessage:kOTRChatStateGone];
+        }
+           
+    }
+    
+    if ([message hasReceiptResponse] && ![message isErrorMessage]) {
+        //[OTRManagedMessage receivedDeliveryReceiptForMessageID:[message receiptResponseID]];
+    }
+    
+	if ([message isMessageWithBody] && ![message isErrorMessage])
+	{
+        NSString *body = [[message elementForName:@"body"] stringValue];
+        
+        /*
+        OTRManagedBuddy * messageBuddy = [self buddyWithMessage:message inContext:context];
+        
+        NSDate * date = [message delayedDeliveryDate];
+        
+        OTRManagedMessage *otrMessage = [OTRManagedMessage newMessageFromBuddy:messageBuddy message:body encrypted:YES delayedDate:date inContext:context];
+        [context MR_saveToPersistentStoreAndWait];
+        
+        [OTRCodec decodeMessage:otrMessage completionBlock:^(OTRManagedMessage *message) {
+            [OTRManagedMessage showLocalNotificationForMessage:message];
+        }];
+         */
+	}
+    
     
     /*
      NSDictionary *bodyDict = [Globals JsonStringToDict:[[message elementForName:@"body"] stringValue]];

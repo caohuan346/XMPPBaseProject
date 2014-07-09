@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47035D28196D38EF00929C71 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 47035D27196D38EF00929C71 /* JSBadgeView.m */; };
 		4705D23419026367006D1D2E /* AccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4705D23319026367006D1D2E /* AccessoryView.m */; };
 		470EADEF1962EBE200DBD2A8 /* add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 470EADEE1962EBE200DBD2A8 /* add@2x.png */; };
 		470EADF91962ECA400DBD2A8 /* AddFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 470EADF21962ECA400DBD2A8 /* AddFriendCell.m */; };
@@ -389,6 +390,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		47035D26196D38EF00929C71 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		47035D27196D38EF00929C71 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 		4705D23219026367006D1D2E /* AccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccessoryView.h; sourceTree = "<group>"; };
 		4705D23319026367006D1D2E /* AccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccessoryView.m; sourceTree = "<group>"; };
 		470EADEE1962EBE200DBD2A8 /* add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add@2x.png"; sourceTree = "<group>"; };
@@ -1095,6 +1098,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		47035D25196D38EF00929C71 /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				47035D26196D38EF00929C71 /* JSBadgeView.h */,
+				47035D27196D38EF00929C71 /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
 		4705D23119026367006D1D2E /* CustomAccessoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2470,6 +2482,7 @@
 		BBDCFF7418F52806008A4DA7 /* customCtl */ = {
 			isa = PBXGroup;
 			children = (
+				47035D25196D38EF00929C71 /* JSBadgeView */,
 				47EAFC13195D501400561D4C /* MBProgressHUD */,
 				47EAFC0F195D4FEC00561D4C /* WCAlertView */,
 				47EAFBD7195D4CB700561D4C /* SlimeRefresh */,
@@ -2956,6 +2969,7 @@
 				BBDC014A18F52807008A4DA7 /* SBJsonStreamWriter.m in Sources */,
 				BBDC01B418F52808008A4DA7 /* NSXMLElement+XEP_0297.m in Sources */,
 				47EAFC1D195D518A00561D4C /* ChineseToPinyin.m in Sources */,
+				47035D28196D38EF00929C71 /* JSBadgeView.m in Sources */,
 				BBDC015318F52807008A4DA7 /* XMPPDigestMD5Authentication.m in Sources */,
 				471573291926100600E88EC9 /* MJRefreshHeaderView.m in Sources */,
 				BBDC013118F52807008A4DA7 /* XMPPServer.m in Sources */,

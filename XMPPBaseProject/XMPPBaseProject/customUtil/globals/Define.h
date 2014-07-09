@@ -12,7 +12,7 @@
 #endif
 
 //mini of
-#define XMPPServerURL      @"192.168.8.62"
+#define XMPPServerURL      @"192.168.8.69"
 #define XMPPServerHostName @"hc-mini.local"
 
 //macbook of
