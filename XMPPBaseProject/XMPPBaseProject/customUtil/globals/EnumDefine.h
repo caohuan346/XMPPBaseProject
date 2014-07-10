@@ -13,40 +13,35 @@
 
 #endif
 
-//消息类型（文字，图片..）
-typedef enum {
-	ContentType_Text = 0,
-    ContentType_Image = 1,
-    ContentType_Audio = 2,
-    ContentType_System = 3,
-} ContentType;
-
-/*!
- @enum
- @brief 聊天类型
- @constant MessageType_Text 文本类型
- @constant MessageType_Image 图片类型
- @constant MessageType_Video 视频类型
- @constant MessageType_Location 位置类型
- @constant MessageType_Voice 语音类型
- @constant MessageType_File 文件类型
- @constant MessageType_Command 命令类型
- */
+//聊天类型
 typedef NS_ENUM(NSUInteger, MessageContentType){
-    MessageContentType_Text = 1,
-    MessageContentType_Image,
-    MessageContentType_Video,
-    MessageContentType_Location,
-    MessageContentType_Voice,
-    MessageContentType_File,
-    MessageContentType_Command
+    MessageContentType_Text = 1,    //文本
+    MessageContentType_Image,       //图片
+    MessageContentType_Video,       //视频
+    MessageContentType_Location,    //位置
+    MessageContentType_Voice,       //语音
+    MessageContentType_File,        //文件
+    MessageContentType_Command      //命令
 };
 
-//发送方向
-typedef enum {
-	SendType_Received = 0,
-	SendType_Send = 1,
-} SendType;
+//消息状态
+typedef NS_ENUM(NSUInteger, MessageState) {
+    MessageState_Fail = 1,      //失败
+    MessageState_Success,       //成功：发送到服务器了
+    MessageState_Arrived,       //到达目标用户
+    MessageState_HaveRead,      //用户已读
+    MessageState_Unknown        //unknown
+};
+
+//聊天状态
+typedef NS_ENUM(NSUInteger,  ChatState) {
+    ChatStateUnknown   = 0,     //未知
+    ChatStateActive    = 1,     //active
+    ChatStateComposing = 2,
+    ChatStatePaused    = 3,
+    ChatStateInactive  = 4,
+    ChatStateGone      = 5
+};
 
 //群/私消息
 typedef enum {

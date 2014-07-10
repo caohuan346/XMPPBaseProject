@@ -41,6 +41,7 @@
 		4747FA1719629D0200D7AA84 /* EMRemarkImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4747FA1619629D0200D7AA84 /* EMRemarkImageView.m */; };
 		4747FA1A19629D8000D7AA84 /* PublicGroupDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4747FA1919629D8000D7AA84 /* PublicGroupDetailViewController.m */; };
 		4748E43A1963AE47002F7C05 /* Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4748E4391963AE47002F7C05 /* Conversation.m */; };
+		4759ED7B196E4302001BE001 /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4759ED7A196E4302001BE001 /* ChatMessage.m */; };
 		47783A45195D3E8700A3CE57 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 47783A44195D3E8700A3CE57 /* BaseTableViewCell.m */; };
 		4797698C1952E02800CA5FBA /* SettingViewCtl.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797698B1952E02800CA5FBA /* SettingViewCtl.m */; };
 		479769991952E07F00CA5FBA /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4797698F1952E07F00CA5FBA /* AppViewController.m */; };
@@ -455,6 +456,8 @@
 		4747FA1919629D8000D7AA84 /* PublicGroupDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublicGroupDetailViewController.m; sourceTree = "<group>"; };
 		4748E4381963AE47002F7C05 /* Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conversation.h; sourceTree = "<group>"; };
 		4748E4391963AE47002F7C05 /* Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Conversation.m; sourceTree = "<group>"; };
+		4759ED79196E4302001BE001 /* ChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		4759ED7A196E4302001BE001 /* ChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		47783A43195D3E8700A3CE57 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		47783A44195D3E8700A3CE57 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
 		47974D491965035700D7FB4B /* DBModelProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBModelProtocol.h; sourceTree = "<group>"; };
@@ -1261,6 +1264,8 @@
 				47974D491965035700D7FB4B /* DBModelProtocol.h */,
 				4748E4381963AE47002F7C05 /* Conversation.h */,
 				4748E4391963AE47002F7C05 /* Conversation.m */,
+				4759ED79196E4302001BE001 /* ChatMessage.h */,
+				4759ED7A196E4302001BE001 /* ChatMessage.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2998,6 +3003,7 @@
 				47F6B52E18F8E75F00246D68 /* EmojiEmoticons.m in Sources */,
 				BBDC01BF18F52808008A4DA7 /* DDFileLogger.m in Sources */,
 				BBDC019518F52808008A4DA7 /* TURNSocket.m in Sources */,
+				4759ED7B196E4302001BE001 /* ChatMessage.m in Sources */,
 				470EADF91962ECA400DBD2A8 /* AddFriendCell.m in Sources */,
 				BBDC014918F52807008A4DA7 /* SBJsonStreamParserState.m in Sources */,
 				BBDCFCBB18F52342008A4DA7 /* AppDelegate.m in Sources */,

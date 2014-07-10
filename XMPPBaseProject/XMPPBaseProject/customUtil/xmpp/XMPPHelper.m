@@ -8,6 +8,7 @@
 
 #import "XMPPHelper.h"
 #import "XMPPServer+Add.h"
+#import "XMPPMessage+XEP_0085.h"
 #import "AppDelegate.h"
 #include "Session.h"
 #import "Message.h"
@@ -147,6 +148,7 @@
 
 //发送xmpp消息
 +(void)xmppSendMessage:(XMPPMsg *)xmppMsg{
+    /*
     XMPPType type = xmppMsg.msgType;
     NSString *msgContent = xmppMsg.content;
     
@@ -168,6 +170,21 @@
 
     //发送消息
     [[XMPPServer xmppStream] sendElement:mes];
+     */
+    
+    NSString *messageStr = xmppMsg.content;
+    
+    if ([messageStr length] >0)
+    {
+        NSString *jidStr = [NSString stringWithFormat:@"%@@%@",xmppMsg.targetId,SharedAppDelegate.globals.xmppServerDomain];
+        NSString * messageID = [NSString stringWithFormat:@"%@",xmppMsg.senderId];
+        XMPPMessage * xmppMessage = [XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithString:jidStr] elementID:messageID];
+        [xmppMessage addBody:messageStr];
+        
+        [xmppMessage addActiveChatState];
+		
+		[[XMPPServer xmppStream] sendElement:xmppMessage];
+    }
 }
 
 /*

@@ -664,19 +664,20 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
     // A simple example of inbound message handling.
     if([message hasChatState] && ![message isErrorMessage])
     {
-        //OTRManagedBuddy * messageBuddy = [self buddyWithMessage:message inContext:context];
+        //ChatStateComposing
         if([message isComposingChatState]){
             //[messageBuddy receiveChatStateMessage:kOTRChatStateComposing];
         }
         
+        //ChatStatePaused
         else if([message isPausedChatState]){
            //[messageBuddy receiveChatStateMessage:kOTRChatStatePaused];
         }
-        
+        //ChatStateActive
         else if([message isActiveChatState]){
              //[messageBuddy receiveChatStateMessage:kOTRChatStateActive];
         }
-        
+        //ChatStateInactive
         else if([message isInactiveChatState]){
             //[messageBuddy receiveChatStateMessage:kOTRChatStateInactive];
         }
@@ -684,7 +685,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(XMPPServer)
         else if([message isGoneChatState]){
              //[messageBuddy receiveChatStateMessage:kOTRChatStateGone];
         }
-           
     }
     
     if ([message hasReceiptResponse] && ![message isErrorMessage]) {
